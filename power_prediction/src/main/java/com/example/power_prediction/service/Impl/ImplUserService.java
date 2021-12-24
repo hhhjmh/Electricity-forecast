@@ -12,13 +12,13 @@ import java.util.Map;
 @Service
 public class ImplUserService implements UserService {
     @Autowired
-    UserRepository userRespostory;
+    UserRepository userRepository;
 
     @Override
     public Map<String, Object> login(User user) {
 
         Map<String, Object> map = new HashMap<>();
-        User newUser = userRespostory.findByUsername(user.getUsername());
+        User newUser = userRepository.findByUsername(user.getUsername());
         if (newUser != null) {
             map.put("username", newUser.getUsername());
             map.put("root", newUser.getRoot());
