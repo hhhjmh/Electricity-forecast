@@ -18,7 +18,7 @@ public class ImplUserService implements UserService {
     public Map<String, Object> login(User user) {
 
         Map<String, Object> map = new HashMap<>();
-        User newUser = userRepository.findByUsername(user.getUsername());
+        User newUser = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
         if (newUser != null) {
             map.put("username", newUser.getUsername());
             map.put("root", newUser.getRoot());
