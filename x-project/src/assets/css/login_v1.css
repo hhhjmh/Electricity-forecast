@@ -1,0 +1,604 @@
+/* 中央屏幕 */
+#screen_center{
+	position: absolute;
+	left: calc(50% - 400px);
+	top: calc(50% - 200px);
+	width: 800px;
+	height: 400px;
+	z-index:1;
+	background-image: url(../gif_image/Frame_08.gif);
+	background-size: 100% 100%;
+}
+
+/* 右下角屏幕 */
+#screen_right_bottom{
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    width: 300px;
+    height: 200px;
+    background:linear-gradient(-30deg,
+    #233c48 0%,#233c48 45%,
+    #e1455c 50%,#e1455c 55%,
+    #c4fffe 57%,#83ffff 58%,
+    #e1455c 60%,#e1455c 65%,
+    #233c48 70%,#233c48 100%
+    );
+    animation: screen_right_bottom_animation 2s forwards, screen_right_bottom_animation_after 5s;
+    box-shadow:0px 0px 20px 5px #000000;
+	z-index: 2;
+}
+/* 屏幕移动动画 */
+@keyframes screen_right_bottom_animation{
+    100%{
+		left:65%;
+		top: 60%;
+    }
+}
+
+/* 屏幕旋转后动画 */
+@keyframes screen_right_bottom_animation_after {
+  0% {
+    -webkit-transform: rotate3d(-1, 1, 0, 0deg);
+            transform: rotate3d(-1, 1, 0, 0deg);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+  }
+  50% {
+    -webkit-transform: rotate3d(-1, 1, 0, 180deg);
+            transform: rotate3d(-1, 1, 0, 180deg);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+  }
+  100% {
+    -webkit-transform: rotate3d(-1, 1, 0, 360deg);
+            transform: rotate3d(-1, 1, 0, 360deg);
+    -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+  }
+}
+#screen_right_bottom:hover{
+    background:linear-gradient(-30deg,
+    #233c48 0%,#233c48 45%,
+    #c4fffe 50%,#c4fffe 55%,
+    #e1455c 57%,#e1455c 58%,
+    #c4fffe 60%,#c4fffe 65%,
+    #233c48 70%,#233c48 100%
+    );
+    border-radius: 0;
+    box-shadow:inset 0px 0px 20px 5px #c6ffff;
+}
+/* 右下角屏幕的背后屏幕 */
+#screen_right_bottom::after{
+    content: "";
+    width: 340px;
+    height: 240px;
+    background-color: #85f9ff;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    opacity: 0.5;
+    z-index: 1;
+    box-shadow: 0 0 20px 15px #fdffff;
+}
+#screen_right_bottom:hover::after{
+    border-radius: 20px;
+}
+/* P段落文字  ：未来电能*/
+#screen_right_bottom p{
+	font-weight: bolder;
+	margin-top:55px;
+	margin-left: 60px;
+	text-align: left;
+	transform: rotate(-30deg);
+	font-size: 24px;
+	color: #ffffff;
+	animation: screen_right_bottom_p_animation 2.5s infinite ;
+}
+/* 文字动画 */
+@keyframes screen_right_bottom_p_animation{
+  0% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  13.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.45), 0 0 110px rgba(255, 255, 255, 0.25), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  14% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  14.9% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  15% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 110px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  22.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 110px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  23% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  24.9% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  25% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  34.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35), 0 0 100px rgba(255, 255, 255, 0.1);
+  }
+  35% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  39.9% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  40% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35);
+  }
+  42.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.55), 0 0 60px rgba(255, 255, 255, 0.35);
+  }
+  43% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  44.9% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  45% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+  }
+  54.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+  }
+  55% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  69.4% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  69.5% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+  }
+  69.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.45), 0 0 60px rgba(255, 255, 255, 0.25);
+  }
+  70% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  79.4% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  79.9% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+  }
+  80% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  89.8% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  89.9% {
+    opacity: 1;
+    text-shadow: none;
+  }
+  90% {
+    opacity: 0;
+    text-shadow: none;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* 位于屏幕左上角的邮件图片 */
+#screen_right_bottom img{
+	position: absolute;
+	border-radius: 50px;
+	left: 30px;
+	top: 20px;
+	width: 50px;
+	height: 50px;
+	box-shadow:0 0 10px #000;
+	animation: mail_img_animation 1s infinite;
+}
+#screen_right_bottom img:hover{
+	animation: mail_img_animation_hover 1s infinite;
+}
+/* 邮件图片动画 */
+@keyframes mail_img_animation{
+	50%{
+    opacity: 0;
+    box-shadow:0 0 20px #00ff15;
+    }
+    100%{
+      opacity: 1;
+      box-shadow:0 0 20px #00ffff;
+    }
+}
+@keyframes mail_img_animation_hover {
+  0% {
+    -webkit-transform: scale(1) rotateY(0);
+            transform: scale(1) rotateY(0);
+	box-shadow:0 0 20px #b3ffaa;
+  }
+  50% {
+    -webkit-transform: scale(2.5) rotateY(90deg);
+            transform: scale(2.5) rotateY(90deg);
+	box-shadow:0 0 20px #b5ffea;
+  }
+  100% {
+    -webkit-transform: scale(1) rotateY(180deg);
+            transform: scale(1) rotateY(180deg);
+	box-shadow:0 0 20px #edbeff;
+  }
+}
+/* 旋转引擎 */
+#rotate_engine_left, #rotate_engine_right{
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	font-family: LiShu;
+	box-shadow: 5px 5px 5px 0 #38e5ff;
+}
+#rotate_engine_left{
+	position: relative;
+	top: 140px;
+	left: 195px;
+	animation: rotate_engine_animation 5s infinite;
+}
+#rotate_engine_right{
+	position: relative;
+	transform: rotate(180deg);
+	left: 245px;
+	top:80px ;
+	animation: rotate_engine_animation 5s infinite;
+}
+/* 旋转引擎动画 */
+@keyframes rotate_engine_animation{
+	20%{box-shadow: 10px 10px 10px 0 #a0d3ff;transform: rotate(3600deg);}
+	40%{box-shadow: 10px 10px 10px 0 #d8b8ff;transform: rotate(1turn);}
+	60%{box-shadow: 20px 20px 20px 0 #ffa0bd;transform: rotate(3600deg)}
+	80%{box-shadow: 10px 10px 10px 0 #c9ffc9;transform: rotate(1800deg)}
+	100%{box-shadow: 10px 10px 10px 0 #fff260;transform: rotate(1turn);}
+}
+/* 左下角屏幕 */
+#screen_left_bottom{
+    position: absolute;
+    right: 30%;
+    top: 20%;
+    width: 300px;
+    height: 200px;
+    background: url(../image/screen_bg.gif);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+    animation: screen_left_bottom_animation 2s forwards, screen_left_bottom_animation_after 5s;
+	box-shadow: inset 0 0 24px 0px rgba(20, 252, 255, 0.5),
+	0 -20px 20px -5px rgba(139, 255, 162, 0.7), 
+	0 20px 20px -5px rgba(255, 135, 151, 0.7);
+}
+/* 左下角屏幕移动动画 */
+@keyframes screen_left_bottom_animation{
+    100%{
+      right: 65%;
+      top: 60%;
+    }
+}
+/* 左下角屏幕后动画 */
+@keyframes screen_left_bottom_animation_after{
+  0% {
+    -webkit-transform: rotate3d(1, 1, 0, 0deg);
+            transform: rotate3d(1, 1, 0, 0deg);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+  50% {
+    -webkit-transform: rotate3d(1, 1, 0, -180deg);
+            transform: rotate3d(1, 1, 0, -180deg);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: rotate3d(1, 1, 0, -360deg);
+            transform: rotate3d(1, 1, 0, -360deg);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+}
+/* 太极图 */
+#taiChi{
+	position: absolute;
+	left: 75px;
+	top:25px;
+	z-index: -1;
+}
+#taiChi img{
+	position: relative;
+	top: -100px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+	
+}
+#taiChi_round{
+	width: 150px;
+	height: 150px;
+	border-radius: 100px;
+	background-color: #ffffff;
+	animation: taiChi_round_ping_animation 3s infinite;
+}
+/* 脉冲动画 */
+@keyframes taiChi_round_ping_animation {
+  0% {
+    -webkit-transform: scale(0.2);
+            transform: scale(0.2);
+    opacity: 0.8;
+	box-shadow: 0px -10px 0px 0px #6f85ff,
+	-10px 0px 0px 0px #ee62ee,   
+    10px 0px 0px 0px #a3ee9b,   
+    0px 10px 0px 0px #eeee92;
+  }
+  80% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    opacity: 0;
+	box-shadow: 0px -15px 0px 0px #388f55,
+	-15px 0px 0px 0px #6163c6,   
+	15px 0px 0px 0px #ba9658,   
+	0px 15px 0px 0px #aa1739;
+  }
+  100% {
+    -webkit-transform: scale(2.2);
+            transform: scale(2.2);
+    opacity: 0;
+	box-shadow: 0px -20px 0px 0px #388f55,
+	-20px 0px 0px 0px #6163c6,   
+	20px 0px 0px 0px #ba9658,   
+	0px 20px 0px 0px #aa1739;
+  }
+}
+/* 右下角屏幕红门 */
+#door{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+/* 左门 */
+#door_left{
+	height: 200px;
+	width: 140px;
+	background: #ab4a38;
+	box-shadow: 12px -12px 20px -6px rgba(137, 244, 255, 0.8),
+	inset 16px 0 20px 2px rgba(0, 0, 0, 0.5),
+	1px -1px #00fbff,
+	2px -2px #c7fffb, 
+	3px -3px #47d0cc, 
+	4px -4px #b0ece3, 
+	5px -5px #78c5bf, 
+	6px -6px #97d1cd, 
+	7px -7px #719695, 
+	8px -8px #698484;
+	transform: translateX(-8px) translateY(8px);
+	animation: door_left_animation 2s cubic-bezier(0.68,-0.55,0.27,0.55) both;
+	animation-delay: 6s;
+}
+/* 左门动画 */
+@keyframes door_left_animation {
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+    -webkit-transform-origin: left bottom;
+            transform-origin: left bottom;
+  }
+  100% {
+    -webkit-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+    -webkit-transform-origin: left bottom;
+            transform-origin: left bottom;
+  }
+}
+/* 右门 */
+#door_right{
+	height: 200px;
+	width: 140px;
+	background: #ab4a38;
+	box-shadow: -12px -12px 20px -6px rgba(137, 244, 255, 0.8),
+	inset -16px 0 14px 2px rgba(0, 0, 0, 0.5),
+	-1px -1px #00fbff,
+	-2px -2px #c7fffb, 
+	-3px -3px #47d0cc, 
+	-4px -4px #b0ece3, 
+	-5px -5px #78c5bf, 
+	-6px -6px #97d1cd, 
+	-7px -7px #719695, 
+	-8px -8px #698484;
+	transform: translateX(8px) translateY(8px);
+	animation: door_right_animation 2s cubic-bezier(0.68,-0.55,0.27,0.55) both;
+	animation-delay: 8s;
+}
+/* 右门动画 */
+@keyframes door_right_animation{
+  0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+  }
+}
+/* 虎头锁 */
+#door_left img{
+	margin-right: -50px;
+	margin-top: 80px;
+	width: 30px;
+	height: 30px;
+}
+#door_right img{
+	margin-left: -50px;
+	margin-top: 80px;
+	width: 30px;
+	height: 30px;
+}
+/* 荧光楼梯 */
+#stair{
+	margin-left: 50px;
+	width: 200px;
+	height: 30px;
+	background: linear-gradient(to bottom,
+    #ced1d8 0%,#ced1d8 40%,  #00ffee 40%,#00fbff 42%,
+    #ced1d8 60%,#ced1d8 90%,  #00ffee 98%,#00ffee 100%
+    );
+	box-shadow: 0 12px 20px -2px rgba(123, 255, 247, 1),
+	inset 0 -6px 4px -6px rgba(183, 255, 249, 1), 
+	inset 0 6px 14px -6px rgba(255, 55, 81, 1.0);
+}
+
+/* 右上角屏幕*/
+#screen_right_top{
+    position: absolute;
+    left: 30%;
+    bottom: 28%;
+    width: 300px;
+    height: 200px;
+	background-image: url(../gif_image/Element_09.gif);
+	background-size: 100% 100%;
+	border-radius: 10px;
+	border: 3px solid #b2f3ff;
+    animation: screen_right_top_animation 2s forwards,
+	screen_right_top_animation_after 5s;
+    z-index: 1;
+	box-shadow: -30px 0 20px -12px rgba(176, 188, 255, 0.7), 30px 0 20px -12px rgba(194, 189, 255, 0.7);
+}
+#screen_right_top::after{
+	content: "";
+	width: 200px;
+	height: 80px;
+	background-image: url(../gif_image/Element_08.gif);
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	top: -70px;
+	z-index: 2;
+	box-shadow: 0 0 20px 15px #fdffff;
+	animation:top_gif_animation 2s linear infinite alternate both ;
+}
+#screen_right_top img{
+	width: 200px;
+	height: 80px;
+}
+/* 右上角屏幕动画 */
+@keyframes screen_right_top_animation{
+    100%{
+      left: 65%;
+      bottom: 60%;
+    }
+}
+@keyframes screen_right_top_animation_after {
+  0% {
+    -webkit-transform: rotate3d(1, 1, 0, 0deg);
+            transform: rotate3d(1, 1, 0, 0deg);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+  50% {
+    -webkit-transform: rotate3d(1, 1, 0, 180deg);
+            transform: rotate3d(1, 1, 0, 180deg);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+  100% {
+    -webkit-transform: rotate3d(1, 1, 0, 360deg);
+            transform: rotate3d(1, 1, 0, 360deg);
+    -webkit-transform-origin: 0% 100%;
+            transform-origin: 0% 100%;
+  }
+}
+@keyframes top_gif_animation {
+  0% {
+	box-shadow: 0 0 20px 5px #c7fffc;
+	left: 0;
+	opacity: 0;
+	}
+  100%{
+	left: 100px;
+	opacity: 1;
+	box-shadow: 0 0 20px 15px #ff1d00;
+  }
+}
+
+/* 左上角 */
+#screen_left_top{
+    position: absolute;
+    right: 30%;
+    bottom: 28%;
+    width: 300px;
+    height: 200px;
+    background-color: #b8b7af;
+    border-radius: 10px;
+    animation: screen_left_top_animation 2s forwards, screen_left_top_animation_after 5s;
+    z-index: 1;
+}
+/*左上角动画 */
+@keyframes screen_left_top_animation{
+    100%{
+      right: 65%;
+      bottom: 60%;
+    }
+}
+@keyframes screen_left_top_animation_after {
+  0% {
+    -webkit-transform: rotate3d(-1, 1, 0, 0deg);
+            transform: rotate3d(-1, 1, 0, 0deg);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+  50% {
+    -webkit-transform: rotate3d(-1, 1, 0, -180deg);
+            transform: rotate3d(-1, 1, 0, -180deg);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+  100% {
+    -webkit-transform: rotate3d(-1, 1, 0, -360deg);
+            transform: rotate3d(-1, 1, 0, -360deg);
+    -webkit-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+  }
+}
+
+

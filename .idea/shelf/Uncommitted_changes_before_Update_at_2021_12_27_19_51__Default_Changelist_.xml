@@ -1,0 +1,9 @@
+<changelist name="Uncommitted_changes_before_Update_at_2021_12_27_19_51_[Default_Changelist]" date="1640605906480" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_27_19_51_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021/12/27 19:51 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="power_prediction/target/classes/com/example/power_prediction/service/Impl/ImplUserService.class" />
+    <option name="AFTER_PATH" value="power_prediction/target/classes/com/example/power_prediction/service/Impl/ImplUserService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_12_27_19_51_[Default_Changelist]/ImplUserService.class" />
+  </binary>
+</changelist>
