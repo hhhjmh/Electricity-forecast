@@ -14,7 +14,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @RequestMapping("/user")
-public class userController {
+public class UserController {
     @Autowired
     UserService userService;
 
