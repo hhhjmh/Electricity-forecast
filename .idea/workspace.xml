@@ -5,13 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="633cd189-8040-4313-9acd-feef631aa774" name="Default Changelist" comment="后端框架">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/power_prediction/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/power_prediction/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/power_prediction/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/power_prediction/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/power_prediction/power_prediction.iml" beforeDir="false" afterPath="$PROJECT_DIR$/power_prediction/power_prediction.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/power_prediction/target/classes/com/example/power_prediction/service/Impl/ImplUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/power_prediction/target/classes/com/example/power_prediction/service/Impl/ImplUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/power_prediction/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/power_prediction/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/demo1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/readme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/.browserslistrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/.eslintrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/css/element-ui-reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/css/login_v1.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/gif_image/Circle_18.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/gif_image/Element_06.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/gif_image/Element_08.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/gif_image/Element_09.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/gif_image/Frame_08.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/icon/one.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/iconfont/iconfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/backImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/camera.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/city.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/login.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/message.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/person.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/power.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/powerTower.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/screen_bg.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/ship.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/six.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/taiChi.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/tiger_lock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/image/title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/js/devicePixelRatio.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/js/dialog-drag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/js/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/js/rem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/assets/sass/element-reset.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/components/BgOfHome.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/components/testDialog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/store/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/views/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/views/JumpToLogin.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/src/views/Login.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/x-project/vue.config.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +139,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunManager">
@@ -114,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640178099095</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="前端改">
+      <created>1640606802969</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640606802969</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -195,7 +262,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="后端框架" />
     <MESSAGE value="前端整合" />
-    <option name="LAST_COMMIT_MESSAGE" value="前端整合" />
+    <MESSAGE value="前端改" />
+    <option name="LAST_COMMIT_MESSAGE" value="前端改" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/power_prediction/pom.xml">
