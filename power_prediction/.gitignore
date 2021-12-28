@@ -19,6 +19,7 @@ target/
 *.iml
 *.ipr
 .idea/workspace.xml
+.idea/dataSources.local.xml
 
 ### NetBeans ###
 /nbproject/private/
