@@ -17,4 +17,10 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
     public List<PowerRealtime> findAllByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end) {
         return powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
     }
+
+    @Override
+    public List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime) {
+        
+        return
+    }
 }

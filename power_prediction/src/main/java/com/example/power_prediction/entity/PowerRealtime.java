@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_realtime", schema = "power", catalog = "")
 public class PowerRealtime {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Integer deviceId;
     private Integer dataTime;
@@ -32,8 +34,6 @@ public class PowerRealtime {
     private String ubc;
     private String uca;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
