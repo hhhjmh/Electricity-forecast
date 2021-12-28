@@ -45,6 +45,16 @@ public class PowerAnalyseMonthAvg {
     private String iUnbalance;
     private String uUnbalance;
 
+    private int deviceId;
+    public int getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(int deviceId) {
+        this.deviceId = deviceId;
+    }
+
+
     @Id
     @Column(name = "id")
     public int getId() {
