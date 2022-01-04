@@ -9,8 +9,8 @@ public class DeviceRelationship {
     private int id;
     private int deviceId;
     private int type;
-    private String superDeviceId;
-    private String sublayerDeviceId;
+    private Integer superDeviceId;
+    private Integer sublayerDeviceId;
 
     @Id
     @Column(name = "id")
@@ -44,21 +44,21 @@ public class DeviceRelationship {
 
     @Basic
     @Column(name = "superDeviceId")
-    public String getSuperDeviceId() {
+    public Integer getSuperDeviceId() {
         return superDeviceId;
     }
 
-    public void setSuperDeviceId(String superDeviceId) {
+    public void setSuperDeviceId(Integer superDeviceId) {
         this.superDeviceId = superDeviceId;
     }
 
     @Basic
     @Column(name = "sublayerDeviceId")
-    public String getSublayerDeviceId() {
+    public Integer getSublayerDeviceId() {
         return sublayerDeviceId;
     }
 
-    public void setSublayerDeviceId(String sublayerDeviceId) {
+    public void setSublayerDeviceId(Integer sublayerDeviceId) {
         this.sublayerDeviceId = sublayerDeviceId;
     }
 

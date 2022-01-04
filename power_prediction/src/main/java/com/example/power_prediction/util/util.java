@@ -1,9 +1,15 @@
 package com.example.power_prediction.util;
 
+import com.example.power_prediction.repository.DeviceRelationshipRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class util {
+
 
     public static Map divideData(Integer max ,Integer min, Integer bias) {
 
@@ -18,4 +24,5 @@ public class util {
         map.put("total", total);
         return map;
     }
+
 }
