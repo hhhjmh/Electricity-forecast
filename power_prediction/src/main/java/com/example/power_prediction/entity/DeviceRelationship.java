@@ -12,6 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 public class DeviceRelationship {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false,unique = true,insertable = false, updatable = false)
@@ -20,6 +21,7 @@ public class DeviceRelationship {
     private Integer type;
     private Integer superDeviceId;
     private Integer sublayerDeviceId;
+
 
     @Override
     public boolean equals(Object o) {
