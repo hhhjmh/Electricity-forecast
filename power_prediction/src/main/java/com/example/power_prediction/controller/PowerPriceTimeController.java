@@ -2,26 +2,19 @@ package com.example.power_prediction.controller;
 
 
 import com.example.power_prediction.entity.PowerPriceTime;
-import com.example.power_prediction.entity.User;
 import com.example.power_prediction.service.PowerPriceTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin
-@Controller
+@RestController
 @RequestMapping("/powerPriceTime")
 public class PowerPriceTimeController {
     @Autowired
     PowerPriceTimeService powerPriceTimeService;
-
 
     @RequestMapping("/listAll")
     public List<PowerPriceTime> listAll() {
@@ -29,9 +22,18 @@ public class PowerPriceTimeController {
     }
 
     @PostMapping("/edit")
-    public String edit(@RequestBody User user) {
-        return null;
+    public String edit(@RequestBody PowerPriceTime powerPriceTime) {
+        return powerPriceTimeService.edit(powerPriceTime);
     }
 
+    @PostMapping("/del")
+    public String del(@RequestParam Integer id){
+        return powerPriceTimeService.del(id);
+    }
+
+    @PostMapping("/add")
+    public String add(@RequestBody PowerPriceTime powerPriceTime){
+        return powerPriceTimeService.add(powerPriceTime);
+    }
 
 }

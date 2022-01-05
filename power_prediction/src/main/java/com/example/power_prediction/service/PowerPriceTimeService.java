@@ -7,4 +7,6 @@ public interface PowerPriceTimeService {
 
     List<PowerPriceTime> findAll();
     String edit(PowerPriceTime powerPriceTime);
+    String del(Integer id);
+    String add(PowerPriceTime powerPriceTime);
 }

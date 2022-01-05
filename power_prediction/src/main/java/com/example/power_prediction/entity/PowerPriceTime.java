@@ -3,6 +3,7 @@ package com.example.power_prediction.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -12,7 +13,6 @@ import java.util.Objects;
 @Table(name = "power_price_time")
 @Getter
 @Setter
-@ToString
 public class PowerPriceTime {
 
     @Id
@@ -73,5 +73,26 @@ public class PowerPriceTime {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", f_power_startAt=" + f_power_startAt +
+                ", f_power_endAt=" + f_power_endAt +
+                ", f_power_price='" + f_power_price + '\'' +
+                ", g_power_startAt=" + g_power_startAt +
+                ", g_power_endAt=" + g_power_endAt +
+                ", g_power_price='" + g_power_price + '\'' +
+                ", p_power_startAt=" + p_power_startAt +
+                ", p_power_endAt=" + p_power_endAt +
+                ", p_power_price='" + p_power_price + '\'' +
+                ", j_power_startAt=" + j_power_startAt +
+                ", j_power_endAt=" + j_power_endAt +
+                ", j_power_price='" + j_power_price + '\'' +
+                ", deviceTypeId=" + deviceTypeId +
+                '}';
     }
 }

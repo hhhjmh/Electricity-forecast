@@ -18,9 +18,6 @@ public class Device {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(targetEntity=PowerBillByDay.class,cascade = CascadeType.REMOVE)
-    @JoinColumn(name="deviceId",referencedColumnName="id")
-    private List<PowerBillByDay> powerBillByDayList;
 
     @Override
     public String toString() {

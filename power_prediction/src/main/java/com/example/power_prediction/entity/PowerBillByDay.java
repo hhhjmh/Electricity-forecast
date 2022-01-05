@@ -46,9 +46,8 @@ public class PowerBillByDay {
     @Column(name = "j_power_price", nullable = false)
     private String j_power_price;
 
-    @ManyToOne(targetEntity = Device.class,optional = false)
-    @JoinColumn(name="deviceId",referencedColumnName="id")
-    private Device device;
+    @Column(name = "deviceId", nullable = false)
+    private Integer deviceId;
 
     @Override
     public boolean equals(Object o) {
@@ -76,7 +75,7 @@ public class PowerBillByDay {
                 ", g_power_price='" + g_power_price + '\'' +
                 ", p_power_price='" + p_power_price + '\'' +
                 ", j_power_price='" + j_power_price + '\'' +
-                ", device=" + device.getId() +
+                ", device=" + deviceId +
                 '}';
     }
 }
