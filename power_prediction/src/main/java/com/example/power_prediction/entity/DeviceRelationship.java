@@ -18,8 +18,8 @@ public class DeviceRelationship {
     private Integer id;
     private Integer deviceId;
     private Integer type;
-    private String superDeviceId;
-    private String sublayerDeviceId;
+    private Integer superDeviceId;
+    private Integer sublayerDeviceId;
 
     @Override
     public boolean equals(Object o) {
