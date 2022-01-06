@@ -18,34 +18,24 @@ public class PowerBillByDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false,unique = true,insertable = false, updatable = false)
     private Integer id;
-
     @Column(name = "date_time", nullable = false)
-    private Long dateTime;
-
+    private Integer dateTime;
     @Column(name = "f_power", nullable = false)
     private String f_power;
-
     @Column(name = "g_power", nullable = false)
     private String g_power;
-
     @Column(name = "p_power", nullable = false)
     private String p_power;
-
     @Column(name = "j_power", nullable = false)
     private String j_power;
-
     @Column(name = "f_power_price", nullable = false)
     private String f_power_price;
-
     @Column(name = "g_power_price", nullable = false)
     private String g_power_price;
-
     @Column(name = "p_power_price", nullable = false)
     private String p_power_price;
-
     @Column(name = "j_power_price", nullable = false)
     private String j_power_price;
-
     @Column(name = "deviceId", nullable = false)
     private Integer deviceId;
 

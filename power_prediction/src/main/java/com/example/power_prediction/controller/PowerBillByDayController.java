@@ -3,7 +3,6 @@ package com.example.power_prediction.controller;
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.service.PowerBillByDayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,7 @@ public class PowerBillByDayController {
      * @return
      */
     @RequestMapping("/listBill")
-    public List<PowerBillByDay> listBill(@RequestParam Integer deviceId,@RequestParam Integer start,@RequestParam Integer end){
+    public List<PowerBillByDay> listBill(@RequestParam Integer deviceId, @RequestParam Integer start, @RequestParam Integer end){
         return powerBillByDayService.findAllByDeviceIdAndDateTimeBetween(deviceId,start,end);
     }
 }
