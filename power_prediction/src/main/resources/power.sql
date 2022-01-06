@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : mysql
  Source Server Type    : MySQL
- Source Server Version : 50736
+ Source Server Version : 50735
  Source Host           : localhost:3306
  Source Schema         : power
 
  Target Server Type    : MySQL
- Target Server Version : 50736
+ Target Server Version : 50735
  File Encoding         : 65001
 
- Date: 06/01/2022 16:38:36
+ Date: 06/01/2022 21:10:10
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `device`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of device
@@ -53,7 +53,7 @@ CREATE TABLE `device_relationship`  (
   `superDeviceId` int(255) NULL DEFAULT NULL COMMENT '逻辑上层',
   `sublayerDeviceId` int(255) NULL DEFAULT NULL COMMENT '逻辑下层',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = FIXED;
 
 -- ----------------------------
 -- Records of device_relationship
@@ -112,7 +112,7 @@ CREATE TABLE `power_analyse_day_avg`  (
   `uUnbalance` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `deviceId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_day_avg
@@ -200,7 +200,7 @@ CREATE TABLE `power_analyse_day_max`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_day_max
@@ -288,7 +288,7 @@ CREATE TABLE `power_analyse_day_min`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_day_min
@@ -340,7 +340,7 @@ CREATE TABLE `power_analyse_month_avg`  (
   `uUnbalance` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `deviceId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_month_avg
@@ -427,7 +427,7 @@ CREATE TABLE `power_analyse_month_max`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_month_max
@@ -514,7 +514,7 @@ CREATE TABLE `power_analyse_month_min`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_month_min
@@ -565,7 +565,7 @@ CREATE TABLE `power_analyse_year_avg`  (
   `uca` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `zeroi` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_year_avg
@@ -652,7 +652,7 @@ CREATE TABLE `power_analyse_year_max`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_year_max
@@ -739,10 +739,34 @@ CREATE TABLE `power_analyse_year_min`  (
   `ucaTime` int(11) NULL DEFAULT NULL,
   `zeroiTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_analyse_year_min
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for power_bill_by_day
+-- ----------------------------
+DROP TABLE IF EXISTS `power_bill_by_day`;
+CREATE TABLE `power_bill_by_day`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date_time` int(11) NOT NULL,
+  `f_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `g_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `j_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `f_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `g_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `device_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uc_power_bill_by_day_id`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of power_bill_by_day
 -- ----------------------------
 
 -- ----------------------------
@@ -765,7 +789,7 @@ CREATE TABLE `power_distribution_day`  (
   `midCharge` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `topCharge` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_distribution_day
@@ -831,7 +855,7 @@ CREATE TABLE `power_distribution_hour`  (
   `dataTime` int(11) NULL DEFAULT NULL COMMENT '精确到小时查询的时间戳',
   `totalKWh` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_distribution_hour
@@ -848,10 +872,37 @@ CREATE TABLE `power_forecast`  (
   `dataTime` int(11) NULL DEFAULT NULL,
   `type` int(11) NULL DEFAULT NULL COMMENT '0日预测1月预测2年预测',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_forecast
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for power_price_time
+-- ----------------------------
+DROP TABLE IF EXISTS `power_price_time`;
+CREATE TABLE `power_price_time`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_time` int(11) NOT NULL,
+  `f_power_start_at` int(11) NOT NULL,
+  `f_power_end_at` int(11) NOT NULL,
+  `f_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `g_power_start_at` int(11) NOT NULL,
+  `g_power_end_at` int(11) NOT NULL,
+  `g_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_power_start_at` int(11) NOT NULL,
+  `p_power_end_at` int(11) NOT NULL,
+  `p_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `j_power_start_at` int(11) NOT NULL,
+  `j_power_end_at` int(11) NOT NULL,
+  `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `device_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of power_price_time
 -- ----------------------------
 
 -- ----------------------------
@@ -878,7 +929,7 @@ CREATE TABLE `power_quality_realtime`  (
   `iUnbalance` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '三相电流不平衡度%',
   `uUnbalance` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_quality_realtime
@@ -915,7 +966,7 @@ CREATE TABLE `power_realtime`  (
   `ubc` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `uca` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 551 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 551 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_realtime
@@ -1481,7 +1532,7 @@ CREATE TABLE `user`  (
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `root` int(11) NOT NULL COMMENT '0用户1系统管理员',
   PRIMARY KEY (`userId`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -1500,7 +1551,7 @@ CREATE TABLE `util`  (
   `state` int(255) NULL DEFAULT NULL COMMENT '0正在使用1弃用',
   `dataTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of util
