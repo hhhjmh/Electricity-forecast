@@ -6,10 +6,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "util", schema = "power", catalog = "")
 public class UtilEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String variableAttributeName;
     private String variableAttributeNum;
-    private String state;
+    private Integer state;
     private Integer dataTime;
 
     @Id
@@ -44,11 +46,11 @@ public class UtilEntity {
 
     @Basic
     @Column(name = "state")
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

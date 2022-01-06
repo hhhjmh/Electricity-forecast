@@ -6,10 +6,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_distribution_day", schema = "power", catalog = "")
 public class PowerDistributionDay {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int deviceId;
     private int dataTime;
-    private String load;
+    private String totalLoad;
     private String totalkWh;
     private String highKWh;
     private String lowKWh;
@@ -21,8 +23,6 @@ public class PowerDistributionDay {
     private String midCharge;
     private String topCharge;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -52,13 +52,13 @@ public class PowerDistributionDay {
     }
 
     @Basic
-    @Column(name = "load")
-    public String getLoad() {
-        return load;
+    @Column(name = "totalLoad")
+    public String getTotalLoad() {
+        return totalLoad;
     }
 
-    public void setLoad(String load) {
-        this.load = load;
+    public void setTotalLoad(String totalLoad) {
+        this.totalLoad = totalLoad;
     }
 
     @Basic
@@ -169,7 +169,7 @@ public class PowerDistributionDay {
         return id == that.id &&
                 deviceId == that.deviceId &&
                 dataTime == that.dataTime &&
-                Objects.equals(load, that.load) &&
+                Objects.equals(totalLoad, that.totalLoad) &&
                 Objects.equals(totalkWh, that.totalkWh) &&
                 Objects.equals(highKWh, that.highKWh) &&
                 Objects.equals(lowKWh, that.lowKWh) &&
@@ -184,6 +184,6 @@ public class PowerDistributionDay {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, deviceId, dataTime, load, totalkWh, highKWh, lowKWh, midKWh, topKWh, totalCharge, highCharge, lowCharge, midCharge, topCharge);
+        return Objects.hash(id, deviceId, dataTime, totalLoad, totalkWh, highKWh, lowKWh, midKWh, topKWh, totalCharge, highCharge, lowCharge, midCharge, topCharge);
     }
 }

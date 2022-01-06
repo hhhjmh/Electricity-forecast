@@ -7,8 +7,8 @@ import java.util.Objects;
 @Table(name = "power_distribution_hour", schema = "power", catalog = "")
 public class PowerDistributionHour {
     private int id;
-    private Integer deivceId;
-    private Integer datatime;
+    private Integer deviceId;
+    private Integer dataTime;
     private String totalKWh;
 
     @Id
@@ -22,23 +22,23 @@ public class PowerDistributionHour {
     }
 
     @Basic
-    @Column(name = "deivceId")
-    public Integer getDeivceId() {
-        return deivceId;
+    @Column(name = "deviceId")
+    public Integer getDeviceId() {
+        return deviceId;
     }
 
-    public void setDeivceId(Integer deivceId) {
-        this.deivceId = deivceId;
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
     }
 
     @Basic
-    @Column(name = "datatime")
-    public Integer getDatatime() {
-        return datatime;
+    @Column(name = "dataTime")
+    public Integer getDataTime() {
+        return dataTime;
     }
 
-    public void setDatatime(Integer datatime) {
-        this.datatime = datatime;
+    public void setDataTime(Integer dataTime) {
+        this.dataTime = dataTime;
     }
 
     @Basic
@@ -57,13 +57,13 @@ public class PowerDistributionHour {
         if (o == null || getClass() != o.getClass()) return false;
         PowerDistributionHour that = (PowerDistributionHour) o;
         return id == that.id &&
-                Objects.equals(deivceId, that.deivceId) &&
-                Objects.equals(datatime, that.datatime) &&
+                Objects.equals(deviceId, that.deviceId) &&
+                Objects.equals(dataTime, that.dataTime) &&
                 Objects.equals(totalKWh, that.totalKWh);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, deivceId, datatime, totalKWh);
+        return Objects.hash(id, deviceId, dataTime, totalKWh);
     }
 }

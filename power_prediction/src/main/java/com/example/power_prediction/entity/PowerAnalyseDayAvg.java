@@ -7,6 +7,7 @@ import java.util.Objects;
 @Table(name = "power_analyse_day_avg", schema = "power", catalog = "")
 public class PowerAnalyseDayAvg {
     private int id;
+    private int deviceId;
     private Integer dataTime;
     private String totalLoad;
     private String aLoad;
@@ -53,6 +54,14 @@ public class PowerAnalyseDayAvg {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(int deviceId) {
+        this.deviceId = deviceId;
     }
 
     @Basic
