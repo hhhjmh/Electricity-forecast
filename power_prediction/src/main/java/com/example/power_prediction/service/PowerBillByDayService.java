@@ -18,5 +18,5 @@ public interface PowerBillByDayService {
      */
     List<PowerBillByDay> findAllByDeviceIdAndDateTimeBetween(Integer deviceId, Integer start, Integer end);
 
-    Map<String,Object> queryByMonth(Integer deviceId, YearMonth yearMonth);
+    Map<String,Object> queryByMonth(Integer deviceId,Integer year,Integer month);
 }

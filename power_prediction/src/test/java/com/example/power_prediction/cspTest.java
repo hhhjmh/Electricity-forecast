@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+
 
 @SpringBootTest
 class CspTest {
@@ -17,8 +22,9 @@ class CspTest {
     PowerBillByDayRepository powerBillByDayRepository;
     @Autowired
     DeviceRepository deviceRepository;
+
     @Test
-    void showPowerBillByDay(){
+    void showPowerBillByDay() {
         //powerBillByDayRepository.save(powerBillByDay);
 
 //      PowerBillByDay powerBillByDay=new PowerBillByDay();
@@ -37,6 +43,17 @@ class CspTest {
         deviceRepository.delete(deviceRepository.findById(2).get());
         //System.out.println(deviceRepository.findAll());
         //System.out.println(powerBillByDayRepository.findAll());
+    }
+
+}
+
+class JustJavaTest {
+    @Test
+    void Date() {
+        LocalDate localDate = LocalDate.of(2022, 1, 7);
+        System.out.println(localDate.compareTo(LocalDate.now()));
+
+        System.out.println(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toEpochSecond());
     }
 
 }

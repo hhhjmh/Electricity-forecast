@@ -11,7 +11,7 @@
  Target Server Version : 50735
  File Encoding         : 65001
 
- Date: 06/01/2022 21:10:10
+ Date: 07/01/2022 00:00:12
 */
 
 SET NAMES utf8mb4;
@@ -760,9 +760,8 @@ CREATE TABLE `power_bill_by_day`  (
   `g_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `p_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `device_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uc_power_bill_by_day_id`(`id`) USING BTREE
+  `deviceId` int(11) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -884,26 +883,27 @@ CREATE TABLE `power_forecast`  (
 DROP TABLE IF EXISTS `power_price_time`;
 CREATE TABLE `power_price_time`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start_time` int(11) NOT NULL,
-  `f_power_start_at` int(11) NOT NULL,
-  `f_power_end_at` int(11) NOT NULL,
+  `startTime` int(11) NOT NULL,
+  `f_power_startAt` int(11) NOT NULL,
+  `f_power_endAt` int(11) NOT NULL,
   `f_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `g_power_start_at` int(11) NOT NULL,
-  `g_power_end_at` int(11) NOT NULL,
+  `g_power_startAt` int(11) NOT NULL,
+  `g_power_endAt` int(11) NOT NULL,
   `g_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `p_power_start_at` int(11) NOT NULL,
-  `p_power_end_at` int(11) NOT NULL,
+  `p_power_startAt` int(11) NOT NULL,
+  `p_power_endAt` int(11) NOT NULL,
   `p_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `j_power_start_at` int(11) NOT NULL,
-  `j_power_end_at` int(11) NOT NULL,
+  `j_power_startAt` int(11) NOT NULL,
+  `j_power_endAt` int(11) NOT NULL,
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `device_type_id` int(11) NOT NULL,
+  `deviceTypeId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of power_price_time
 -- ----------------------------
+INSERT INTO `power_price_time` VALUES (1, 1600679600, 1641398401, 1641420000, '0.6', 1641420001, 1641441600, '0.3', 1641441601, 1641463200, '0.5', 1641463201, 1641484800, '0.8', 1);
 
 -- ----------------------------
 -- Table structure for power_quality_realtime
