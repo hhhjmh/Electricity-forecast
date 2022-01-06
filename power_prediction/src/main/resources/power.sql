@@ -11,7 +11,7 @@
  Target Server Version : 50735
  File Encoding         : 65001
 
- Date: 07/01/2022 01:43:36
+ Date: 07/01/2022 03:57:30
 */
 
 SET NAMES utf8mb4;
@@ -762,17 +762,11 @@ CREATE TABLE `power_bill_by_day`  (
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `deviceId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_bill_by_day
 -- ----------------------------
-INSERT INTO `power_bill_by_day` VALUES (63, 1640966400, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1);
-INSERT INTO `power_bill_by_day` VALUES (64, 1641052800, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1);
-INSERT INTO `power_bill_by_day` VALUES (65, 1641139200, '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1);
-INSERT INTO `power_bill_by_day` VALUES (66, 1641225600, '0.00', '13890.09', '0.00', '13820.40', '0.00', '4167.03', '0.00', '11056.32', 1);
-INSERT INTO `power_bill_by_day` VALUES (67, 1641312000, '13413.76', '14074.44', '14828.31', '13265.39', '8048.26', '4222.33', '7414.15', '10612.31', 1);
-INSERT INTO `power_bill_by_day` VALUES (68, 1641398400, '13426.26', '0.00', '13817.11', '0.00', '8055.76', '0.00', '6908.55', '0.00', 1);
 
 -- ----------------------------
 -- Table structure for power_distribution_day
@@ -904,7 +898,7 @@ CREATE TABLE `power_price_time`  (
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `deviceTypeId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_price_time
