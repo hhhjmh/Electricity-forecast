@@ -11,6 +11,7 @@ import './drag'
 import * as echarts from 'echarts';
 import Print from 'vue-print-nb'
 import htmlToPdf from './assets/js/htmlToPdf'
+import axios from 'axios'
 Vue.use(htmlToPdf)
 Vue.use(Print); //注册
 
@@ -19,8 +20,14 @@ Vue.prototype.$echarts = echarts
 Vue.use(ElementUI); // 引用
 Vue.config.productionTip = false
 
+axios.defaults.baseURL = 'http://localhost:80'
+Vue.prototype.$axios = axios;
+Vue.config.productionTip = false
+
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+

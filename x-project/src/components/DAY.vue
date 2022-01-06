@@ -822,7 +822,7 @@ export default {
 
       //请求表格数据
       axios
-      .post("http://114.213.211.241/PowerAnalyse/DayAvg", {
+      .post("/PowerAnalyse/DayAvg", {
 	      deviceId: "1",
         dataTime: "1641312000"
       })
@@ -836,7 +836,7 @@ export default {
       });
 
       axios
-      .post("http://114.213.211.241/PowerAnalyse/DayMax", {
+      .post("/PowerAnalyse/DayMax", {
 	      deviceId: "1",
         dataTime: "1641312000"
       })
@@ -850,7 +850,7 @@ export default {
       });
 
       axios
-      .post("http://114.213.211.241/PowerAnalyse/DayMin", {
+      .post("/PowerAnalyse/DayMin", {
 	      deviceId: "1",
         dataTime: "1641312000"
       })

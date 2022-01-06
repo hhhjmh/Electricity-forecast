@@ -53,7 +53,7 @@ public class PowerRealtimeController {
     @PostMapping("/findPowerDistributionDayByDataTime")
     public List<PowerDistributionDay> findPowerDistributionDayByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionDay powerDistributionDay) {
         if (powerDistributionDay.getId() ==0) {
-            powerDistributionDay.setId(1);
+            powerDistributionDay.setId(30);
         }
         //使用id暂存天数
         return powerRealtimeService.findPowerDistributionDayByDeviceIdAndDataTimeBetween(powerDistributionDay.getDeviceId(), powerDistributionDay.getDataTime(), powerDistributionDay.getDataTime() + 86400 * powerDistributionDay.getId());

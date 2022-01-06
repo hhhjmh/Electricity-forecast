@@ -824,7 +824,7 @@ export default {
     convert() {
       axios
         .post(
-          "http://114.213.210.219/powerRealtime/findPowerDistributionDayByDataTime",
+          "/powerRealtime/findPowerDistributionDayByDataTime",
           {
             deviceId: "1",
             dataTime: "1638288000",

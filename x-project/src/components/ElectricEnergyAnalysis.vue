@@ -418,7 +418,7 @@ export default {
     convert() {
       let _this = this;
       axios
-        .post("http://114.213.210.219/util/deviceRelationshipTree", {
+        .post("/util/deviceRelationshipTree", {
           type: 1
         })
         .then(response => {
