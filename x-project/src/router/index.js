@@ -22,7 +22,20 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/Home.vue'),
+    children:[ 
+    {
+      path: '/day',
+      component:()=>import('../components/DAY')
+    },
+    {
+      path: '/month',
+      component: ()=>import('../components/MONTH.vue')
+    },
+    {
+      path: '/year',
+      component: ()=>import('../components/YEAR.vue')
+    },]
   },
   {
     path: '/test',

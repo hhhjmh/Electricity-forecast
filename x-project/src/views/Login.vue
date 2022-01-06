@@ -4,13 +4,11 @@
   <div id="screen">
     <!-- 中间屏幕 -->
     <div id="screen_center">
-      <!-- <router-link to='/home'> -->
-      <button @click="login()">登录</button>
-      <!-- </router-link> -->
+      <router-link to='/home'><button>登录</button></router-link>
       <div id="screen_center_content">
         <p>智能能源综合服务平台</p>
-        <input v-model="username" placeholder="账号" autofocus/>
-        <input v-model="password" placeholder="密码"/>
+        <input placeholder="账号" autofocus/>
+        <input placeholder="密码"/>
       </div>
       <button>注册</button>
     </div>
@@ -68,44 +66,6 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods:{
-    login(){
-      console.log(this.username,this.password)
-       if (this.username == "" || this.password == "")
-        alert("请输入用户名或密码");
-       else {
-          axios
-            .post("/user/login", {
-              username: this.username,
-              password: this.password
-            })
-            .then(response => {
-              console.log(response.data);
-              alert(response.data.state);
-              if (response.data.state == "Success") {
-                this.$router.push({
-                  path: "/home",
-                  query: {
-                    login_name: this.username
-                  }
-                });
-              }
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
-    }
-  }
-  }
 </script>
 <style src="../assets/css/login.css" scoped></style>
 
