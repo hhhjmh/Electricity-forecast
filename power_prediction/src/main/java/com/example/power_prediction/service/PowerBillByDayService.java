@@ -3,7 +3,9 @@ package com.example.power_prediction.service;
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.entity.PowerPriceTime;
 
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 public interface PowerBillByDayService {
     /**
@@ -16,11 +18,5 @@ public interface PowerBillByDayService {
      */
     List<PowerBillByDay> findAllByDeviceIdAndDateTimeBetween(Integer deviceId, Integer start, Integer end);
 
-    /**
-     * 根据输入数据，查询PowerRealtime计算出结果录入数据表
-     *
-     * @param deviceId  设备ID
-     * @param time 时间戳
-     */
-    void insertDay(Integer deviceId, Integer time);
+    Map<String,Object> queryByMonth(Integer deviceId, YearMonth yearMonth);
 }

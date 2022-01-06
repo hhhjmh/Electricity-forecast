@@ -9,7 +9,9 @@ import com.example.power_prediction.service.PowerBillByDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.YearMonth;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.averagingDouble;
 
@@ -35,8 +37,13 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         return powerBillByDayRepository.findAllByDeviceIdAndDateTimeBetween(deviceId, start, end);
     }
 
-    @Override
-    public void insertDay(Integer deviceId, Integer time) {
+    /**
+     * 根据输入数据，查询PowerRealtime计算出结果录入数据表
+     *
+     * @param deviceId  设备ID
+     * @param time 时间戳
+     */
+    private void insertDay(Integer deviceId, Integer time) {
         //如果一天还没过完则不计算
         if ((System.currentTimeMillis() / 1000 - time) < 86400) {
             return;
@@ -82,22 +89,26 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 */
 
         double f_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() >= powerPriceTime.getF_power_startAt() && s.getDataTime() < powerPriceTime.getF_power_endAt()).
+                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getF_power_startAt() % 86400 &&
+                        s.getDataTime() % 86400 < powerPriceTime.getF_power_endAt() % 86400).
                 map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
                 (powerPriceTime.getF_power_startAt() - powerPriceTime.getF_power_endAt()) / 3600.0;
         double f_power_price = f_power * Double.parseDouble(powerPriceTime.getF_power_price());
         double g_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() >= powerPriceTime.getG_power_startAt() && s.getDataTime() < powerPriceTime.getG_power_endAt()).
+                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getG_power_startAt() % 86400 &&
+                        s.getDataTime() % 86400 < powerPriceTime.getG_power_endAt() % 86400).
                 map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
                 (powerPriceTime.getG_power_startAt() - powerPriceTime.getG_power_endAt()) / 3600.0;
         double g_power_price = g_power * Double.parseDouble(powerPriceTime.getG_power_price());
         double p_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() >= powerPriceTime.getP_power_startAt() && s.getDataTime() < powerPriceTime.getP_power_endAt()).
+                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getP_power_startAt() % 86400 &&
+                        s.getDataTime() % 86400 < powerPriceTime.getP_power_endAt() % 86400).
                 map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
                 (powerPriceTime.getP_power_startAt() - powerPriceTime.getP_power_endAt()) / 3600.0;
         double p_power_price = p_power * Double.parseDouble(powerPriceTime.getP_power_price());
         double j_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() >= powerPriceTime.getJ_power_startAt() && s.getDataTime() < powerPriceTime.getJ_power_endAt()).
+                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getJ_power_startAt() % 86400 &&
+                        s.getDataTime() % 86400 < powerPriceTime.getJ_power_endAt() % 86400).
                 map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
                 (powerPriceTime.getJ_power_startAt() - powerPriceTime.getJ_power_endAt()) / 3600.0;
         double j_power_price = j_power * Double.parseDouble(powerPriceTime.getJ_power_price());
@@ -112,5 +123,10 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         powerBillByDay.setJ_power_price(String.format("%.2f", j_power_price));
 
         powerBillByDayRepository.save(powerBillByDay);
+    }
+
+    @Override
+    public Map<String, Object> queryByMonth(Integer deviceId, YearMonth yearMonth) {
+        return null;
     }
 }
