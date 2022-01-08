@@ -5,6 +5,7 @@ import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.repository.DeviceRepository;
 import com.example.power_prediction.repository.PowerBillByDayRepository;
 import com.example.power_prediction.service.PowerPriceTimeService;
+import com.example.power_prediction.util.TimeOperation;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 
 
 @SpringBootTest
@@ -50,10 +52,10 @@ class CspTest {
 class JustJavaTest {
     @Test
     void Date() {
-        LocalDate localDate = LocalDate.of(2022, 1, 7);
-        System.out.println(localDate.compareTo(LocalDate.now()));
-
-        System.out.println(localDate.atStartOfDay(ZoneId.of("Asia/Shanghai")).toEpochSecond());
+        LocalDate l1= LocalDate.of(2022, 1, 8);
+        LocalDate l2= LocalDate.of(2022, 1, 8);
+        LocalDate l3= LocalDate.of(2022, 1, 9);
+        System.out.println(TimeOperation.isBetween(l2, l1, l3, ChronoUnit.DAYS));
     }
 
 }

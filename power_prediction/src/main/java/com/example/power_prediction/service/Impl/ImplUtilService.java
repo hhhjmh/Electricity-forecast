@@ -2,6 +2,7 @@ package com.example.power_prediction.service.Impl;
 
 import com.example.power_prediction.entity.PowerDistributionDay;
 import com.example.power_prediction.entity.PowerRealtime;
+import com.example.power_prediction.entity.UtilEntity;
 import com.example.power_prediction.repository.DeviceRelationshipRepository;
 import com.example.power_prediction.repository.PowerDistributionDayRepository;
 import com.example.power_prediction.repository.PowerRealtimeRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -102,7 +104,7 @@ public class ImplUtilService implements UtilService {
                 Double highCharge = highKWh * highPowerRate;
                 Double lowCharge = lowKWh * lowPowerRate;
                 Double midCharge = midKWh * midPowerRate;
-                Double totalCharge = highCharge+lowCharge+midCharge;
+                Double totalCharge = highCharge + lowCharge + midCharge;
 
                 powerDistributionDay.setHighCharge(String.format("%.2f", highCharge));
                 powerDistributionDay.setLowCharge(String.format("%.2f", lowCharge));
@@ -140,7 +142,7 @@ public class ImplUtilService implements UtilService {
             if (o[4] == null) { //superDeviceID为null
                 topMap.put("label", o[0]);
                 topMap.put("children", recursionTree(objects, (Integer) o[2], type));
-                topMap.put("id",o[1]);
+                topMap.put("id", o[1]);
                 arrayList.add(topMap);
             }
 
@@ -162,7 +164,7 @@ public class ImplUtilService implements UtilService {
                 Map map = new HashMap();
                 map.put("children", arrayList1);
                 map.put("label", o[0]);
-                map.put("id",o[1]);
+                map.put("id", o[1]);
 
                 if (deviceName != null && deviceName.equals((String) o[0])) {
                     break;
@@ -173,11 +175,36 @@ public class ImplUtilService implements UtilService {
             } else if (o[4] == topId) {
                 Map<String, Object> subMap = new HashMap<>();
                 subMap.put("label", o[0]);
-                subMap.put("id",o[1]);
+                subMap.put("id", o[1]);
                 arrayList.add(subMap);
             }
         }
         return arrayList;
     }
 
+    @Override
+    public ZoneId getZoneId() {
+        try {
+            return ZoneId.of(utilEntityRepository.findByVariableAttributeNameAndState("time_zone", 1).getVariableAttributeNum());
+        } catch (Exception e) {
+            return ZoneId.of("Asia/Shanghai"); //默认中国时间
+        }
+    }
+
+
+
+    @Override
+    public void setZoneId(String zone) {
+        UtilEntity time_zone = utilEntityRepository.findByVariableAttributeNameAndState("time_zone", 1);
+        if (time_zone != null) {
+            time_zone.setVariableAttributeNum(zone);
+        } else {
+            time_zone=new UtilEntity();
+            time_zone.setVariableAttributeName("time_zone");
+            time_zone.setState(1);
+            time_zone.setVariableAttributeNum(zone);
+        }
+        time_zone.setDataTime((int) (System.currentTimeMillis()/1000));
+        utilEntityRepository.save(time_zone);
+    }
 }
