@@ -1,36 +1,72 @@
 package com.example.power_prediction.service.Impl;
 
-import com.example.power_prediction.entity.DeviceRelationship;
 import com.example.power_prediction.entity.PowerBillByDay;
-import com.example.power_prediction.entity.PowerPriceTime;
 import com.example.power_prediction.entity.PowerRealtime;
 import com.example.power_prediction.repository.*;
 import com.example.power_prediction.service.PowerBillByDayService;
+import com.example.power_prediction.service.PowerPriceTimeService;
+import com.example.power_prediction.service.UtilService;
+import com.example.power_prediction.util.TimeOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.averagingDouble;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class ImplPowerBillByDayService implements PowerBillByDayService {
     @Autowired
     PowerBillByDayRepository powerBillByDayRepository;
-    @Autowired
-    DeviceRelationshipRepository deviceRelationshipRepository;
-    @Autowired
-    PowerPriceTimeRepository powerPriceTimeRepository;
+
     @Autowired
     PowerRealtimeRepository powerRealtimeRepository;
 
-    private final ZoneId zoneId = ZoneId.of("Asia/Shanghai");
+    @Autowired
+    PowerPriceTimeService powerPriceTimeService;
 
-    @Override
-    public List<PowerBillByDay> findAllByDeviceIdAndDateTimeBetween(Integer deviceId, Integer start, Integer end) {
-        return powerBillByDayRepository.findAllByDeviceIdAndDateTimeBetween(deviceId, start, end);
+    @Autowired
+    UtilService utilService;
+
+
+
+
+    private String getTimeZone(Map<String, Object> powerPriceTime, LocalTime time) {
+        String[] keys = {"f", "g", "p", "j"};
+        for (String key : keys) {
+            Map<String, Object> timeAndPrice = (Map<String, Object>) powerPriceTime.get(key);
+            List<LocalTime> starts = (List<LocalTime>) timeAndPrice.get("start");
+            List<LocalTime> ends = (List<LocalTime>) timeAndPrice.get("end");
+            for (int i = 0; i < starts.size(); i++) {
+                if (TimeOperation.isBetween(time, starts.get(i), ends.get(i), ChronoUnit.SECONDS)) {
+                    return key;
+                }
+            }
+        }
+        return "error";
+    }
+
+    private Map<String, Double[]> getPriceZone(Map<String, Object> powerPriceTime) {
+        String[] keys = {"f", "g", "p", "j"};
+        Map<String, Double[]> map = new HashMap<>();
+        for (String key : keys) {
+            Map<String, Object> timeAndPrice = (Map<String, Object>) powerPriceTime.get(key);
+            List<LocalTime> starts = (List<LocalTime>) timeAndPrice.get("start");
+            List<LocalTime> ends = (List<LocalTime>) timeAndPrice.get("end");
+            double price = Double.parseDouble((String) timeAndPrice.get("price"));
+            double tmp = 0;
+            for (int i = 0; i < starts.size(); i++) {
+                double t=ChronoUnit.SECONDS.between(starts.get(i), ends.get(i));
+                if (t<0)t=86400+t;
+                tmp += t;
+            }
+            map.put(key, new Double[]{tmp/3600, price});
+        }
+        return map;
     }
 
 
@@ -40,66 +76,52 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
      * @param deviceId 设备ID
      * @param time     时间戳
      */
-    private PowerBillByDay insertDay(Integer deviceId, Integer time) {
+    private PowerBillByDay insertDay(Integer deviceId, Integer time,ZoneId zoneId) {
         //如果一天还没过完则不计算
         if ((System.currentTimeMillis() / 1000 - time) < 86400) {
             return null;
         }
 
-        //获得设备类型
-        DeviceRelationship deviceRelationship = deviceRelationshipRepository.findByDeviceId(deviceId);
-        Integer type = deviceRelationship.getType();
-
-        //获取当天的电费计价信息
-        PowerPriceTime powerPriceTime = powerPriceTimeRepository.
-                findFirstByDeviceTypeIdAndStartTimeLessThanEqualOrderByStartTimeDesc(type, time);
+        //获得当天电费计价信息
+        Map<String, Object> powerPriceTime = powerPriceTimeService.getDevicePowerPriceInTime(deviceId, time);
 
         //获得当天的所有电量数据
         List<PowerRealtime> powerRealtimes = powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(
                 deviceId, time, time + 86399);
 
+
         //初始化表格
         PowerBillByDay powerBillByDay = new PowerBillByDay();
         powerBillByDay.setDeviceId(deviceId);
-        powerBillByDay.setDateTime(time);
+        powerBillByDay.setDateTime(TimeOperation.getZonedDateTime(time, zoneId).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 
-        double f_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getF_power_startAt() % 86400 &&
-                        s.getDataTime() % 86400 < powerPriceTime.getF_power_endAt() % 86400).
-                map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
-                (powerPriceTime.getF_power_endAt() % 86400 - powerPriceTime.getF_power_startAt() % 86400) / 3600.0;
-        double f_power_price = f_power * Double.parseDouble(powerPriceTime.getF_power_price());
 
-        double g_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getG_power_startAt() % 86400 &&
-                        s.getDataTime() % 86400 < powerPriceTime.getG_power_endAt() % 86400).
-                map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
-                (powerPriceTime.getG_power_endAt() % 86400 - powerPriceTime.getG_power_startAt() % 86400) / 3600.0;
-        double g_power_price = g_power * Double.parseDouble(powerPriceTime.getG_power_price());
+        Map<String, Double> stringDoubleMap = powerRealtimes.stream().collect(groupingBy(s ->
+                        getTimeZone(powerPriceTime, LocalTime.from(TimeOperation.getZonedDateTime(s.getDataTime(), zoneId))),
+                averagingDouble(s -> Double.parseDouble(s.getTotalLoad()))
+        ));
 
-        double p_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getP_power_startAt() % 86400 &&
-                        s.getDataTime() % 86400 < powerPriceTime.getP_power_endAt() % 86400 + 86400).
-                map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
-                (powerPriceTime.getP_power_endAt() % 86400 + 86400 - powerPriceTime.getP_power_startAt() % 86400) / 3600.0;
-        double p_power_price = p_power * Double.parseDouble(powerPriceTime.getP_power_price());
+        Map<String, Double[]> priceZone = getPriceZone(powerPriceTime);
 
-        double j_power = powerRealtimes.stream().
-                filter(s -> s.getDataTime() % 86400 >= powerPriceTime.getJ_power_startAt() % 86400 &&
-                        s.getDataTime() % 86400 < powerPriceTime.getJ_power_endAt() % 86400).
-                map(PowerRealtime::getTotalLoad).collect(averagingDouble(Double::parseDouble)) *
-                (powerPriceTime.getJ_power_endAt() % 86400 - powerPriceTime.getJ_power_startAt() % 86400) / 3600.0;
-        double j_power_price = j_power * Double.parseDouble(powerPriceTime.getJ_power_price());
+        String[] keys = {"f", "g", "p", "j"};
+        Map<String, Double> power = new HashMap<>();
+        Map<String, Double> price = new HashMap<>();
+        for (String key : keys) {
+            stringDoubleMap.putIfAbsent(key, 0.0);
+            power.put(key, stringDoubleMap.get(key) * priceZone.get(key)[0]);
+            price.put(key, stringDoubleMap.get(key) * priceZone.get(key)[0] * priceZone.get(key)[1]);
+        }
 
-        powerBillByDay.setF_power(String.format("%.2f", f_power));
-        powerBillByDay.setG_power(String.format("%.2f", g_power));
-        powerBillByDay.setP_power(String.format("%.2f", p_power));
-        powerBillByDay.setJ_power(String.format("%.2f", j_power));
-        powerBillByDay.setF_power_price(String.format("%.2f", f_power_price));
-        powerBillByDay.setG_power_price(String.format("%.2f", g_power_price));
-        powerBillByDay.setP_power_price(String.format("%.2f", p_power_price));
-        powerBillByDay.setJ_power_price(String.format("%.2f", j_power_price));
+
+        powerBillByDay.setF_power(String.format("%.2f", power.get("f")));
+        powerBillByDay.setG_power(String.format("%.2f", power.get("g")));
+        powerBillByDay.setP_power(String.format("%.2f", power.get("p")));
+        powerBillByDay.setJ_power(String.format("%.2f", power.get("j")));
+        powerBillByDay.setF_power_price(String.format("%.2f", price.get("f")));
+        powerBillByDay.setG_power_price(String.format("%.2f", price.get("g")));
+        powerBillByDay.setP_power_price(String.format("%.2f", price.get("p")));
+        powerBillByDay.setJ_power_price(String.format("%.2f", price.get("j")));
 
         powerBillByDayRepository.save(powerBillByDay);
         return powerBillByDay;
@@ -107,30 +129,32 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
     @Override
     public Map<String, Object> queryByMonth(Integer deviceId, Integer year, Integer month) {
+        final ZoneId zoneId = utilService.getZoneId();
         Map<String, Object> map = new HashMap<>(); //总容器
         try {
             YearMonth yearMonth = YearMonth.of(year, month);
 
             //从数据库中查找该月数据
-            List<PowerBillByDay> powerBillByDays = findAllByDeviceIdAndDateTimeBetween(
+            List<PowerBillByDay> powerBillByDays = powerBillByDayRepository.findAllByDeviceIdAndDateTimeStartingWith(
                     deviceId,
-                    (int) yearMonth.atDay(1).atStartOfDay(zoneId).toEpochSecond(),
-                    (int) yearMonth.atEndOfMonth().atStartOfDay(zoneId).toEpochSecond());
+                    yearMonth.format(DateTimeFormatter.ofPattern("yyyy-MM"))
+            );
 
-            Map<Integer, Object> dayData; //每天的数据容器
+            Map<String, Object> dayData; //每天的数据容器
 
             //天数不够则寻找不存在的天数并插入数据后返回
             if (powerBillByDays.size() != yearMonth.lengthOfMonth()) {
                 for (LocalDate localDate = LocalDate.of(year, month, 1); localDate.getMonthValue() == month && localDate.compareTo(LocalDate.now(zoneId)) < 0; localDate = localDate.plusDays(1)) {
                     Integer dateTime = (int) localDate.atStartOfDay(zoneId).toEpochSecond();
-                    if (powerBillByDays.stream().noneMatch(p -> Objects.equals(p.getDateTime(), dateTime))) {
-                        powerBillByDays.add(insertDay(deviceId, dateTime));
+                    LocalDate finalLocalDate = localDate;
+                    if (powerBillByDays.stream().noneMatch(p -> Objects.equals(p.getDateTime(), finalLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))) {
+                        powerBillByDays.add(insertDay(deviceId, dateTime,zoneId));
                     }
                 }
             }
             //从对象中提取数据注入Map
             dayData = powerBillByDays.stream().filter(Objects::nonNull).collect(Collectors.toMap(
-                    p -> ZonedDateTime.ofInstant(Instant.ofEpochSecond(p.getDateTime()), zoneId).getDayOfMonth(),
+                    PowerBillByDay::getDateTime,
                     p -> {
                         Map<String, Object> tmp = new HashMap<>();
                         tmp.put("f_power", p.getF_power());

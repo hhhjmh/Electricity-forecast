@@ -19,7 +19,7 @@ public class PowerBillByDay {
     @Column(name = "id", nullable = false,unique = true,insertable = false, updatable = false)
     private Integer id;
     @Column(name = "date_time", nullable = false)
-    private Integer dateTime;
+    private String dateTime;
     @Column(name = "f_power", nullable = false)
     private String f_power;
     @Column(name = "g_power", nullable = false)
