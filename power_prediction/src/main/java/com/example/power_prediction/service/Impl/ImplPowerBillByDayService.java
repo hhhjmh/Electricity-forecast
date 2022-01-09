@@ -33,8 +33,12 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
     UtilService utilService;
 
 
-
-
+    /**
+     * 判断该时间处在哪个计时段
+     * @param powerPriceTime getDevicePowerPriceInTime得到的Map对象
+     * @param time 时间
+     * @return “f”“g”“p”“j”
+     */
     private String getTimeZone(Map<String, Object> powerPriceTime, LocalTime time) {
         String[] keys = {"f", "g", "p", "j"};
         for (String key : keys) {
@@ -50,6 +54,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         return "error";
     }
 
+    //返回各个计时段持续的时间以及电费单价
     private Map<String, Double[]> getPriceZone(Map<String, Object> powerPriceTime) {
         String[] keys = {"f", "g", "p", "j"};
         Map<String, Double[]> map = new HashMap<>();
@@ -95,15 +100,13 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         powerBillByDay.setDeviceId(deviceId);
         powerBillByDay.setDateTime(TimeOperation.getZonedDateTime(time, zoneId).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
+        //利用stream流分割，将各个时间段内的负载求平均值
+        Map<String, Double> stringDoubleMap = powerRealtimes.stream().collect(groupingBy(
+                s -> getTimeZone(powerPriceTime, LocalTime.from(TimeOperation.getZonedDateTime(s.getDataTime(), zoneId))),
+                averagingDouble(s -> Double.parseDouble(s.getTotalLoad()))));
 
-
-        Map<String, Double> stringDoubleMap = powerRealtimes.stream().collect(groupingBy(s ->
-                        getTimeZone(powerPriceTime, LocalTime.from(TimeOperation.getZonedDateTime(s.getDataTime(), zoneId))),
-                averagingDouble(s -> Double.parseDouble(s.getTotalLoad()))
-        ));
-
+        //将负载乘时间和电价，得出电量和电费
         Map<String, Double[]> priceZone = getPriceZone(powerPriceTime);
-
         String[] keys = {"f", "g", "p", "j"};
         Map<String, Double> power = new HashMap<>();
         Map<String, Double> price = new HashMap<>();
@@ -176,6 +179,4 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         }
         return map;
     }
-
-
 }

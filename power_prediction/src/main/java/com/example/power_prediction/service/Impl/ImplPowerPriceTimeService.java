@@ -117,6 +117,7 @@ public class ImplPowerPriceTimeService implements PowerPriceTimeService {
     }
 
 
+    //将时间字符串映射成两个List数组，以,切割
     private Map<String, Object> mappedLocalTime(String start, String end) {
         Map<String, Object> map = new HashMap<>();
         List<LocalTime> starts = Stream.of(start.split(",")).map(LocalTime::parse).collect(Collectors.toList());

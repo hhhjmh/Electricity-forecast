@@ -22,6 +22,7 @@ public interface UtilService {
 
     /**
      * 返回数据库中设置的时区的ZoneId对象，用于其他业务调用
+     * 默认Asia/Shanghai
      *
      * @return ZoneId
      */
