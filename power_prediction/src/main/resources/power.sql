@@ -11,7 +11,7 @@
  Target Server Version : 50735
  File Encoding         : 65001
 
- Date: 07/01/2022 03:57:30
+ Date: 10/01/2022 01:05:05
 */
 
 SET NAMES utf8mb4;
@@ -751,7 +751,7 @@ CREATE TABLE `power_analyse_year_min`  (
 DROP TABLE IF EXISTS `power_bill_by_day`;
 CREATE TABLE `power_bill_by_day`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date_time` int(11) NOT NULL,
+  `date_time` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `g_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `p_power` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -762,7 +762,7 @@ CREATE TABLE `power_bill_by_day`  (
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `deviceId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = MyISAM AUTO_INCREMENT = 191 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of power_bill_by_day
@@ -884,17 +884,17 @@ DROP TABLE IF EXISTS `power_price_time`;
 CREATE TABLE `power_price_time`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `startTime` int(11) NOT NULL,
-  `f_power_startAt` int(11) NOT NULL,
-  `f_power_endAt` int(11) NOT NULL,
+  `f_power_startAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `f_power_endAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `f_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `g_power_startAt` int(11) NOT NULL,
-  `g_power_endAt` int(11) NOT NULL,
+  `g_power_startAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `g_power_endAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `g_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `p_power_startAt` int(11) NOT NULL,
-  `p_power_endAt` int(11) NOT NULL,
+  `p_power_startAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `p_power_endAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `p_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `j_power_startAt` int(11) NOT NULL,
-  `j_power_endAt` int(11) NOT NULL,
+  `j_power_startAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `j_power_endAt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `j_power_price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `deviceTypeId` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -903,7 +903,7 @@ CREATE TABLE `power_price_time`  (
 -- ----------------------------
 -- Records of power_price_time
 -- ----------------------------
-INSERT INTO `power_price_time` VALUES (1, 1600679600, 1641398400, 1641420000, '0.6', 1641441600, 1641463200, '0.3', 1641420000, 1641441600, '0.5', 1641463200, 1641484800, '0.8', 1);
+INSERT INTO `power_price_time` VALUES (1, 1600679600, '00:00', '06:00', '0.6', '06:00', '12:00', '0.3', '12:00,15:00', '15:00,18:00', '0.5', '18:00', '00:00', '0.8', 1);
 
 -- ----------------------------
 -- Table structure for power_quality_realtime
@@ -1551,7 +1551,7 @@ CREATE TABLE `util`  (
   `state` int(255) NULL DEFAULT NULL COMMENT '0正在使用1弃用',
   `dataTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of util

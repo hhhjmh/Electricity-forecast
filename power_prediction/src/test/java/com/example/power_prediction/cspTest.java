@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 
 
@@ -56,6 +53,16 @@ class JustJavaTest {
         LocalDate l2= LocalDate.of(2022, 1, 8);
         LocalDate l3= LocalDate.of(2022, 1, 9);
         System.out.println(TimeOperation.isBetween(l2, l1, l3, ChronoUnit.DAYS));
+    }
+
+    @Test
+    void Time(){
+        LocalTime t1=LocalTime.of(23,0);
+        LocalTime t2=LocalTime.of(23,30);
+        LocalTime t3=LocalTime.of(0,0);
+        System.out.println(t3.minus(1, ChronoUnit.SECONDS));
+        System.out.println(ChronoUnit.SECONDS.between(t1, t3));
+        System.out.println(TimeOperation.isBetween(t2,t1,t3,ChronoUnit.SECONDS));
     }
 
 }

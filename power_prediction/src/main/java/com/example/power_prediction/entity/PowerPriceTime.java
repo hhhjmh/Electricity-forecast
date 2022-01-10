@@ -3,7 +3,6 @@ package com.example.power_prediction.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,33 +16,33 @@ public class PowerPriceTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false,unique = true,insertable = false, updatable = false)
+    @Column(name = "id", nullable = false, unique = true, insertable = false, updatable = false)
     private Integer id;
     @Column(name = "startTime", nullable = false)
     private Integer startTime; //规则生效时间 只精确到日 次日生效
-    @Column(name = "f_power_startAt", nullable = false)
-    private Integer f_power_startAt;
-    @Column(name = "f_power_endAt", nullable = false)
-    private Integer f_power_endAt;
-    @Column(name = "f_power_price", nullable = false)
+    @Column(name = "f_power_startAt")
+    private String f_power_startAt;
+    @Column(name = "f_power_endAt")
+    private String f_power_endAt;
+    @Column(name = "f_power_price")
     private String f_power_price;
-    @Column(name = "g_power_startAt", nullable = false)
-    private Integer g_power_startAt;
-    @Column(name = "g_power_endAt", nullable = false)
-    private Integer g_power_endAt;
-    @Column(name = "g_power_price", nullable = false)
+    @Column(name = "g_power_startAt")
+    private String g_power_startAt;
+    @Column(name = "g_power_endAt")
+    private String g_power_endAt;
+    @Column(name = "g_power_price")
     private String g_power_price;
-    @Column(name = "p_power_startAt", nullable = false)
-    private Integer p_power_startAt;
-    @Column(name = "p_power_endAt", nullable = false)
-    private Integer p_power_endAt;
-    @Column(name = "p_power_price", nullable = false)
+    @Column(name = "p_power_startAt")
+    private String p_power_startAt;
+    @Column(name = "p_power_endAt")
+    private String p_power_endAt;
+    @Column(name = "p_power_price")
     private String p_power_price;
-    @Column(name = "j_power_startAt", nullable = false)
-    private Integer j_power_startAt;
-    @Column(name = "j_power_endAt", nullable = false)
-    private Integer j_power_endAt;
-    @Column(name = "j_power_price", nullable = false)
+    @Column(name = "j_power_startAt")
+    private String j_power_startAt;
+    @Column(name = "j_power_endAt")
+    private String j_power_endAt;
+    @Column(name = "j_power_price")
     private String j_power_price;
     @Column(name = "deviceTypeId", nullable = false)
     private Integer deviceTypeId; //对应DeviceRelationShip的type字段
