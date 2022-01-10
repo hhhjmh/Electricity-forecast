@@ -34,4 +34,9 @@ public class PowerBillByDayController {
     public Map<String, Object> queryMonth(@RequestParam Integer deviceId, @RequestParam Integer year, @RequestParam Integer month) {
         return powerBillByDayService.queryByMonth(deviceId, year, month);
     }
+
+    @PostMapping("/queryYear")
+    public Map<String, Object> queryYear(@RequestParam Integer deviceId, @RequestParam Integer year) {
+        return powerBillByDayService.queryByYear(deviceId, year);
+    }
 }

@@ -35,8 +35,9 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
     /**
      * 判断该时间处在哪个计时段
+     *
      * @param powerPriceTime getDevicePowerPriceInTime得到的Map对象
-     * @param time 时间
+     * @param time           时间
      * @return “f”“g”“p”“j”
      */
     private String getTimeZone(Map<String, Object> powerPriceTime, LocalTime time) {
@@ -65,11 +66,11 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
             double price = Double.parseDouble((String) timeAndPrice.get("price"));
             double tmp = 0;
             for (int i = 0; i < starts.size(); i++) {
-                double t=ChronoUnit.SECONDS.between(starts.get(i), ends.get(i));
-                if (t<0)t=86400+t;
+                double t = ChronoUnit.SECONDS.between(starts.get(i), ends.get(i));
+                if (t < 0) t = 86400 + t;
                 tmp += t;
             }
-            map.put(key, new Double[]{tmp/3600, price});
+            map.put(key, new Double[]{tmp / 3600, price});
         }
         return map;
     }
@@ -81,12 +82,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
      * @param deviceId 设备ID
      * @param time     时间戳
      */
-    private PowerBillByDay insertDay(Integer deviceId, Integer time,ZoneId zoneId) {
-        //如果一天还没过完则不计算
-        if ((System.currentTimeMillis() / 1000 - time) < 86400) {
-            return null;
-        }
-
+    private PowerBillByDay insertDay(Integer deviceId, Integer time, ZoneId zoneId) {
         //获得当天电费计价信息
         Map<String, Object> powerPriceTime = powerPriceTimeService.getDevicePowerPriceInTime(deviceId, time);
 
@@ -126,7 +122,9 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         powerBillByDay.setP_power_price(String.format("%.2f", price.get("p")));
         powerBillByDay.setJ_power_price(String.format("%.2f", price.get("j")));
 
-        powerBillByDayRepository.save(powerBillByDay);
+        //如果一天还没过完则不持久化
+        if ((System.currentTimeMillis() / 1000 - time) > 86400) {
+        powerBillByDayRepository.save(powerBillByDay);}
         return powerBillByDay;
     }
 
@@ -143,23 +141,22 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     yearMonth.format(DateTimeFormatter.ofPattern("yyyy-MM"))
             );
 
-            Map<String, Object> dayData; //每天的数据容器
 
             //天数不够则寻找不存在的天数并插入数据后返回
             if (powerBillByDays.size() != yearMonth.lengthOfMonth()) {
-                for (LocalDate localDate = LocalDate.of(year, month, 1); localDate.getMonthValue() == month && localDate.compareTo(LocalDate.now(zoneId)) < 0; localDate = localDate.plusDays(1)) {
+                for (LocalDate localDate = LocalDate.of(year, month, 1); localDate.getMonthValue() == month && localDate.compareTo(LocalDate.now(zoneId)) <= 0; localDate = localDate.plusDays(1)) {
                     Integer dateTime = (int) localDate.atStartOfDay(zoneId).toEpochSecond();
                     LocalDate finalLocalDate = localDate;
                     if (powerBillByDays.stream().noneMatch(p -> Objects.equals(p.getDateTime(), finalLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))) {
-                        powerBillByDays.add(insertDay(deviceId, dateTime,zoneId));
+                        powerBillByDays.add(insertDay(deviceId, dateTime, zoneId));
                     }
                 }
             }
             //从对象中提取数据注入Map
-            dayData = powerBillByDays.stream().filter(Objects::nonNull).collect(Collectors.toMap(
+            Map<String, Object> dayData = powerBillByDays.stream().filter(Objects::nonNull).collect(Collectors.toMap(
                     PowerBillByDay::getDateTime,
                     p -> {
-                        Map<String, Object> tmp = new HashMap<>();
+                        Map<String, String> tmp = new HashMap<>();
                         tmp.put("f_power", p.getF_power());
                         tmp.put("f_power_price", p.getF_power_price());
                         tmp.put("g_power", p.getG_power());
@@ -169,9 +166,67 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                         tmp.put("j_power", p.getJ_power());
                         tmp.put("j_power_price", p.getJ_power_price());
                         return tmp;
-                    }));
+                    }, (p1, p2) -> p1, TreeMap::new));
 
             map.put("dayData", dayData);
+            map.put("state", "Success");
+        } catch (Exception e) {
+            map.put("state", "Fail");
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> queryByYear(Integer deviceId, Integer year) {
+        Map<String, Object> map = new HashMap<>(); //总容器
+        try {
+            Map<String, Object> data = new TreeMap<>();
+
+            //判断是不是当年，不计算未出现的月份
+            YearMonth now= YearMonth.now();
+            int end;
+            if(year== now.getYear()){
+                end=now.getMonthValue();
+            }else{
+                end=12;
+            }
+
+            for (int i = 1; i <= end; i++) {
+                Map<String, Object> monthData = queryByMonth(deviceId, year, i);
+                if (monthData.get("state") == "Success") {
+
+                    //对月的每天数据进行累加
+                    Map<String, Object> dayDatas = (Map<String, Object>) monthData.get("dayData");
+                    double f_power = 0, g_power = 0, p_power = 0, j_power = 0;
+                    double f_power_price = 0, g_power_price = 0, p_power_price = 0, j_power_price = 0;
+                    for (String s : dayDatas.keySet()) {
+                        Map<String, String> dayData = (Map<String, String>) dayDatas.get(s);
+                        f_power += Double.parseDouble(dayData.get("f_power"));
+                        g_power += Double.parseDouble(dayData.get("g_power"));
+                        p_power += Double.parseDouble(dayData.get("p_power"));
+                        j_power += Double.parseDouble(dayData.get("j_power"));
+                        f_power_price += Double.parseDouble(dayData.get("f_power_price"));
+                        g_power_price += Double.parseDouble(dayData.get("g_power_price"));
+                        p_power_price += Double.parseDouble(dayData.get("p_power_price"));
+                        j_power_price += Double.parseDouble(dayData.get("j_power_price"));
+                    }
+                    Map<String, Object> tmp = new HashMap<>();
+                    tmp.put("f_power", String.format("%.2f", f_power));
+                    tmp.put("f_power_price", String.format("%.2f", f_power_price));
+                    tmp.put("g_power", String.format("%.2f", g_power));
+                    tmp.put("g_power_price", String.format("%.2f", g_power_price));
+                    tmp.put("p_power", String.format("%.2f", p_power));
+                    tmp.put("p_power_price", String.format("%.2f", p_power_price));
+                    tmp.put("j_power", String.format("%.2f", j_power));
+                    tmp.put("j_power_price", String.format("%.2f", j_power_price));
+
+                    data.put(YearMonth.of(year, i).format(DateTimeFormatter.ofPattern("yyyy-MM")), tmp);
+                } else {
+                    throw new NullPointerException(i + "月份数据错误");
+                }
+            }
+            map.put("monthData", data);
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
