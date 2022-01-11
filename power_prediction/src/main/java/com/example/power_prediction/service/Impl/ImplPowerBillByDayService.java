@@ -1,5 +1,6 @@
 package com.example.power_prediction.service.Impl;
 
+import com.example.power_prediction.entity.DeviceRelationship;
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.entity.PowerRealtime;
 import com.example.power_prediction.repository.*;
@@ -28,6 +29,9 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
     @Autowired
     PowerPriceTimeService powerPriceTimeService;
+
+    @Autowired
+    DeviceRelationshipRepository deviceRelationshipRepository;
 
     @Autowired
     UtilService utilService;
@@ -83,8 +87,14 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
      * @param time     时间戳
      */
     private PowerBillByDay insertDay(Integer deviceId, Integer time, ZoneId zoneId) {
+        //获得设备类型
+        DeviceRelationship deviceRelationship = deviceRelationshipRepository.findByDeviceId(deviceId);
+        Integer typeId = deviceRelationship.getType();
+
+
+
         //获得当天电费计价信息
-        Map<String, Object> powerPriceTime = powerPriceTimeService.getDevicePowerPriceInTime(deviceId, time);
+        Map<String, Object> powerPriceTime = powerPriceTimeService.getDevicePowerPriceInTime(typeId, time);
 
         //获得当天的所有电量数据
         List<PowerRealtime> powerRealtimes = powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(
