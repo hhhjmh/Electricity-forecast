@@ -39,4 +39,9 @@ public class PowerBillByDayController {
     public Map<String, Object> queryYear(@RequestParam Integer deviceId, @RequestParam Integer year) {
         return powerBillByDayService.queryByYear(deviceId, year);
     }
+
+    @PostMapping("/dailyUpdate")
+    public Map<String, Object> dailyUpdate() {
+        return powerBillByDayService.dailyUpdate();
+    }
 }
