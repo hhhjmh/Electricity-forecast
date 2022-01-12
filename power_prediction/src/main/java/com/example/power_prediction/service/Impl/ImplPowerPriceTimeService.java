@@ -23,8 +23,7 @@ public class ImplPowerPriceTimeService implements PowerPriceTimeService {
     @Autowired
     PowerPriceTimeRepository powerPriceTimeRepository;
 
-    @Autowired
-    DeviceRelationshipRepository deviceRelationshipRepository;
+
 
 
     @Override
@@ -83,15 +82,11 @@ public class ImplPowerPriceTimeService implements PowerPriceTimeService {
     }
 
     @Override
-    public Map<String, Object> getDevicePowerPriceInTime(Integer deviceId, Integer time) {
+    public Map<String, Object> getDevicePowerPriceInTime(Integer typeId, Integer time) {
         Map<String, Object> map = new HashMap<>();
         try {
-            //获得设备类型
-            DeviceRelationship deviceRelationship = deviceRelationshipRepository.findByDeviceId(deviceId);
-            Integer type = deviceRelationship.getType();
-
             //获取当天的电费计价信息
-            PowerPriceTime powerPriceTime = powerPriceTimeRepository.findFirstByDeviceTypeIdAndStartTimeLessThanEqualOrderByStartTimeDesc(type, time);
+            PowerPriceTime powerPriceTime = powerPriceTimeRepository.findFirstByDeviceTypeIdAndStartTimeLessThanEqualOrderByStartTimeDesc(typeId, time);
 
             Map<String, Object> f = mappedLocalTime(powerPriceTime.getF_power_startAt(), powerPriceTime.getF_power_endAt());
             f.put("price", powerPriceTime.getF_power_price());

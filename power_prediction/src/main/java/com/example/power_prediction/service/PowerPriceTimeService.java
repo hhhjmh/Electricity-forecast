@@ -18,8 +18,8 @@ public interface PowerPriceTimeService {
     /**
      * 返回指定设备在指定时间段的电费计费规则
      *
-     * @param deviceId 设备Id
+     * @param typeId 设备类型Id
      * @param time     时间
      */
-    Map<String, Object> getDevicePowerPriceInTime(Integer deviceId, Integer time);
+    Map<String, Object> getDevicePowerPriceInTime(Integer typeId, Integer time);
 }
