@@ -162,7 +162,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
 
             //天数不够则寻找不存在的天数并插入数据后返回
-            if (powerBillByDays.size() != yearMonth.lengthOfMonth()) {
+            if (powerBillByDays.size() < yearMonth.lengthOfMonth()) {
                 for (LocalDate localDate = LocalDate.of(year, month, 1); localDate.getMonthValue() == month && localDate.compareTo(LocalDate.now(zoneId)) <= 0; localDate = localDate.plusDays(1)) {
                     LocalDate finalLocalDate = localDate;
                     if (powerBillByDays.stream().noneMatch(p -> Objects.equals(p.getDateTime(), finalLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))) {
