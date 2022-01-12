@@ -4,6 +4,7 @@ package com.example.power_prediction;
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.repository.DeviceRepository;
 import com.example.power_prediction.repository.PowerBillByDayRepository;
+import com.example.power_prediction.service.PowerBillByDayService;
 import com.example.power_prediction.service.PowerDistributionHourService;
 import com.example.power_prediction.service.PowerPriceTimeService;
 import com.example.power_prediction.util.TimeOperation;
@@ -22,6 +23,9 @@ class CspTest {
     @Autowired
     PowerDistributionHourService powerDistributionHourService;
 
+    @Autowired
+    PowerBillByDayService powerBillByDayService;
+
     @Test
     void showPowerDistributionHourQueryByDay() {
         System.out.println(powerDistributionHourService.queryByDay(1, 2022, 1, 12));
@@ -30,6 +34,11 @@ class CspTest {
     @Test
     void showHourlyUpdate() {
         System.out.println(powerDistributionHourService.hourlyUpdate());
+    }
+
+    @Test
+    void showDailyUpdate() {
+        System.out.println(powerBillByDayService.dailyUpdate());
     }
 
 }

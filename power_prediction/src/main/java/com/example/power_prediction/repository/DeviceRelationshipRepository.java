@@ -20,6 +20,6 @@ public interface DeviceRelationshipRepository extends JpaRepository<DeviceRelati
     @Query(value = "SELECT device.name,device_relationship.* from device,device_relationship where device.id=device_relationship.deviceId And device_relationship.type=:type1 And device_relationship.superDeviceId =:superDeviceId", nativeQuery = true)
     List<Object[]> findDeviceRelationshipBySuperDeviceId(@Param("type1") Integer type1, @Param("superDeviceId") Integer sublayerDeviceId);
 
-    DeviceRelationship findByDeviceId(Integer deviceId);
+    DeviceRelationship findFirstByDeviceId(Integer deviceId);
 
 }

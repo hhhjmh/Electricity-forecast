@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PowerDistributionHourRepository extends JpaRepository<PowerDistributionHour,Integer> {
     List<PowerDistributionHour> findAllByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
+    PowerDistributionHour findByDeviceIdAndDataTime(Integer deviceId, Integer dateTime);
 }

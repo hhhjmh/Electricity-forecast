@@ -88,7 +88,7 @@ public class ImplPowerDistributionHourService implements PowerDistributionHourSe
 
             //如果数据不全则尝试更新
             if (powerDistributionHours.size() < 24) {
-                for (ZonedDateTime i = startTime; i.getDayOfMonth() == day && ChronoUnit.HOURS.between(i, ZonedDateTime.now()) > 0; i=i.plusHours(1)) {
+                for (ZonedDateTime i = startTime; i.getDayOfMonth() == day && ChronoUnit.HOURS.between(i, ZonedDateTime.now()) > 0; i = i.plusHours(1)) {
                     ZonedDateTime finalI = i;
                     if (powerDistributionHours.stream().noneMatch(p -> p.getDataTime() == (int) finalI.toEpochSecond())) {
                         PowerDistributionHour powerDistributionHour = insertHour(deviceId, (int) i.toEpochSecond());
@@ -116,7 +116,15 @@ public class ImplPowerDistributionHourService implements PowerDistributionHourSe
         Map<String, Object> map = new HashMap<>();
         try {
             List<Device> devices = deviceRepository.findAll();
-            devices.forEach(device -> insertHour(device.getId(), (int) ZonedDateTime.now().withMinute(0).withSecond(0).minusHours(1).toEpochSecond()));
+            Integer time = (int) ZonedDateTime.now().withMinute(0).withSecond(0).minusHours(1).toEpochSecond();
+
+            devices.forEach(device -> {
+                PowerDistributionHour powerDistributionHour=powerDistributionHourRepository.findByDeviceIdAndDataTime(device.getId(),time);
+                //如果已经有了则不插入
+                if (powerDistributionHour==null){
+                    insertHour(device.getId(), time);
+                }
+            });
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");

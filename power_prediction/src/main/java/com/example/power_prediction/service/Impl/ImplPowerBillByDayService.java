@@ -93,7 +93,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
     private PowerBillByDay insertDay(Integer deviceId, Integer time, ZoneId zoneId) {
         try {
             //获得设备类型
-            DeviceRelationship deviceRelationship = deviceRelationshipRepository.findByDeviceId(deviceId);
+            DeviceRelationship deviceRelationship = deviceRelationshipRepository.findFirstByDeviceId(deviceId);
             Integer typeId = deviceRelationship.getType();
 
 
@@ -166,8 +166,8 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                 for (LocalDate localDate = LocalDate.of(year, month, 1); localDate.getMonthValue() == month && localDate.compareTo(LocalDate.now(zoneId)) <= 0; localDate = localDate.plusDays(1)) {
                     LocalDate finalLocalDate = localDate;
                     if (powerBillByDays.stream().noneMatch(p -> Objects.equals(p.getDateTime(), finalLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))) {
-                        PowerBillByDay powerBillByDay=insertDay(deviceId, (int) localDate.atStartOfDay(zoneId).toEpochSecond(), zoneId);
-                        if (powerBillByDay!=null)powerBillByDays.add(powerBillByDay);
+                        PowerBillByDay powerBillByDay = insertDay(deviceId, (int) localDate.atStartOfDay(zoneId).toEpochSecond(), zoneId);
+                        if (powerBillByDay != null) powerBillByDays.add(powerBillByDay);
                     }
                 }
             }
@@ -259,8 +259,15 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         final ZoneId zoneId = utilService.getZoneId();
         Map<String, Object> map = new HashMap<>();
         try {
-           List<Device> devices=deviceRepository.findAll();
-            devices.forEach(device -> insertDay(device.getId(),(int)LocalDate.now().minusDays(1).atStartOfDay(zoneId).toEpochSecond(), zoneId));
+            List<Device> devices = deviceRepository.findAll();
+            ZonedDateTime time =  LocalDate.now().minusDays(1).atStartOfDay(zoneId);
+
+            devices.forEach(device -> {
+                PowerBillByDay powerBillByDay = powerBillByDayRepository.findByDeviceIdAndDateTime(device.getId(), time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                if (powerBillByDay == null) {
+                    insertDay(device.getId(), (int)time.toEpochSecond(), zoneId);
+                }
+            });
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
