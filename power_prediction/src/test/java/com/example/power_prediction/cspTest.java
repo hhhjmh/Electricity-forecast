@@ -32,6 +32,16 @@ class CspTest {
     }
 
     @Test
+    void showPowerBillByDayQueryByMonth() {
+        System.out.println(powerBillByDayService.queryByMonth(2,2022,1));
+    }
+
+    @Test
+    void showPowerBillByDayQueryYear() {
+        System.out.println(powerBillByDayService.queryByYear(2,2022));
+    }
+
+    @Test
     void showHourlyUpdate() {
         System.out.println(powerDistributionHourService.hourlyUpdate());
     }
@@ -39,6 +49,16 @@ class CspTest {
     @Test
     void showDailyUpdate() {
         System.out.println(powerBillByDayService.dailyUpdate());
+    }
+
+    @Test
+    void showQueryCustom1() {
+        System.out.println(powerBillByDayService.queryCustom("1,2","2022-01-03","2022-01-12","day"));
+    }
+
+    @Test
+    void showQueryCustom2() {
+        System.out.println(powerBillByDayService.queryCustom("1,2","2021-12","2022-01","month"));
     }
 
 }
