@@ -33,7 +33,7 @@ class CspTest {
 
     @Test
     void showPowerBillByDayQueryByMonth() {
-        System.out.println(powerBillByDayService.queryByMonth(2,2022,1));
+        System.out.println(powerBillByDayService.queryByMonth(1,2022,1));
     }
 
     @Test

@@ -134,6 +134,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
      */
     private PowerBillByDay insertDay(Integer deviceId, ZonedDateTime zonedDateTime) {
         try {
+            ZoneId zoneId = ZoneId.from(zonedDateTime);
 
             //防止传入数据非0点0分
             ZonedDateTime finalZonedDateTime = zonedDateTime.withHour(0).withMinute(0).withSecond(0);
@@ -154,7 +155,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
             //利用stream流分割，将各个时间段内的负载求平均值
             Map<String, Double> stringDoubleMap = powerRealtimes.stream().collect(groupingBy(
-                    s -> getTimeZone(powerPriceTime, LocalTime.from(finalZonedDateTime)),
+                    s -> getTimeZone(powerPriceTime, LocalTime.from(TimeOperation.getZonedDateTime(s.getDataTime(), zoneId))),
                     averagingDouble(s -> Double.parseDouble(s.getTotalLoad()))));
 
             //将负载乘时间和电价，得出电量和电费
