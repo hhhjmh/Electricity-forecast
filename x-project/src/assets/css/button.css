@@ -1,0 +1,31 @@
+#btn_normal {
+  width: 5rem;
+  height: 5rem;
+    position: fixed;
+    animation: flicker-in-1 1s linear both;
+    animation-delay: 0.5s;
+  }
+  #btn_normal button {
+    margin: 0.5rem;
+    border-radius: 1rem;
+    border: 0.5rem double #80ffea;
+    width: 4rem;
+    height: 4rem;
+   
+    background-size: 100% 100%;
+    color: #ffffff;
+  }
+  #btn_normal p {
+    margin: 0.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 0;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+  }
+  #btn_normal:hover {
+    border-radius: 1rem;
+    border: 0.1rem solid rgba(220, 220, 220, 0.5);
+    background-color: #71a3b0;
+    box-shadow: 0 0 40px 0px rgba(255, 255, 255, 0.8);
+  }
