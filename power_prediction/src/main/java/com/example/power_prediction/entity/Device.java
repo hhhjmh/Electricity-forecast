@@ -1,15 +1,22 @@
 package com.example.power_prediction.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "device", schema = "power", catalog = "")
 public class Device {
     private int id;
     private String name;
+    private String userDepartment;
+
+    public String getUserDepartment() {
+        return userDepartment;
+    }
+
+    public void setUserDepartment(String userDepartment) {
+        this.userDepartment = userDepartment;
+    }
 
     @Id
     @Column(name = "id")

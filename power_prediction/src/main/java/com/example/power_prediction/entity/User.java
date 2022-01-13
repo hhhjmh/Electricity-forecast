@@ -13,7 +13,15 @@ public class User {
     private String username;
     private String password;
     private Integer root;
+    private String department;
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     @Override
     public String toString() {

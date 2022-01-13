@@ -6,13 +6,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_distribution_hour", schema = "power", catalog = "")
 public class PowerDistributionHour {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Integer deviceId;
     private Integer dataTime;
     private String totalKWh;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }

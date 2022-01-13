@@ -13,6 +13,9 @@ public interface DeviceRelationshipRepository extends JpaRepository<DeviceRelati
     @Query(value = "SELECT device.name,device_relationship.* from device,device_relationship where device.id=device_relationship.deviceId And device_relationship.type=:type1 ", nativeQuery = true)
     List<Object[]> findDeviceRelationship(@Param("type1") Integer type1);
 
+    @Query(value = "SELECT device.name,device_relationship.*,device.userDepartment from device,device_relationship where device.id=device_relationship.deviceId And device_relationship.type=:type1 And device.userDepartment=:userDepartment", nativeQuery = true)
+    List<Object[]> findDeviceRelationshipAndUserDepartment(@Param("type1") Integer type1,@Param("userDepartment")String userDepartment);
+
     @Query(value = "SELECT device.name,device_relationship.* from device,device_relationship where device.id=device_relationship.deviceId And device_relationship.type=:type1 And device_relationship.sublayerDeviceId =:sublayerDeviceId", nativeQuery = true)
     List<Object[]> findDeviceRelationshipBySublayerDeviceId(@Param("type1") Integer type1,@Param("sublayerDeviceId")Integer sublayerDeviceId);
 

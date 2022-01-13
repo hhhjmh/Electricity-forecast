@@ -23,7 +23,8 @@ public class ImplUserService implements UserService {
             map.put("username", newUser.getUsername());
             map.put("root", newUser.getRoot());
             map.put("state", "Success");
-            System.out.println("success");
+            map.put("userDepartment,",newUser.getDepartment());
+            System.out.println("Success");
         } else {
             map.put("state", "Fail");
             System.out.println("Fail");
