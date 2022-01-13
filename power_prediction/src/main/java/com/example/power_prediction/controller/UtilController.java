@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,13 @@ public class UtilController {
         return utilService.findAllDeviceRelationship(device.getId(), device.getUserDepartment(), method);
     }
 
+    @ResponseBody
+    @RequestMapping("/timeZone")
+    public ZoneId timeZone() {
+        return utilService.getZoneId();
+    }
 
+<<<<<<< HEAD
     @ResponseBody
     @PostMapping("/deviceRelationshipTreeForAll")
     public List findAllDeviceRelationship(@RequestBody Device device) {
@@ -58,4 +65,10 @@ public class UtilController {
     }
 
 
+=======
+    @RequestMapping("/setTimeZone")
+    public void setTimeZone(@RequestParam String timezone) {
+        utilService.setZoneId(timezone);
+    }
+>>>>>>> dev
 }

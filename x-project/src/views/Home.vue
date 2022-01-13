@@ -2,6 +2,9 @@
   <div class="home">
     <!-- 电能在线应用 -->
     <testDialog></testDialog>
+    <baobiao></baobiao>
+    <ElectricEnergyAnalysis></ElectricEnergyAnalysis>
+ 
     <!-- 背景板 -->
     <div id="BgOfHome"><BgOfHome></BgOfHome></div>
   </div>
@@ -20,11 +23,18 @@
 // @ is an alias to /src
 import testDialog from '@/components/testDialog.vue'
 import BgOfHome from '@/components/BgOfHome.vue'
+import baobiao from '@/components/baobiao.vue'
+import ElectricEnergyAnalysis from '../components/ElectricEnergyAnalysis.vue'
+
+
 export default {
   name: 'Home',
   components: {
     testDialog,
-    BgOfHome
+    BgOfHome,
+    baobiao,
+    ElectricEnergyAnalysis,
+   
   }
 }
 </script>

@@ -76,7 +76,11 @@ public class PowerRealtimeController {
     //返回每天的电能分布数据
     @PostMapping("/findPowerDistributionDayByDataTime")
     public List<PowerDistributionDay> findPowerDistributionDayByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionDay powerDistributionDay) {
+<<<<<<< HEAD
         if (powerDistributionDay.getId() == 0) {
+=======
+        if (powerDistributionDay.getId() ==0) {
+>>>>>>> dev
             powerDistributionDay.setId(30);
         }
         //使用id暂存天数
