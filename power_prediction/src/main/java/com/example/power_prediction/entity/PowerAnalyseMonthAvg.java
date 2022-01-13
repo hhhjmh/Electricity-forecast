@@ -54,6 +54,15 @@ public class PowerAnalyseMonthAvg {
         this.deviceId = deviceId;
     }
 
+    private String frequencyDeviation;
+
+    public String getFrequencyDeviation() {
+        return frequencyDeviation;
+    }
+
+    public void setFrequencyDeviation(String frequencyDeviation) {
+        this.frequencyDeviation = frequencyDeviation;
+    }
 
     @Id
     @Column(name = "id")

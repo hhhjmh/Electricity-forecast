@@ -4,6 +4,7 @@ import com.example.power_prediction.entity.PowerAnalyseDayAvg;
 import com.example.power_prediction.entity.PowerAnalyseDayMax;
 import com.example.power_prediction.entity.PowerAnalyseDayMin;
 import com.example.power_prediction.entity.PowerRealtime;
+import com.example.power_prediction.repository.PowerAnalyseDayAvgRepository;
 
 import java.util.List;
 
@@ -20,5 +21,8 @@ public interface PowerAnalyseDayService {
 
     void getAvg(Integer deviceId, Integer start, Integer end);
 
+    List<PowerAnalyseDayAvg> findPowerAnalyseDayAvgByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
+
+    List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
 
 }

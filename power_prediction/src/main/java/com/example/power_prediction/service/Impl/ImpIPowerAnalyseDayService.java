@@ -1,14 +1,8 @@
 package com.example.power_prediction.service.Impl;
 
 
-import com.example.power_prediction.entity.PowerAnalyseDayAvg;
-import com.example.power_prediction.entity.PowerAnalyseDayMax;
-import com.example.power_prediction.entity.PowerAnalyseDayMin;
-import com.example.power_prediction.entity.PowerRealtime;
-import com.example.power_prediction.repository.PowerAnalyseDayAvgRepository;
-import com.example.power_prediction.repository.PowerAnalyseDayMaxRepository;
-import com.example.power_prediction.repository.PowerAnalyseDayMinRepository;
-import com.example.power_prediction.repository.PowerRealtimeRepository;
+import com.example.power_prediction.entity.*;
+import com.example.power_prediction.repository.*;
 import com.example.power_prediction.service.PowerAnalyseDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +24,9 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
 
     @Autowired
     PowerRealtimeRepository powerRealtimeRepository;
+
+    @Autowired
+    PowerQualityRealtimeRepository powerQualityRealtimeRepository;
 
     @Override
     public PowerAnalyseDayAvg getDayAvgByID(int deviceId, Integer dataTime) {
@@ -77,11 +74,29 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
      *     private String uab;
      *     private String ubc;
      *     private String uca;
+     *
+     *
+     *     private String iaPhd;
+     *     private String ibPhd;
+     *     private String icPhd;
+     *     private String uaPhd;
+     *     private String ubPhd;
+     *     private String ucPhd;
+     *     private String frequencyDeviation;
+     *     private String uaDeviation;
+     *     private String ubDeviation;
+     *     private String ucDeviation;
+     *     private String uUabDeviation;
+     *     private String uUbcDeviation;
+     *     private String uUcaDeviation;
+     *     private String iUnbalance;
+     *     private String uUnbalance;
      */
 
     @Override
     public void getMax(Integer deviceId, Integer start, Integer end) {
-        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);;
+        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        List<PowerQualityRealtime> dayData_2 = powerQualityRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
         double maxtotalLoad= 0;
         double maxaLoad = 0;
         double maxbLoad = 0;
@@ -104,6 +119,22 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         double maxuab = 0;
         double maxubc= 0;
         double maxuca= 0;
+
+        double maxiaPhd = 0;
+        double maxibPhd = 0;
+        double maxicPhd = 0;
+        double maxuaPhd = 0;
+        double maxubPhd = 0;
+        double maxucPhd = 0;
+        double maxfrequencyDeviation = 0;
+        double maxuaDeviation = 0;
+        double maxubDeviation= 0;
+        double maxucDeviation= 0;
+        double maxuUabDeviation = 0;
+        double maxuUbcDeviation = 0;
+        double maxuUcaDeviation = 0;
+        double maxiUnbalance = 0;
+        double maxuUnbalance = 0;
 
 
         int indextotalLoad= 0;
@@ -128,6 +159,23 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         int indexuab = 0;
         int indexubc= 0;
         int indexuca= 0;
+
+        int indexiaPhd = 0;
+        int indexibPhd = 0;
+        int indexicPhd = 0;
+        int indexuaPhd = 0;
+        int indexubPhd = 0;
+        int indexucPhd = 0;
+        int indexfrequencyDeviation = 0;
+        int indexuaDeviation = 0;
+        int indexubDeviation= 0;
+        int indexucDeviation= 0;
+        int indexuUabDeviation = 0;
+        int indexuUbcDeviation = 0;
+        int indexuUcaDeviation = 0;
+        int indexiUnbalance = 0;
+        int indexuUnbalance = 0;
+
 
         for(int i=0; i<dayData.size(); i++) {
 
@@ -225,11 +273,113 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
                 indexuca = i;
                 maxuca = Double.parseDouble(dayData.get(i).getUca());
             }
+
+            if(maxiaPhd<Double.parseDouble(dayData_2.get(i).getIaPhd())) {
+                indexiaPhd = i;
+                maxiaPhd = Double.parseDouble(dayData_2.get(i).getIaPhd());
+            }
+            if(maxibPhd<Double.parseDouble(dayData_2.get(i).getIbPhd())) {
+                indexibPhd = i;
+                maxibPhd = Double.parseDouble(dayData_2.get(i).getIbPhd());
+            }
+            if(maxicPhd<Double.parseDouble(dayData_2.get(i).getIcPhd())) {
+                indexicPhd = i;
+                maxicPhd = Double.parseDouble(dayData_2.get(i).getIcPhd());
+            }
+
+            if(maxuaPhd<Double.parseDouble(dayData_2.get(i).getUaPhd())) {
+                indexiaPhd = i;
+                maxuaPhd = Double.parseDouble(dayData_2.get(i).getUaPhd());
+            }
+            if(maxubPhd<Double.parseDouble(dayData_2.get(i).getUbPhd())) {
+                indexibPhd = i;
+                maxubPhd = Double.parseDouble(dayData_2.get(i).getUbPhd());
+            }
+            if(maxucPhd<Double.parseDouble(dayData_2.get(i).getUcPhd())) {
+                indexicPhd = i;
+                maxucPhd = Double.parseDouble(dayData_2.get(i).getUcPhd());
+            }
+
+            if(maxfrequencyDeviation<Double.parseDouble(dayData_2.get(i).getFrequencyDeviation())) {
+                indexfrequencyDeviation = i;
+                maxfrequencyDeviation = Double.parseDouble(dayData_2.get(i).getFrequencyDeviation());
+            }
+            if(maxuaDeviation<Double.parseDouble(dayData_2.get(i).getUaDeviation())) {
+                indexuaDeviation = i;
+                maxuaDeviation = Double.parseDouble(dayData_2.get(i).getUaDeviation());
+            }
+            if(maxubDeviation<Double.parseDouble(dayData_2.get(i).getUbDeviation())) {
+                indexubDeviation = i;
+                maxubDeviation = Double.parseDouble(dayData_2.get(i).getUbDeviation());
+            }
+            if(maxucDeviation<Double.parseDouble(dayData_2.get(i).getUcDeviation())) {
+                indexucDeviation = i;
+                maxucDeviation = Double.parseDouble(dayData_2.get(i).getUcDeviation());
+            }
+
+            if(maxuUabDeviation<Double.parseDouble(dayData_2.get(i).getuUabDeviation())) {
+                indexuUabDeviation = i;
+                maxuUabDeviation = Double.parseDouble(dayData_2.get(i).getuUabDeviation());
+            }
+            if(maxuUbcDeviation<Double.parseDouble(dayData_2.get(i).getuUbcDeviation())) {
+                indexuUbcDeviation = i;
+                maxuUbcDeviation = Double.parseDouble(dayData_2.get(i).getuUbcDeviation());
+            }
+            if(maxuUcaDeviation<Double.parseDouble(dayData_2.get(i).getuUcaDeviation())) {
+                indexuUcaDeviation = i;
+                maxuUcaDeviation = Double.parseDouble(dayData_2.get(i).getuUcaDeviation());
+            }
+
+            if(maxiUnbalance<Double.parseDouble(dayData_2.get(i).getiUnbalance())) {
+                indexiUnbalance = i;
+                maxiUnbalance = Double.parseDouble(dayData_2.get(i).getiUnbalance());
+            }
+            if(maxuUnbalance<Double.parseDouble(dayData_2.get(i).getuUnbalance())) {
+                indexuUnbalance = i;
+                maxuUnbalance = Double.parseDouble(dayData_2.get(i).getuUnbalance());
+            }
+
         }
 
         PowerAnalyseDayMax powerAnalyseDayMax = new PowerAnalyseDayMax();
         powerAnalyseDayMax.setDeviceId(deviceId);
         powerAnalyseDayMax.setDataTime(start);
+
+        powerAnalyseDayMax.setIaPhd(dayData_2.get(indexiaPhd).getIaPhd());
+        powerAnalyseDayMax.setIaPhdTime(dayData_2.get(indexiaPhd).getDataTime());
+        powerAnalyseDayMax.setIbPhd(dayData_2.get(indexibPhd).getIbPhd());
+        powerAnalyseDayMax.setIbPhdTime(dayData_2.get(indexibPhd).getDataTime());
+        powerAnalyseDayMax.setIcPhd(dayData_2.get(indexicPhd).getIaPhd());
+        powerAnalyseDayMax.setIcPhdTime(dayData_2.get(indexicPhd).getDataTime());
+
+        powerAnalyseDayMax.setUaPhd(dayData_2.get(indexuaPhd).getUaPhd());
+        powerAnalyseDayMax.setUaPhdTime(dayData_2.get(indexuaPhd).getDataTime());
+        powerAnalyseDayMax.setUbPhd(dayData_2.get(indexubPhd).getUbPhd());
+        powerAnalyseDayMax.setUbPhdTime(dayData_2.get(indexubPhd).getDataTime());
+        powerAnalyseDayMax.setUcPhd(dayData_2.get(indexucPhd).getUaPhd());
+        powerAnalyseDayMax.setUcPhdTime(dayData_2.get(indexucPhd).getDataTime());
+
+        powerAnalyseDayMax.setFrequencyDeviation(dayData_2.get(indexfrequencyDeviation).getFrequencyDeviation());
+        powerAnalyseDayMax.setFrequencyDeviationTime(dayData_2.get(indexfrequencyDeviation).getDataTime());
+        powerAnalyseDayMax.setUaDeviation(dayData_2.get(indexuaDeviation).getUaDeviation());
+        powerAnalyseDayMax.setUaDeviationTime(dayData_2.get(indexuaDeviation).getDataTime());
+        powerAnalyseDayMax.setUbDeviation(dayData_2.get(indexubDeviation).getUbDeviation());
+        powerAnalyseDayMax.setUbDeviationTime(dayData_2.get(indexubDeviation).getDataTime());
+        powerAnalyseDayMax.setUcDeviation(dayData_2.get(indexucDeviation).getUcDeviation());
+        powerAnalyseDayMax.setUcDeviationTime(dayData_2.get(indexucDeviation).getDataTime());
+
+        powerAnalyseDayMax.setuUabDeviation(dayData_2.get(indexuUabDeviation).getuUabDeviation());
+        powerAnalyseDayMax.setuUabDeviationTime(dayData_2.get(indexuUabDeviation).getDataTime());
+        powerAnalyseDayMax.setuUbcDeviation(dayData_2.get(indexuUbcDeviation).getuUbcDeviation());
+        powerAnalyseDayMax.setuUbcDeviationTime(dayData_2.get(indexuUbcDeviation).getDataTime());
+        powerAnalyseDayMax.setuUcaDeviation(dayData_2.get(indexuUcaDeviation).getuUcaDeviation());
+        powerAnalyseDayMax.setuUcaDeviationTime(dayData_2.get(indexuUcaDeviation).getDataTime());
+
+        powerAnalyseDayMax.setiUnbalance(dayData_2.get(indexiUnbalance).getiUnbalance());
+        powerAnalyseDayMax.setiUnbalanceTime(dayData_2.get(indexiUnbalance).getDataTime());
+        powerAnalyseDayMax.setuUnbalance(dayData_2.get(indexuUnbalance).getuUnbalance());
+        powerAnalyseDayMax.setuUnbalanceTime(dayData_2.get(indexuUnbalance).getDataTime());
+
 
         powerAnalyseDayMax.setTotalLoad(dayData.get(indextotalLoad).getTotalLoad());
         powerAnalyseDayMax.setTotalLoadTime(dayData.get(indextotalLoad).getDataTime());
@@ -294,7 +444,8 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
 
     @Override
     public void getMin(Integer deviceId, Integer start, Integer end) {
-        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);;
+        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        List<PowerQualityRealtime> dayData_2 = powerQualityRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
         double mintotalLoad= 100000;
         double minaLoad = 100000;
         double minbLoad = 100000;
@@ -317,6 +468,22 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         double minuab = 100000;
         double minubc= 100000;
         double minuca= 100000;
+
+        double miniaPhd = 10000;
+        double minibPhd = 10000;
+        double minicPhd = 10000;
+        double minuaPhd = 10000;
+        double minubPhd = 10000;
+        double minucPhd = 10000;
+        double minfrequencyDeviation = 10000;
+        double minuaDeviation = 10000;
+        double minubDeviation= 10000;
+        double minucDeviation= 10000;
+        double minuUabDeviation = 10000;
+        double minuUbcDeviation = 10000;
+        double minuUcaDeviation = 10000;
+        double miniUnbalance = 10000;
+        double minuUnbalance = 10000;
 
 
         int indextotalLoad= 0;
@@ -341,6 +508,24 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         int indexuab = 0;
         int indexubc= 0;
         int indexuca= 0;
+
+        int indexiaPhd = 0;
+        int indexibPhd = 0;
+        int indexicPhd = 0;
+        int indexuaPhd = 0;
+        int indexubPhd = 0;
+        int indexucPhd = 0;
+        int indexfrequencyDeviation = 0;
+        int indexuaDeviation = 0;
+        int indexubDeviation= 0;
+        int indexucDeviation= 0;
+        int indexuUabDeviation = 0;
+        int indexuUbcDeviation = 0;
+        int indexuUcaDeviation = 0;
+        int indexiUnbalance = 0;
+        int indexuUnbalance = 0;
+
+
 
         for(int i=0; i<dayData.size(); i++) {
 
@@ -439,11 +624,113 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
                 minuca = Double.parseDouble(dayData.get(i).getUca());
             }
 
+            if(miniaPhd>Double.parseDouble(dayData_2.get(i).getIaPhd())) {
+                indexiaPhd = i;
+                miniaPhd = Double.parseDouble(dayData_2.get(i).getIaPhd());
+            }
+            if(minibPhd>Double.parseDouble(dayData_2.get(i).getIbPhd())) {
+                indexibPhd = i;
+                minibPhd = Double.parseDouble(dayData_2.get(i).getIbPhd());
+            }
+            if(minicPhd>Double.parseDouble(dayData_2.get(i).getIcPhd())) {
+                indexicPhd = i;
+                minicPhd = Double.parseDouble(dayData_2.get(i).getIcPhd());
+            }
+
+            if(minuaPhd>Double.parseDouble(dayData_2.get(i).getUaPhd())) {
+                indexiaPhd = i;
+                minuaPhd = Double.parseDouble(dayData_2.get(i).getUaPhd());
+            }
+            if(minubPhd>Double.parseDouble(dayData_2.get(i).getUbPhd())) {
+                indexibPhd = i;
+                minubPhd = Double.parseDouble(dayData_2.get(i).getUbPhd());
+            }
+            if(minucPhd>Double.parseDouble(dayData_2.get(i).getUcPhd())) {
+                indexicPhd = i;
+                minucPhd = Double.parseDouble(dayData_2.get(i).getUcPhd());
+            }
+
+            if(minfrequencyDeviation>Double.parseDouble(dayData_2.get(i).getFrequencyDeviation())) {
+                indexfrequencyDeviation = i;
+                minfrequencyDeviation = Double.parseDouble(dayData_2.get(i).getFrequencyDeviation());
+            }
+            if(minuaDeviation>Double.parseDouble(dayData_2.get(i).getUaDeviation())) {
+                indexuaDeviation = i;
+                minuaDeviation = Double.parseDouble(dayData_2.get(i).getUaDeviation());
+            }
+            if(minubDeviation>Double.parseDouble(dayData_2.get(i).getUbDeviation())) {
+                indexubDeviation = i;
+                minubDeviation = Double.parseDouble(dayData_2.get(i).getUbDeviation());
+            }
+            if(minucDeviation>Double.parseDouble(dayData_2.get(i).getUcDeviation())) {
+                indexucDeviation = i;
+                minucDeviation = Double.parseDouble(dayData_2.get(i).getUcDeviation());
+            }
+
+            if(minuUabDeviation>Double.parseDouble(dayData_2.get(i).getuUabDeviation())) {
+                indexuUabDeviation = i;
+                minuUabDeviation = Double.parseDouble(dayData_2.get(i).getuUabDeviation());
+            }
+            if(minuUbcDeviation>Double.parseDouble(dayData_2.get(i).getuUbcDeviation())) {
+                indexuUbcDeviation = i;
+                minuUbcDeviation = Double.parseDouble(dayData_2.get(i).getuUbcDeviation());
+            }
+            if(minuUcaDeviation>Double.parseDouble(dayData_2.get(i).getuUcaDeviation())) {
+                indexuUcaDeviation = i;
+                minuUcaDeviation = Double.parseDouble(dayData_2.get(i).getuUcaDeviation());
+            }
+
+            if(miniUnbalance>Double.parseDouble(dayData_2.get(i).getiUnbalance())) {
+                indexiUnbalance = i;
+                miniUnbalance = Double.parseDouble(dayData_2.get(i).getiUnbalance());
+            }
+            if(minuUnbalance>Double.parseDouble(dayData_2.get(i).getuUnbalance())) {
+                indexuUnbalance = i;
+                minuUnbalance = Double.parseDouble(dayData_2.get(i).getuUnbalance());
+            }
+
+
         }
 
         PowerAnalyseDayMin powerAnalyseDayMin = new PowerAnalyseDayMin();
         powerAnalyseDayMin.setDeviceId(deviceId);
         powerAnalyseDayMin.setDataTime(start);
+
+        powerAnalyseDayMin.setIaPhd(dayData_2.get(indexiaPhd).getIaPhd());
+        powerAnalyseDayMin.setIaPhdTime(dayData_2.get(indexiaPhd).getDataTime());
+        powerAnalyseDayMin.setIbPhd(dayData_2.get(indexibPhd).getIbPhd());
+        powerAnalyseDayMin.setIbPhdTime(dayData_2.get(indexibPhd).getDataTime());
+        powerAnalyseDayMin.setIcPhd(dayData_2.get(indexicPhd).getIaPhd());
+        powerAnalyseDayMin.setIcPhdTime(dayData_2.get(indexicPhd).getDataTime());
+
+        powerAnalyseDayMin.setUaPhd(dayData_2.get(indexuaPhd).getUaPhd());
+        powerAnalyseDayMin.setUaPhdTime(dayData_2.get(indexuaPhd).getDataTime());
+        powerAnalyseDayMin.setUbPhd(dayData_2.get(indexubPhd).getUbPhd());
+        powerAnalyseDayMin.setUbPhdTime(dayData_2.get(indexubPhd).getDataTime());
+        powerAnalyseDayMin.setUcPhd(dayData_2.get(indexucPhd).getUaPhd());
+        powerAnalyseDayMin.setUcPhdTime(dayData_2.get(indexucPhd).getDataTime());
+
+        powerAnalyseDayMin.setFrequencyDeviation(dayData_2.get(indexfrequencyDeviation).getFrequencyDeviation());
+        powerAnalyseDayMin.setFrequencyDeviationTime(dayData_2.get(indexfrequencyDeviation).getDataTime());
+        powerAnalyseDayMin.setUaDeviation(dayData_2.get(indexuaDeviation).getUaDeviation());
+        powerAnalyseDayMin.setUaDeviationTime(dayData_2.get(indexuaDeviation).getDataTime());
+        powerAnalyseDayMin.setUbDeviation(dayData_2.get(indexubDeviation).getUbDeviation());
+        powerAnalyseDayMin.setUbDeviationTime(dayData_2.get(indexubDeviation).getDataTime());
+        powerAnalyseDayMin.setUcDeviation(dayData_2.get(indexucDeviation).getUcDeviation());
+        powerAnalyseDayMin.setUcDeviationTime(dayData_2.get(indexucDeviation).getDataTime());
+
+        powerAnalyseDayMin.setuUabDeviation(dayData_2.get(indexuUabDeviation).getuUabDeviation());
+        powerAnalyseDayMin.setuUabDeviationTime(dayData_2.get(indexuUabDeviation).getDataTime());
+        powerAnalyseDayMin.setuUbcDeviation(dayData_2.get(indexuUbcDeviation).getuUbcDeviation());
+        powerAnalyseDayMin.setuUbcDeviationTime(dayData_2.get(indexuUbcDeviation).getDataTime());
+        powerAnalyseDayMin.setuUcaDeviation(dayData_2.get(indexuUcaDeviation).getuUcaDeviation());
+        powerAnalyseDayMin.setuUcaDeviationTime(dayData_2.get(indexuUcaDeviation).getDataTime());
+
+        powerAnalyseDayMin.setiUnbalance(dayData_2.get(indexiUnbalance).getiUnbalance());
+        powerAnalyseDayMin.setiUnbalanceTime(dayData_2.get(indexiUnbalance).getDataTime());
+        powerAnalyseDayMin.setuUnbalance(dayData_2.get(indexuUnbalance).getuUnbalance());
+        powerAnalyseDayMin.setuUnbalanceTime(dayData_2.get(indexuUnbalance).getDataTime());
+
 
         powerAnalyseDayMin.setTotalLoad(dayData.get(indextotalLoad).getTotalLoad());
         powerAnalyseDayMin.setTotalLoadTime(dayData.get(indextotalLoad).getDataTime());
@@ -507,7 +794,8 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
 
     @Override
     public void getAvg(Integer deviceId, Integer start, Integer end) {
-        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);;
+        List<PowerRealtime> dayData =  powerRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        List<PowerQualityRealtime> dayData_2 = powerQualityRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
         double avgtotalLoad= 0;
         double avgaLoad = 0;
         double avgbLoad = 0;
@@ -531,11 +819,28 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         double avgubc= 0;
         double avguca= 0;
 
+        double avgiaPhd = 0;
+        double avgibPhd = 0;
+        double avgicPhd = 0;
+        double avguaPhd = 0;
+        double avgubPhd = 0;
+        double avgucPhd = 0;
+        double avgfrequencyDeviation = 0;
+        double avguaDeviation = 0;
+        double avgubDeviation= 0;
+        double avgucDeviation= 0;
+        double avguUabDeviation = 0;
+        double avguUbcDeviation = 0;
+        double avguUcaDeviation = 0;
+        double avgiUnbalance = 0;
+        double avguUnbalance = 0;
+
+
 
         int size = dayData.size();
+        int size1 = dayData_2.size();
 
-
-        for(int i=0; i<dayData.size(); i++) {
+        for(int i=0; i<size; i++) {
             avgtotalLoad += Double.parseDouble(dayData.get(i).getTotalLoad());
             avgaLoad += Double.parseDouble(dayData.get(i).getaLoad());
             avgbLoad += Double.parseDouble(dayData.get(i).getbLoad());
@@ -559,9 +864,23 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
             avgubc += Double.parseDouble(dayData.get(i).getUbc());
             avguca += Double.parseDouble(dayData.get(i).getUca());
 
-
-
-
+        }
+        for(int i=0; i<size1; i++) {
+            avgiaPhd += Double.parseDouble(dayData_2.get(i).getIaPhd());
+            avgibPhd += Double.parseDouble(dayData_2.get(i).getIbPhd());
+            avgicPhd += Double.parseDouble(dayData_2.get(i).getIcPhd());
+            avguaPhd += Double.parseDouble(dayData_2.get(i).getUaPhd());
+            avgubPhd += Double.parseDouble(dayData_2.get(i).getUbPhd());
+            avgucPhd += Double.parseDouble(dayData_2.get(i).getUcPhd());
+            avgfrequencyDeviation += Double.parseDouble(dayData_2.get(i).getFrequencyDeviation());
+            avguaDeviation += Double.parseDouble(dayData_2.get(i).getUaDeviation());
+            avgubDeviation += Double.parseDouble(dayData_2.get(i).getUbDeviation());
+            avgucDeviation += Double.parseDouble(dayData_2.get(i).getUcDeviation());
+            avguUabDeviation += Double.parseDouble(dayData_2.get(i).getuUabDeviation());
+            avguUabDeviation += Double.parseDouble(dayData_2.get(i).getuUbcDeviation());
+            avguUabDeviation += Double.parseDouble(dayData_2.get(i).getuUcaDeviation());
+            avgiUnbalance += Double.parseDouble(dayData_2.get(i).getiUnbalance());
+            avguUnbalance += Double.parseDouble(dayData_2.get(i).getuUnbalance());
         }
 
         PowerAnalyseDayAvg powerAnalyseDayAvg = new PowerAnalyseDayAvg();
@@ -573,29 +892,50 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         df.setMaximumFractionDigits(2);
 
 
+        powerAnalyseDayAvg.setTotalLoad(String.format("%.2f", avgtotalLoad/size));
+        powerAnalyseDayAvg.setaLoad(String.format("%.2f", avgaLoad/size));
+        powerAnalyseDayAvg.setbLoad(String.format("%.2f", avgbLoad/size));
+        powerAnalyseDayAvg.setcLoad(String.format("%.2f", avgcLoad/size));
+        powerAnalyseDayAvg.setTotalReactivePower(String.format("%.2f", avgtotalReactivePower/size));
+        powerAnalyseDayAvg.setaReactivePower(String.format("%.2f", avgaReactivePower/size));
+        powerAnalyseDayAvg.setbReactivePower(String.format("%.2f", avgbReactivePower/size));
+        powerAnalyseDayAvg.setcReactivePower(String.format("%.2f", avgcReactivePower/size));
+        powerAnalyseDayAvg.setTotalPowerFactor(String.format("%.2f", avgtotalPowerFactor/size));
+        powerAnalyseDayAvg.setaPowerFactor(String.format("%.2f", avgaPowerFactor/size));
+        powerAnalyseDayAvg.setbPowerFactor(String.format("%.2f", avgbPowerFactor/size));
+        powerAnalyseDayAvg.setcPowerFactor(String.format("%.2f", avgcPowerFactor/size));
+        powerAnalyseDayAvg.setIa(String.format("%.2f", avgIa/size));
+        powerAnalyseDayAvg.setIb(String.format("%.2f", avgIb/size));
+        powerAnalyseDayAvg.setIc(String.format("%.2f", avgIc/size));
+        powerAnalyseDayAvg.setZeroi(String.format("%.2f", avgzeroi/size));
+        powerAnalyseDayAvg.setUa(String.format("%.2f", avgua/size));
+        powerAnalyseDayAvg.setUb(String.format("%.2f", avgub/size));
+        powerAnalyseDayAvg.setUc(String.format("%.2f", avguc/size));
+        powerAnalyseDayAvg.setUab(String.format("%.2f", avguab/size));
+        powerAnalyseDayAvg.setUbc(String.format("%.2f", avgubc/size));
+        powerAnalyseDayAvg.setUca(String.format("%.2f", avguca/size));
 
-        powerAnalyseDayAvg.setTotalLoad(String.valueOf(df.format(avgtotalLoad/size)));
-        powerAnalyseDayAvg.setaLoad(String.valueOf(df.format(avgaLoad/size)));
-        powerAnalyseDayAvg.setbLoad(String.valueOf(df.format(avgbLoad/size)));
-        powerAnalyseDayAvg.setcLoad(String.valueOf(df.format(avgcLoad/size)));
-        powerAnalyseDayAvg.setTotalReactivePower(String.valueOf(df.format(avgtotalReactivePower/size)));
-        powerAnalyseDayAvg.setaReactivePower(String.valueOf(df.format(avgaReactivePower/size)));
-        powerAnalyseDayAvg.setbReactivePower(String.valueOf(df.format(avgbReactivePower/size)));
-        powerAnalyseDayAvg.setcReactivePower(String.valueOf(df.format(avgcReactivePower/size)));
-        powerAnalyseDayAvg.setTotalPowerFactor(String.valueOf(df.format(avgtotalPowerFactor/size)));
-        powerAnalyseDayAvg.setaPowerFactor(String.valueOf(df.format(avgaPowerFactor/size)));
-        powerAnalyseDayAvg.setbPowerFactor(String.valueOf(df.format(avgbPowerFactor/size)));
-        powerAnalyseDayAvg.setcPowerFactor(String.valueOf(df.format(avgcPowerFactor/size)));
-        powerAnalyseDayAvg.setIa(String.valueOf(df.format(avgIa/size)));
-        powerAnalyseDayAvg.setIb(String.valueOf(df.format(avgIb/size)));
-        powerAnalyseDayAvg.setIc(String.valueOf(df.format(avgIc/size)));
-        powerAnalyseDayAvg.setZeroi(String.valueOf(df.format(avgzeroi/size)));
-        powerAnalyseDayAvg.setUa(String.valueOf(df.format(avgua/size)));
-        powerAnalyseDayAvg.setUb(String.valueOf(df.format(avgub/size)));
-        powerAnalyseDayAvg.setUc(String.valueOf(df.format(avguc/size)));
-        powerAnalyseDayAvg.setUab(String.valueOf(df.format(avguab/size)));
-        powerAnalyseDayAvg.setUbc(String.valueOf(df.format(avgubc/size)));
-        powerAnalyseDayAvg.setUca(String.valueOf(df.format(avguca/size)));
+        if(size1!=0) {
+            powerAnalyseDayAvg.setIaPhd(String.format("%.2f", avgiaPhd/size1));
+            powerAnalyseDayAvg.setIbPhd(String.format("%.2f", avgibPhd/size1));
+            powerAnalyseDayAvg.setIcPhd(String.format("%.2f", avgicPhd/size1));
+            powerAnalyseDayAvg.setUaPhd(String.format("%.2f", avguaPhd/size1));
+            powerAnalyseDayAvg.setUbPhd(String.format("%.2f", avgubPhd/size1));
+            powerAnalyseDayAvg.setUcPhd(String.format("%.2f", avgucPhd/size1));
+            powerAnalyseDayAvg.setFrequencyDeviation(String.format("%.2f", avgfrequencyDeviation/size1));
+            powerAnalyseDayAvg.setUaDeviation(String.format("%.2f", avguaDeviation/size1));
+            powerAnalyseDayAvg.setUbDeviation(String.format("%.2f", avgubDeviation/size1));
+            powerAnalyseDayAvg.setUcDeviation(String.format("%.2f", avgucDeviation/size1));
+            powerAnalyseDayAvg.setuUabDeviation(String.format("%.2f", avguUabDeviation/size1));
+            powerAnalyseDayAvg.setuUbcDeviation(String.format("%.2f", avguUbcDeviation/size1));
+            powerAnalyseDayAvg.setuUcaDeviation(String.format("%.2f", avguUcaDeviation/size1));
+            powerAnalyseDayAvg.setiUnbalance(String.format("%.2f", avgiUnbalance/size1));
+            powerAnalyseDayAvg.setuUnbalance(String.format("%.2f", avguUnbalance/size1));
+        }
+
+
+
+
 
         if (powerAnalyseDayAvgRepository.findByDeviceIdAndDataTime(deviceId, start) != null) {
             PowerAnalyseDayAvg p1 = powerAnalyseDayAvgRepository.findByDeviceIdAndDataTime(deviceId, start);
@@ -605,6 +945,16 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
         powerAnalyseDayAvgRepository.save(powerAnalyseDayAvg);
 
 
+    }
+
+    @Override
+    public List<PowerAnalyseDayAvg> findPowerAnalyseDayAvgByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end) {
+        return powerAnalyseDayAvgRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+    }
+
+    @Override
+    public List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end) {
+        return powerAnalyseDayMaxRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
     }
 
 }
