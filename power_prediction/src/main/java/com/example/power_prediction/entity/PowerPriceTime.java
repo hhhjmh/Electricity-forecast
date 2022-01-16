@@ -45,7 +45,7 @@ public class PowerPriceTime {
     @Column(name = "j_power_price")
     private String j_power_price;
     @Column(name = "deviceTypeId", nullable = false)
-    private Integer deviceTypeId; //对应DeviceRelationShip的type字段
+    private Integer deviceTypeId; //待删除字段
 
     @Override
     public boolean equals(Object o) {

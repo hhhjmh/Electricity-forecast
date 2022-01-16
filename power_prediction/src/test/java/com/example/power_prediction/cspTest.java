@@ -28,7 +28,7 @@ class CspTest {
 
     @Test
     void showPowerDistributionHourQueryByDay() {
-        System.out.println(powerDistributionHourService.queryByDay(1, 2022, 1, 12));
+        System.out.println(powerDistributionHourService.queryByDay(1, 2021, 12, 1));
     }
 
     @Test
@@ -59,6 +59,11 @@ class CspTest {
     @Test
     void showQueryCustom2() {
         System.out.println(powerBillByDayService.queryCustom("1,2","2021-12","2022-01","month"));
+    }
+
+    @Test
+    void showQueryByDayMulti(){
+        System.out.println(powerDistributionHourService.queryByDayMulti("1,2",1638288000,1638374400,0));
     }
 
 }
