@@ -7,6 +7,7 @@ import com.example.power_prediction.repository.PowerBillByDayRepository;
 import com.example.power_prediction.service.PowerBillByDayService;
 import com.example.power_prediction.service.PowerDistributionHourService;
 import com.example.power_prediction.service.PowerPriceTimeService;
+import com.example.power_prediction.service.UtilService;
 import com.example.power_prediction.util.TimeOperation;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,9 @@ class CspTest {
 
     @Autowired
     DeviceRepository deviceRepository;
+
+    @Autowired
+    UtilService utilService;
 
     @Test
     void showPowerDistributionHourQueryByDay() {
@@ -67,6 +71,16 @@ class CspTest {
     @Test
     void showQueryByDayMulti(){
         System.out.println(powerDistributionHourService.queryByDayMulti("1,3",1638288000,1638374400,0));
+    }
+
+    @Test
+    void showDeviceTree(){
+        System.out.println(utilService.findAllDeviceRelationship(1,"电能体验馆",0));
+    }
+
+    @Test
+    void showGetMainTransformer(){
+        System.out.println(utilService.getMainTransformer(utilService.findAllDeviceRelationship(1, "电能体验馆", 0)));
     }
 
 }
