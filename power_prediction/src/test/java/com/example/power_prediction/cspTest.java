@@ -56,17 +56,17 @@ class CspTest {
 
     @Test
     void showQueryCustom1() {
-        System.out.println(powerBillByDayService.queryCustom("1,2","2022-01-03","2022-01-12","day"));
+        System.out.println(powerBillByDayService.queryCustom("1,3","2022-01-03","2022-01-12","day"));
     }
 
     @Test
     void showQueryCustom2() {
-        System.out.println(powerBillByDayService.queryCustom("1,2","2021-12","2022-01","month"));
+        System.out.println(powerBillByDayService.queryCustom("1,3","2021-12","2022-01","month"));
     }
 
     @Test
     void showQueryByDayMulti(){
-        System.out.println(powerDistributionHourService.queryByDayMulti("1,2",1638288000,1638374400,0));
+        System.out.println(powerDistributionHourService.queryByDayMulti("1,3",1638288000,1638374400,0));
     }
 
 }

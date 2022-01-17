@@ -91,36 +91,41 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         return powerBillByDay.toMap();
     }
 
+    private Map<String, Object> getTotal(Map<String, Object> dataMap){
+        //对数据进行累加
+        Map<String, Object> datas = (Map<String, Object>) dataMap.get("data");
+        double f_power = 0, g_power = 0, p_power = 0, j_power = 0;
+        double f_power_price = 0, g_power_price = 0, p_power_price = 0, j_power_price = 0;
+        for (String s : datas.keySet()) {
+            Map<String, String> dayData = (Map<String, String>) datas.get(s);
+            f_power += Double.parseDouble(dayData.get("f_power"));
+            g_power += Double.parseDouble(dayData.get("g_power"));
+            p_power += Double.parseDouble(dayData.get("p_power"));
+            j_power += Double.parseDouble(dayData.get("j_power"));
+            f_power_price += Double.parseDouble(dayData.get("f_power_price"));
+            g_power_price += Double.parseDouble(dayData.get("g_power_price"));
+            p_power_price += Double.parseDouble(dayData.get("p_power_price"));
+            j_power_price += Double.parseDouble(dayData.get("j_power_price"));
+        }
+        Map<String, Object> tmp = new HashMap<>();
+        tmp.put("f_power", String.format("%.2f", f_power));
+        tmp.put("f_power_price", String.format("%.2f", f_power_price));
+        tmp.put("g_power", String.format("%.2f", g_power));
+        tmp.put("g_power_price", String.format("%.2f", g_power_price));
+        tmp.put("p_power", String.format("%.2f", p_power));
+        tmp.put("p_power_price", String.format("%.2f", p_power_price));
+        tmp.put("j_power", String.format("%.2f", j_power));
+        tmp.put("j_power_price", String.format("%.2f", j_power_price));
+
+        tmp.put("total_power", String.format("%.2f", f_power+p_power+g_power+j_power));
+        tmp.put("total_power_price", String.format("%.2f", f_power_price+p_power_price+g_power_price+j_power_price));
+        return tmp;
+    }
+
     private Map<String, Object> getMonthData(Integer deviceId, Integer year, Integer month) {
-        Map<String, Object> monthData = queryByMonth(deviceId, year, month);
-        if (monthData.get("state") == "Success") {
-
-            //对月的每天数据进行累加
-            Map<String, Object> dayDatas = (Map<String, Object>) monthData.get("dayData");
-            double f_power = 0, g_power = 0, p_power = 0, j_power = 0;
-            double f_power_price = 0, g_power_price = 0, p_power_price = 0, j_power_price = 0;
-            for (String s : dayDatas.keySet()) {
-                Map<String, String> dayData = (Map<String, String>) dayDatas.get(s);
-                f_power += Double.parseDouble(dayData.get("f_power"));
-                g_power += Double.parseDouble(dayData.get("g_power"));
-                p_power += Double.parseDouble(dayData.get("p_power"));
-                j_power += Double.parseDouble(dayData.get("j_power"));
-                f_power_price += Double.parseDouble(dayData.get("f_power_price"));
-                g_power_price += Double.parseDouble(dayData.get("g_power_price"));
-                p_power_price += Double.parseDouble(dayData.get("p_power_price"));
-                j_power_price += Double.parseDouble(dayData.get("j_power_price"));
-            }
-            Map<String, Object> tmp = new HashMap<>();
-            tmp.put("f_power", String.format("%.2f", f_power));
-            tmp.put("f_power_price", String.format("%.2f", f_power_price));
-            tmp.put("g_power", String.format("%.2f", g_power));
-            tmp.put("g_power_price", String.format("%.2f", g_power_price));
-            tmp.put("p_power", String.format("%.2f", p_power));
-            tmp.put("p_power_price", String.format("%.2f", p_power_price));
-            tmp.put("j_power", String.format("%.2f", j_power));
-            tmp.put("j_power_price", String.format("%.2f", j_power_price));
-            return tmp;
-
+        Map<String, Object> dataMap = queryByMonth(deviceId, year, month);
+        if (dataMap.get("state") == "Success") {
+          return getTotal(dataMap);
         } else {
             throw new NullPointerException(month + "月份数据错误");
         }
@@ -222,6 +227,11 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     (p1, p2) -> p1, TreeMap::new));
 
             map.put("data", dayData);
+
+            Map<String, Object> total=getTotal(map);
+            map.put("total_power",total.get("total_power"));
+            map.put("total_power_price",total.get("total_power_price"));
+
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
@@ -251,6 +261,11 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
             }
 
             map.put("data", data);
+
+            Map<String, Object> total=getTotal(map);
+            map.put("total_power",total.get("total_power"));
+            map.put("total_power_price",total.get("total_power_price"));
+
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
@@ -331,6 +346,8 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
             }
 
             map.put("data", data);
+
+
             map.put("state", "Success");
         } catch (NullPointerException e) {
             map.put("state", "Fail");
