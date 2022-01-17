@@ -1,6 +1,7 @@
 package com.example.power_prediction;
 
 
+
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.repository.DeviceRepository;
 import com.example.power_prediction.repository.PowerBillByDayRepository;
@@ -45,7 +46,7 @@ class CspTest {
 
     @Test
     void showPowerBillByDayQueryYear() {
-        System.out.println(powerBillByDayService.queryByYear(2,2022));
+        System.out.println(powerBillByDayService.queryByYear(1,2022));
     }
 
     @Test
