@@ -39,7 +39,7 @@ public class UtilController {
     @ResponseBody
     @RequestMapping("/insertPowerQualityRealtime/{dataTime}")
     public Integer insertPowerQualityRealtime(@PathVariable Integer dataTime) {
-        return utilService.batchInsertingDataForPowerQualityRealtime(1, dataTime, (dataTime + 30*86400), 10, 8, 5, 4);
+        return utilService.batchInsertingDataForPowerQualityRealtime(1, dataTime, (dataTime + 30 * 86400), 10, 8, 5, 4);
     }
 
 
@@ -51,19 +51,17 @@ public class UtilController {
     }
 
     @ResponseBody
-    @RequestMapping("/timeZone")
-    public ZoneId timeZone() {
-        return utilService.getZoneId();
-    }
-
-
-    @ResponseBody
     @PostMapping("/deviceRelationshipTreeForAll")
     public List findAllDeviceRelationship(@RequestBody Device device) {
         Integer method = 1;
         return utilService.findAllDeviceRelationship(device.getId(), device.getUserDepartment(), method);
     }
 
+    @ResponseBody
+    @RequestMapping("/timeZone")
+    public ZoneId timeZone() {
+        return utilService.getZoneId();
+    }
 
     @RequestMapping("/setTimeZone")
     public void setTimeZone(@RequestParam String timezone) {

@@ -83,6 +83,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         return map;
     }
 
+    //获取一天数据
     private Map<String, Object> getDayData(Integer deviceId, ZonedDateTime zonedDateTime) {
         PowerBillByDay powerBillByDay = powerBillByDayRepository.findByDeviceIdAndDateTime(deviceId, zonedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         if (powerBillByDay == null) {
@@ -91,39 +92,73 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         return powerBillByDay.toMap();
     }
 
+
+    //获取一个月的数据
     private Map<String, Object> getMonthData(Integer deviceId, Integer year, Integer month) {
-        Map<String, Object> monthData = queryByMonth(deviceId, year, month);
-        if (monthData.get("state") == "Success") {
-
-            //对月的每天数据进行累加
-            Map<String, Object> dayDatas = (Map<String, Object>) monthData.get("dayData");
-            double f_power = 0, g_power = 0, p_power = 0, j_power = 0;
-            double f_power_price = 0, g_power_price = 0, p_power_price = 0, j_power_price = 0;
-            for (String s : dayDatas.keySet()) {
-                Map<String, String> dayData = (Map<String, String>) dayDatas.get(s);
-                f_power += Double.parseDouble(dayData.get("f_power"));
-                g_power += Double.parseDouble(dayData.get("g_power"));
-                p_power += Double.parseDouble(dayData.get("p_power"));
-                j_power += Double.parseDouble(dayData.get("j_power"));
-                f_power_price += Double.parseDouble(dayData.get("f_power_price"));
-                g_power_price += Double.parseDouble(dayData.get("g_power_price"));
-                p_power_price += Double.parseDouble(dayData.get("p_power_price"));
-                j_power_price += Double.parseDouble(dayData.get("j_power_price"));
-            }
-            Map<String, Object> tmp = new HashMap<>();
-            tmp.put("f_power", String.format("%.2f", f_power));
-            tmp.put("f_power_price", String.format("%.2f", f_power_price));
-            tmp.put("g_power", String.format("%.2f", g_power));
-            tmp.put("g_power_price", String.format("%.2f", g_power_price));
-            tmp.put("p_power", String.format("%.2f", p_power));
-            tmp.put("p_power_price", String.format("%.2f", p_power_price));
-            tmp.put("j_power", String.format("%.2f", j_power));
-            tmp.put("j_power_price", String.format("%.2f", j_power_price));
-            return tmp;
-
+        Map<String, Object> dataMap = queryByMonth(deviceId, year, month);
+        if (dataMap.get("state") == "Success") {
+            return getTotal(dataMap);
         } else {
             throw new NullPointerException(month + "月份数据错误");
         }
+    }
+
+    //不同日期同设备的数据累加
+    private Map<String, Object> getTotal(Map<String, Object> dataMap) {
+        //对数据进行累加
+        Map<String, Object> datas = (Map<String, Object>) dataMap.get("data");
+        double f_power = 0, g_power = 0, p_power = 0, j_power = 0;
+        double f_power_price = 0, g_power_price = 0, p_power_price = 0, j_power_price = 0;
+        for (String s : datas.keySet()) {
+            Map<String, String> dayData = (Map<String, String>) datas.get(s);
+            f_power += Double.parseDouble(dayData.get("f_power"));
+            g_power += Double.parseDouble(dayData.get("g_power"));
+            p_power += Double.parseDouble(dayData.get("p_power"));
+            j_power += Double.parseDouble(dayData.get("j_power"));
+            f_power_price += Double.parseDouble(dayData.get("f_power_price"));
+            g_power_price += Double.parseDouble(dayData.get("g_power_price"));
+            p_power_price += Double.parseDouble(dayData.get("p_power_price"));
+            j_power_price += Double.parseDouble(dayData.get("j_power_price"));
+        }
+        Map<String, Object> tmp = new HashMap<>();
+        tmp.put("f_power", String.format("%.2f", f_power));
+        tmp.put("f_power_price", String.format("%.2f", f_power_price));
+        tmp.put("g_power", String.format("%.2f", g_power));
+        tmp.put("g_power_price", String.format("%.2f", g_power_price));
+        tmp.put("p_power", String.format("%.2f", p_power));
+        tmp.put("p_power_price", String.format("%.2f", p_power_price));
+        tmp.put("j_power", String.format("%.2f", j_power));
+        tmp.put("j_power_price", String.format("%.2f", j_power_price));
+
+        tmp.put("total_power", String.format("%.2f", f_power + p_power + g_power + j_power));
+        tmp.put("total_power_price", String.format("%.2f", f_power_price + p_power_price + g_power_price + j_power_price));
+        return tmp;
+    }
+
+    //同日期不同设备的数据累加
+    private Map<String, Object> sumResult(List<Map<String, Object>> results) {
+        Map<String, Object> result = results.get(0);
+
+        for (int i = 1; i < results.size(); i++) {
+
+            Map<String, Object> tmp = results.get(i);
+            result.merge("total_power", tmp.get("total_power"),
+                    (prev, one) -> String.format("%.2f", Double.parseDouble((String) prev) + Double.parseDouble((String) one)));
+            result.merge("total_power_price", tmp.get("total_power_price"),
+                    (prev, one) -> String.format("%.2f", Double.parseDouble((String) prev) + Double.parseDouble((String) one)));
+
+            Map<String, Map<String, Object>> transformerBillTotalData = (Map<String, Map<String, Object>>) result.get("data");
+            Map<String, Map<String, Object>> tmpData = (Map<String, Map<String, Object>>) tmp.get("data");
+
+            tmpData.forEach((key1, value1) -> {
+                Map<String, Object> transformerBillTotalDataValue = transformerBillTotalData.get(key1);
+                value1.forEach((key2, value2) -> {
+                    transformerBillTotalDataValue.merge(key2, value2,
+                            (prev, one) -> String.format("%.2f", Double.parseDouble((String) prev) + Double.parseDouble((String) one)));
+                });
+            });
+        }
+        return result;
     }
 
     /**
@@ -138,7 +173,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
             //防止传入数据非0点0分
             ZonedDateTime finalZonedDateTime = zonedDateTime.withHour(0).withMinute(0).withSecond(0);
-            Integer time = (int) finalZonedDateTime.toEpochSecond();
+            int time = (int) finalZonedDateTime.toEpochSecond();
 
             //获得当天电费计价信息
             Map<String, Object> powerPriceTime = powerPriceTimeService.getDevicePowerPriceInTime(time);
@@ -221,7 +256,12 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     PowerBillByDay::toMap,
                     (p1, p2) -> p1, TreeMap::new));
 
-            map.put("dayData", dayData);
+            map.put("data", dayData);
+
+            Map<String, Object> total = getTotal(map);
+            map.put("total_power", total.get("total_power"));
+            map.put("total_power_price", total.get("total_power_price"));
+
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
@@ -250,7 +290,12 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                 data.put(YearMonth.of(year, i).format(DateTimeFormatter.ofPattern("yyyy-MM")), getMonthData(deviceId, year, i));
             }
 
-            map.put("monthData", data);
+            map.put("data", data);
+
+            Map<String, Object> total = getTotal(map);
+            map.put("total_power", total.get("total_power"));
+            map.put("total_power_price", total.get("total_power_price"));
+
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
@@ -331,8 +376,58 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
             }
 
             map.put("data", data);
+
+
             map.put("state", "Success");
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
+            map.put("state", "Fail");
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> queryCostMonth(Integer year, Integer month, String department) {
+        Map<String, Object> map = new HashMap<>(); //总容器
+        try {
+            //获得设备树，得到主变列表
+            List<Integer> transformers = utilService.getMainTransformer(utilService.findAllDeviceRelationship(1, department, 0));
+
+            //初始化数据
+            List<Map<String, Object>> now = transformers.stream().map(t -> queryByMonth(t, year, month)).collect(toList());
+            List<Map<String, Object>> lastMonth = transformers.stream().map(t -> queryByMonth(t, month == 1 ? year - 1 : year, month == 1 ? 12 : month - 1)).collect(toList());
+            List<Map<String, Object>> lastYear = transformers.stream().map(t -> queryByMonth(t, year - 1, month)).collect(toList());
+
+            map.put("now", sumResult(now));
+            map.put("lastMonth", sumResult(lastMonth));
+            map.put("lastYear", sumResult(lastYear));
+
+            map.put("state", "Success");
+        } catch (Exception e) {
+            map.put("state", "Fail");
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> queryCostYear(Integer year, String department) {
+        Map<String, Object> map = new HashMap<>(); //总容器
+        try {
+            //获得设备树，得到主变列表
+            List<Integer> transformers = utilService.getMainTransformer(utilService.findAllDeviceRelationship(1, department, 0));
+
+            //初始化数据
+            List<Map<String, Object>> now = transformers.stream().map(t -> queryByYear(t, year)).collect(toList());
+            List<Map<String, Object>> lastYear = transformers.stream().map(t -> queryByYear(t, year - 1)).collect(toList());
+
+            map.put("now", sumResult(now));
+            map.put("lastYear", sumResult(lastYear));
+
+            map.put("state", "Success");
+        } catch (Exception e) {
             map.put("state", "Fail");
             e.printStackTrace();
         }

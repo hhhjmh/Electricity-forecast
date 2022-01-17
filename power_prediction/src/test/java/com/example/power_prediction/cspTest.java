@@ -1,12 +1,14 @@
 package com.example.power_prediction;
 
 
+
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.repository.DeviceRepository;
 import com.example.power_prediction.repository.PowerBillByDayRepository;
 import com.example.power_prediction.service.PowerBillByDayService;
 import com.example.power_prediction.service.PowerDistributionHourService;
 import com.example.power_prediction.service.PowerPriceTimeService;
+import com.example.power_prediction.service.UtilService;
 import com.example.power_prediction.util.TimeOperation;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,9 @@ class CspTest {
     @Autowired
     DeviceRepository deviceRepository;
 
+    @Autowired
+    UtilService utilService;
+
     @Test
     void showPowerDistributionHourQueryByDay() {
         System.out.println(powerDistributionHourService.queryByDay(1, 2021, 12, 1));
@@ -41,7 +46,7 @@ class CspTest {
 
     @Test
     void showPowerBillByDayQueryYear() {
-        System.out.println(powerBillByDayService.queryByYear(2,2022));
+        System.out.println(powerBillByDayService.queryByYear(1,2022));
     }
 
     @Test
@@ -56,17 +61,27 @@ class CspTest {
 
     @Test
     void showQueryCustom1() {
-        System.out.println(powerBillByDayService.queryCustom("1,2","2022-01-03","2022-01-12","day"));
+        System.out.println(powerBillByDayService.queryCustom("1,3","2022-01-03","2022-01-12","day"));
     }
 
     @Test
     void showQueryCustom2() {
-        System.out.println(powerBillByDayService.queryCustom("1,2","2021-12","2022-01","month"));
+        System.out.println(powerBillByDayService.queryCustom("1,3","2021-12","2022-01","month"));
     }
 
     @Test
     void showQueryByDayMulti(){
-        System.out.println(powerDistributionHourService.queryByDayMulti("1,2",1638288000,1638374400,0));
+        System.out.println(powerDistributionHourService.queryByDayMulti("1,3",1638288000,1638374400,0));
+    }
+
+    @Test
+    void showDeviceTree(){
+        System.out.println(utilService.findAllDeviceRelationship(1,"电能体验馆",0));
+    }
+
+    @Test
+    void showGetMainTransformer(){
+        System.out.println(utilService.getMainTransformer(utilService.findAllDeviceRelationship(1, "电能体验馆", 0)));
     }
 
 }

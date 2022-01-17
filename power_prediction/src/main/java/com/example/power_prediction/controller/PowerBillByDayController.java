@@ -45,6 +45,16 @@ public class PowerBillByDayController {
         return powerBillByDayService.queryCustom(deviceIds, start, end, unit);
     }
 
+    @PostMapping("/queryCostMonth")
+    public Map<String, Object> queryCostMonth(@RequestParam Integer year,@RequestParam Integer month,@RequestParam String department) {
+        return powerBillByDayService.queryCostMonth(year,month,department);
+    }
+
+    @PostMapping("/queryCostYear")
+    public Map<String, Object> queryCostYear(@RequestParam Integer year,@RequestParam String department) {
+        return powerBillByDayService.queryCostYear(year,department);
+    }
+
     @PostMapping("/dailyUpdate")
     public Map<String, Object> dailyUpdate() {
         return powerBillByDayService.dailyUpdate();
