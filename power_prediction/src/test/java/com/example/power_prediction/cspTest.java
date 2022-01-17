@@ -26,6 +26,9 @@ class CspTest {
     @Autowired
     PowerBillByDayService powerBillByDayService;
 
+    @Autowired
+    DeviceRepository deviceRepository;
+
     @Test
     void showPowerDistributionHourQueryByDay() {
         System.out.println(powerDistributionHourService.queryByDay(1, 2021, 12, 1));
