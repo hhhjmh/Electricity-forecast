@@ -221,7 +221,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     PowerBillByDay::toMap,
                     (p1, p2) -> p1, TreeMap::new));
 
-            map.put("dayData", dayData);
+            map.put("data", dayData);
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
@@ -250,7 +250,7 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                 data.put(YearMonth.of(year, i).format(DateTimeFormatter.ofPattern("yyyy-MM")), getMonthData(deviceId, year, i));
             }
 
-            map.put("monthData", data);
+            map.put("data", data);
             map.put("state", "Success");
         } catch (Exception e) {
             map.put("state", "Fail");
