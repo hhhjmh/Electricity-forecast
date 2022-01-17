@@ -7,6 +7,7 @@ import com.example.power_prediction.entity.PowerRealtime;
 import com.example.power_prediction.repository.PowerQualityRealtimeRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PowerRealtimeService {
 
@@ -18,6 +19,12 @@ public interface PowerRealtimeService {
     List<PowerQualityRealtime> findPowerQualityRealtimeByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
 
     List<PowerDistributionDay> findPowerDistributionDayByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
+
+    Map<String,List>  findPowerRealtimeByDataTimeForTable(Integer deviceId, Integer start, Integer end);
+
+    Map findPowerDistributionHourByDataTimeForTable(Integer deviceId, Integer start, Integer end);
+
+    Map findPowerQualityRealtimeByDataTimeForTable(Integer deviceId, Integer dataTime, Integer end);
     //    List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime);
 
 }

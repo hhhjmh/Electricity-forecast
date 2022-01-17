@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_analyse_day_min", schema = "power", catalog = "")
 public class PowerAnalyseDayMin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Integer dataTime;
     private Integer totalLoadTime;
@@ -89,10 +91,25 @@ public class PowerAnalyseDayMin {
     public void setDeviceId(int deviceId) {
         this.deviceId = deviceId;
     }
+    private Integer frequencyDeviationTime;
+    private String frequencyDeviation;
+    public Integer getFrequencyDeviationTime() {
+        return frequencyDeviationTime;
+    }
+
+    public void setFrequencyDeviationTime(Integer frequencyDeviationTime) {
+        this.frequencyDeviationTime = frequencyDeviationTime;
+    }
+
+    public String getFrequencyDeviation() {
+        return frequencyDeviation;
+    }
+
+    public void setFrequencyDeviation(String frequencyDeviation) {
+        this.frequencyDeviation = frequencyDeviation;
+    }
 
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }

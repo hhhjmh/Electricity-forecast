@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- APP按钮 -->
-    <div id="btn_Dialog" >
+    <div class="buttonBackground"id="btn_normal">
        <button type="text" @click="centerDialogVisible = true"></button>
        <p>电能分析</p>
     </div>
@@ -45,7 +45,10 @@
     
   </div>
 </template>
+<style src="../assets/css/button.css">
 
+
+</style>
 <style lang="scss">
 .tabBox{
   color: #ffffff;
@@ -83,129 +86,14 @@
 /* 侧边栏动画 */
 
 /* 弹窗按钮 */
-#btn_Dialog button{
-    margin: 0.5rem;
-    border-radius: 1.5rem;
-    border: 0.5rem double #80ffea;
-    width: 6rem;
-    height: 6rem;
-    background-image:url(../assets/icon/one.png);
-    background-size: 100% 100%;
-    color: #ffffff;
-    
+ .buttonBackground button {
+   
+     background-image: url(../assets/icon/powerAnalyse.png);
   }
-#btn_Dialog p{
-    margin: 0.5rem;
-    color:#FFFFFF;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-top: 0;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
-    
-}
-  /* 按钮动画  */
-@keyframes flicker-in-1 {
-  0% {
-    opacity: 0;
+  .buttonBackground {
+    left: 15rem;
+    top: 16rem;
   }
-  10% {
-    opacity: 0;
-  }
-  10.1% {
-    opacity: 1;
-  }
-  10.2% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 0;
-  }
-  20.1% {
-    opacity: 1;
-  }
-  20.6% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  30.1% {
-    opacity: 1;
-  }
-  30.5% {
-    opacity: 1;
-  }
-  30.6% {
-    opacity: 0;
-  }
-  45% {
-    opacity: 0;
-  }
-  45.1% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  55% {
-    opacity: 1;
-  }
-  55.1% {
-    opacity: 0;
-  }
-  57% {
-    opacity: 0;
-  }
-  57.1% {
-    opacity: 1;
-  }
-  60% {
-    opacity: 1;
-  }
-  60.1% {
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  65.1% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  75.1% {
-    opacity: 0;
-  }
-  77% {
-    opacity: 0;
-  }
-  77.1% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  85.1% {
-    opacity: 0;
-  }
-  86% {
-    opacity: 0;
-  }
-  86.1% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-#btn_Dialog:hover{
-    border-radius: 1rem;
-    border: 0.1rem solid  rgba(220, 220, 220, 0.5);
-    background-color: #71a3b0;
-    box-shadow: 0 0 40px 0px rgba(255, 255, 255, 0.8);
-}
-
 
 #outaside {
   background-color: cornflowerblue;
@@ -418,7 +306,7 @@ export default {
     convert() {
       let _this = this;
       axios
-        .post("/util/deviceRelationshipTree", {
+        .post("http://114.213.210.219/util/deviceRelationshipTree", {
           type: 1
         })
         .then(response => {

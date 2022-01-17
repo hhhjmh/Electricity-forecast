@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_analyse_day_max", schema = "power", catalog = "")
 public class PowerAnalyseDayMax {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Integer dataTime;
     private Integer totalLoadTime;
@@ -64,6 +66,7 @@ public class PowerAnalyseDayMax {
     private String ubPhd;
     private Integer ucPhdTime;
     private String ucPhd;
+
     private Integer uaDeviationTime;
     private String uaDeviation;
     private Integer ubDeviationTime;
@@ -81,6 +84,8 @@ public class PowerAnalyseDayMax {
     private Integer uUnbalanceTime;
     private String uUnbalance;
 
+
+
     private int deviceId;
     public int getDeviceId() {
         return deviceId;
@@ -90,9 +95,24 @@ public class PowerAnalyseDayMax {
         this.deviceId = deviceId;
     }
 
+    private Integer frequencyDeviationTime;
+    private String frequencyDeviation;
+    public Integer getFrequencyDeviationTime() {
+        return frequencyDeviationTime;
+    }
 
-    @Id
-    @Column(name = "id")
+    public void setFrequencyDeviationTime(Integer frequencyDeviationTime) {
+        this.frequencyDeviationTime = frequencyDeviationTime;
+    }
+
+    public String getFrequencyDeviation() {
+        return frequencyDeviation;
+    }
+
+    public void setFrequencyDeviation(String frequencyDeviation) {
+        this.frequencyDeviation = frequencyDeviation;
+    }
+
     public int getId() {
         return id;
     }

@@ -47,6 +47,126 @@ public class PowerPriceTime {
     @Column(name = "deviceTypeId", nullable = false)
     private Integer deviceTypeId; //待删除字段
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Integer startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getF_power_startAt() {
+        return f_power_startAt;
+    }
+
+    public void setF_power_startAt(String f_power_startAt) {
+        this.f_power_startAt = f_power_startAt;
+    }
+
+    public String getF_power_endAt() {
+        return f_power_endAt;
+    }
+
+    public void setF_power_endAt(String f_power_endAt) {
+        this.f_power_endAt = f_power_endAt;
+    }
+
+    public String getF_power_price() {
+        return f_power_price;
+    }
+
+    public void setF_power_price(String f_power_price) {
+        this.f_power_price = f_power_price;
+    }
+
+    public String getG_power_startAt() {
+        return g_power_startAt;
+    }
+
+    public void setG_power_startAt(String g_power_startAt) {
+        this.g_power_startAt = g_power_startAt;
+    }
+
+    public String getG_power_endAt() {
+        return g_power_endAt;
+    }
+
+    public void setG_power_endAt(String g_power_endAt) {
+        this.g_power_endAt = g_power_endAt;
+    }
+
+    public String getG_power_price() {
+        return g_power_price;
+    }
+
+    public void setG_power_price(String g_power_price) {
+        this.g_power_price = g_power_price;
+    }
+
+    public String getP_power_startAt() {
+        return p_power_startAt;
+    }
+
+    public void setP_power_startAt(String p_power_startAt) {
+        this.p_power_startAt = p_power_startAt;
+    }
+
+    public String getP_power_endAt() {
+        return p_power_endAt;
+    }
+
+    public void setP_power_endAt(String p_power_endAt) {
+        this.p_power_endAt = p_power_endAt;
+    }
+
+    public String getP_power_price() {
+        return p_power_price;
+    }
+
+    public void setP_power_price(String p_power_price) {
+        this.p_power_price = p_power_price;
+    }
+
+    public String getJ_power_startAt() {
+        return j_power_startAt;
+    }
+
+    public void setJ_power_startAt(String j_power_startAt) {
+        this.j_power_startAt = j_power_startAt;
+    }
+
+    public String getJ_power_endAt() {
+        return j_power_endAt;
+    }
+
+    public void setJ_power_endAt(String j_power_endAt) {
+        this.j_power_endAt = j_power_endAt;
+    }
+
+    public String getJ_power_price() {
+        return j_power_price;
+    }
+
+    public void setJ_power_price(String j_power_price) {
+        this.j_power_price = j_power_price;
+    }
+
+    public Integer getDeviceTypeId() {
+        return deviceTypeId;
+    }
+
+    public void setDeviceTypeId(Integer deviceTypeId) {
+        this.deviceTypeId = deviceTypeId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -19,6 +19,7 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
+  
   {
     path: '/home',
     name: 'Home',
@@ -35,7 +36,16 @@ const routes = [
     {
       path: '/year',
       component: ()=>import('../components/YEAR.vue')
-    },]
+    },
+    {
+      path: '/monitor',
+      component: ()=>import('../components/monitor.vue')
+    },
+    {
+      path: '/unit',
+      component: ()=>import('../components/unit.vue')
+    },
+    ]
   },
   {
     path: '/test',
