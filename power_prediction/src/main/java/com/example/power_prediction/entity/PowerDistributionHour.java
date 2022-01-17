@@ -14,13 +14,45 @@ import java.util.Objects;
 public class PowerDistributionHour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private Integer id;
     @Column(name = "deviceId")
     private Integer deviceId;
     @Column(name = "dataTime")
     private Integer dataTime;
     @Column(name = "totalKWh")
     private String totalKWh;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public Integer getDataTime() {
+        return dataTime;
+    }
+
+    public void setDataTime(Integer dataTime) {
+        this.dataTime = dataTime;
+    }
+
+    public String getTotalKWh() {
+        return totalKWh;
+    }
+
+    public void setTotalKWh(String totalKWh) {
+        this.totalKWh = totalKWh;
+    }
 
     @Override
     public boolean equals(Object o) {
