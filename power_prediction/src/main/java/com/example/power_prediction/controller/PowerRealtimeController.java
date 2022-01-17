@@ -42,7 +42,7 @@ public class PowerRealtimeController {
         return powerRealtimeService.findPowerRealtimeByDataTimeForTable(powerRealtime.getDeviceId(), powerRealtime.getDataTime(), powerRealtime.getDataTime() + 86400 * powerRealtime.getId() - 1);
     }
 
-    //返回每天中24个整点的电能分布数据——曲线
+    //返回每天的电能分布数据——曲线
     @PostMapping("/findPowerDistributionHourByDataTime")
     public List<PowerDistributionHour> findPowerDistributionHourByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionHour powerDistributionHour) {
         if (powerDistributionHour.getId() == 0) {
@@ -60,7 +60,7 @@ public class PowerRealtimeController {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerDistributionHourByDataTimeForTable(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId());
+        return powerRealtimeService.findPowerDistributionHourByDataTimeForTable(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
     }
 
     //返回每天的电能质量数据
@@ -73,14 +73,20 @@ public class PowerRealtimeController {
         return powerRealtimeService.findPowerQualityRealtimeByDeviceIdAndDataTimeBetween(powerQualityRealtime.getDeviceId(), powerQualityRealtime.getDataTime(), powerQualityRealtime.getDataTime() + 86400 * powerQualityRealtime.getId());
     }
 
+    //返回24个整点的电能质量数据
+    @PostMapping("/findPowerQualityRealtimeByDataTimeForTable")
+    public Map findPowerQualityRealtimeByDataTimeForTable(@RequestBody PowerQualityRealtime powerQualityRealtime) {
+        if (powerQualityRealtime.getId() == 0) {
+            powerQualityRealtime.setId(1);
+        }
+        //使用id暂存天数
+        return powerRealtimeService.findPowerQualityRealtimeByDataTimeForTable(powerQualityRealtime.getDeviceId(), powerQualityRealtime.getDataTime(), powerQualityRealtime.getDataTime() + 86400 * powerQualityRealtime.getId()-1);
+    }
+
     //返回每天的电能分布数据
     @PostMapping("/findPowerDistributionDayByDataTime")
     public List<PowerDistributionDay> findPowerDistributionDayByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionDay powerDistributionDay) {
-<<<<<<< HEAD
         if (powerDistributionDay.getId() == 0) {
-=======
-        if (powerDistributionDay.getId() ==0) {
->>>>>>> dev
             powerDistributionDay.setId(30);
         }
         //使用id暂存天数

@@ -23,6 +23,8 @@ public interface PowerRealtimeService {
     Map<String,List>  findPowerRealtimeByDataTimeForTable(Integer deviceId, Integer start, Integer end);
 
     Map findPowerDistributionHourByDataTimeForTable(Integer deviceId, Integer start, Integer end);
+
+    Map findPowerQualityRealtimeByDataTimeForTable(Integer deviceId, Integer dataTime, Integer end);
     //    List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime);
 
 }

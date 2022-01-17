@@ -65,8 +65,8 @@
   <div id="myChart"
   :style="{ width: '1000px', height: '500px'}"
   ></div>
+  &nbsp;
 
-  
   <div>
     <el-row>
       <el-button :class="{actived:changeBG[0]}" size="mini" @click="fhclick()" >负荷</el-button>
@@ -123,7 +123,7 @@ export default {
       tableMinData:[],
       //选择框定义
       isshow0:'',
-      isshow1:'',
+      isshow1:'display:none',
       isshow2:'display:none',
       isshow3:'display:none',
 
@@ -159,7 +159,7 @@ export default {
 
 
       //A相B相选择池
-      checkList: [],
+      checkList: ['总体'],
 
       //打印图表名称
       htmlTitle: 'myChart',
@@ -176,14 +176,17 @@ export default {
 
       echartsOption: {
         legend: {	//图表上方的图例
-          data: ['', '', '', '总体','','','','',''],
+          y:'bottom',
+          
+          data: ['总体'],//后面会被checklist赋值
           selected:{'A相':false, 'B相':false, 'C相':false, '总体':true,'需量负荷':false,'零线电流':false,'Uab':false,'Ubc':false,'Uca':false,}
         },
+        
         // echarts选项，所有绘图数据和样式都在这里设置
         xAxis: {
           type: "category",
           data: [], // x轴数据
-          interval :6,
+          
           name: "时间", // x轴名称
           nameTextStyle: {
             // x轴名称样式
@@ -201,6 +204,7 @@ export default {
           type: "value",
           
           name: '负荷', // y轴名称
+          min:1000,
           nameTextStyle: {
             // y轴名称样式
             fontWeight: 1000,
@@ -265,112 +269,86 @@ export default {
   },
   mounted() {
    
-// echarts设置选项
-
+// echarts设置选项s
     
   },
 
+
   methods:{
+
     addLine(){
+      this.echartsOption.legend.data=this.checkList
       //判断某些元素是否存在，如果存在就做出时间
       if(this.checkList.indexOf('A相')!=-1){
-        this.echartsOption.legend.data[0] = 'A相'
         this.echartsOption.legend.selected['A相'] = true
         
       }else{
-        this.echartsOption.legend.data[0] = ''
         this.echartsOption.legend.selected['A相'] = false
       
       }
 
       if(this.checkList.indexOf('B相')!=-1){
-        this.echartsOption.legend.data[1] = 'B相'
         this.echartsOption.legend.selected['B相'] = true
-      
       }else{
-        this.echartsOption.legend.data[1] = ''
         this.echartsOption.legend.selected['B相'] = false
         
       }
 
       if(this.checkList.indexOf('C相')!=-1){
-        this.echartsOption.legend.data[2] = 'C相'
+
         this.echartsOption.legend.selected['C相'] = true
        
       }else{
-        this.echartsOption.legend.data[2] = ''
+
         this.echartsOption.legend.selected['C相'] = false
        
       }
-
       if(this.checkList.indexOf('总体')!=-1){
-        this.echartsOption.legend.data[3] = '总体'
-        this.echartsOption.legend.selected['总体'] = true
-        
+        this.echartsOption.legend.selected['总体'] = true 
       }else{
-        this.echartsOption.legend.data[3] = ''
+  
         this.echartsOption.legend.selected['总体'] = false
-       
       }
-
       if(this.checkList.indexOf('需量负荷')!=-1){
-        this.echartsOption.legend.data[4] = '需量负荷'
         this.echartsOption.legend.selected['需量负荷'] = true
-        
       }else{
-        this.echartsOption.legend.data[4] = ''
-        this.echartsOption.legend.selected['需量负荷'] = false
-        
+        this.echartsOption.legend.selected['需量负荷'] = false  
       }
       if(this.checkList.indexOf('零线电流')!=-1){
-        this.echartsOption.legend.data[5] = '零线电流'
         this.echartsOption.legend.selected['零线电流'] = true
-      
       }else{
-        this.echartsOption.legend.data[5] = ''
         this.echartsOption.legend.selected['零线电流'] = false
-        
       }
       if(this.checkList.indexOf('Uab')!=-1){
-        this.echartsOption.legend.data[6] = 'Uab'
         this.echartsOption.legend.selected['Uab'] = true
-      
       }else{
-        this.echartsOption.legend.data[6] = ''
-        this.echartsOption.legend.selected['Uab'] = false
-        
+        this.echartsOption.legend.selected['Uab'] = false 
       }
       if(this.checkList.indexOf('Ubc')!=-1){
-        this.echartsOption.legend.data[7] = 'Ubc'
         this.echartsOption.legend.selected['Ubc'] = true
-      
       }else{
-        this.echartsOption.legend.data[7] = ''
         this.echartsOption.legend.selected['Ubc'] = false
-        
       }
       if(this.checkList.indexOf('Uca')!=-1){
-        this.echartsOption.legend.data[8] = 'Uca'
         this.echartsOption.legend.selected['Uca'] = true
-      
       }else{
-        this.echartsOption.legend.data[8] = ''
         this.echartsOption.legend.selected['Uca'] = false
-        
       }
-
-
+      console.log(this.checkList)
+      console.log(this.echartsOption.legend.data)
       let myChart = echarts.init(document.getElementById("myChart"), "light"); // 初始化echarts, theme为light
-        myChart.setOption(this.echartsOption); // echarts设置选项
+      myChart.setOption(this.echartsOption); // echarts设置选项
 
 
     },
     //将所有的线条都不显示
     cleanLine(){
-      let i=0
-      for(i=0;i<9;i++){
-        this.echartsOption.legend.data[i] = ''
-      }
+      // let i=0
+      // for(i=0;i<9;i++){
+      //   this.echartsOption.legend.data[i] = ''
+      // }
+      this.echartsOption.yAxis.min=0
+      this.echartsOption.legend.data=[]
       this.checkList=[]
       this.echartsOption.legend.selected['A相']=false
       this.echartsOption.legend.selected['B相']=false
@@ -431,10 +409,15 @@ export default {
       if(this.value2 == '负荷'){//负荷变量赋值
         //选择框赋值
         this.cleanLine()
+        
         this.isshow0='',
         this.isshow1='display:none',
         this.isshow2='display:none',
         this.isshow3='display:none',
+        this.checkList=['总体']
+        this.echartsOption.legend.data=['总体']
+        this.echartsOption.legend.selected['总体']=true
+        this.echartsOption.yAxis.min=400
 
 
         this.echartsOption.yAxis.name = this.value2+'(kW)'
@@ -459,6 +442,10 @@ export default {
         this.isshow1='display:none',
         this.isshow2='display:none',
         this.isshow3='display:none',
+        this.checkList=['总体']
+        this.echartsOption.legend.data=['总体']
+        this.echartsOption.legend.selected['总体']=true
+        this.echartsOption.yAxis.min=150
 
         this.echartsOption.yAxis.name = this.value2+'(kVar)'
         let i=0
@@ -482,6 +469,11 @@ export default {
         this.isshow1='display:none',
         this.isshow2='display:none',
         this.isshow3='display:none',
+        this.checkList=['总体']
+        this.echartsOption.legend.data=['总体']
+        this.echartsOption.legend.selected['总体']=true
+        this.echartsOption.yAxis.min=0.8
+
 
         this.echartsOption.yAxis.name = this.value2
         let i=0
@@ -530,6 +522,7 @@ export default {
         this.isshow1='display:none',
         this.isshow2='display:none',
         this.isshow3='',
+        this.echartsOption.yAxis.min=200
 
         this.echartsOption.yAxis.name = this.value2+'(V)'
         let i=0
@@ -567,6 +560,7 @@ export default {
     fhclick(){
       this.changeBG = [1,0,0,0,0,0,0,0,0]
       this.cleanTable()
+
       this.tableData[0].message = '总负荷(kW)'
       this.tableData[1].message = 'A相负荷(kW)'
       this.tableData[2].message = 'B相负荷(kW)'
@@ -822,9 +816,9 @@ export default {
 
       //请求表格数据
       axios
-      .post("/PowerAnalyse/DayAvg", {
+      .post("http://114.213.211.241/PowerAnalyse/DayAvg", {
 	      deviceId: "1",
-        dataTime: "1641312000"
+        dataTime: "1638288000"
       })
       .then(response => {
         this.tableAvgData = response.data
@@ -836,9 +830,9 @@ export default {
       });
 
       axios
-      .post("/PowerAnalyse/DayMax", {
+      .post("http://114.213.211.241/PowerAnalyse/DayMax", {
 	      deviceId: "1",
-        dataTime: "1641312000"
+        dataTime: "1638288000"
       })
       .then(response => {
         this.tableMaxData = response.data
@@ -850,9 +844,9 @@ export default {
       });
 
       axios
-      .post("/PowerAnalyse/DayMin", {
+      .post("http://114.213.211.241/PowerAnalyse/DayMin", {
 	      deviceId: "1",
-        dataTime: "1641312000"
+        dataTime: "1638288000"
       })
       .then(response => {
         this.tableMinData = response.data

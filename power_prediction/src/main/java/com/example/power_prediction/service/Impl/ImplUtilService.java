@@ -4,15 +4,15 @@ import com.example.power_prediction.entity.PowerDistributionDay;
 import com.example.power_prediction.entity.PowerDistributionHour;
 import com.example.power_prediction.entity.PowerQualityRealtime;
 import com.example.power_prediction.entity.PowerRealtime;
-<<<<<<< HEAD
+
 import com.example.power_prediction.repository.*;
-=======
+
 import com.example.power_prediction.entity.UtilEntity;
 import com.example.power_prediction.repository.DeviceRelationshipRepository;
 import com.example.power_prediction.repository.PowerDistributionDayRepository;
 import com.example.power_prediction.repository.PowerRealtimeRepository;
 import com.example.power_prediction.repository.UtilEntityRepository;
->>>>>>> dev
+
 import com.example.power_prediction.service.UtilService;
 import com.example.power_prediction.util.util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -244,6 +244,8 @@ public class ImplUtilService implements UtilService {
         return powerQualityRealtime;
     }
 
+
+
     @Override
     public List findAllDeviceRelationship(Integer type, String userDepartment, Integer method) {
 
@@ -256,7 +258,6 @@ public class ImplUtilService implements UtilService {
         }
         if (objects == null) {
             System.out.println("error");
-<<<<<<< HEAD
             return null;
         } else {
             for (Object[] o : objects
@@ -268,18 +269,6 @@ public class ImplUtilService implements UtilService {
                     topMap.put("id", o[1]);
                     arrayList.add(topMap);
                 }
-=======
-        for (Object[] o : objects
-        ) {
-            Map<String, Object> topMap = new HashMap<>();
-            if (o[4] == null) { //superDeviceID为null
-                topMap.put("label", o[0]);
-                topMap.put("children", recursionTree(objects, (Integer) o[2], type));
-                topMap.put("id", o[1]);
-                arrayList.add(topMap);
-            }
->>>>>>> dev
-
             }
             return arrayList;
         }
@@ -317,9 +306,8 @@ public class ImplUtilService implements UtilService {
         return arrayList;
     }
 
-<<<<<<< HEAD
 
-=======
+
     @Override
     public ZoneId getZoneId() {
         try {
@@ -345,5 +333,4 @@ public class ImplUtilService implements UtilService {
         time_zone.setDataTime((int) (System.currentTimeMillis()/1000));
         utilEntityRepository.save(time_zone);
     }
->>>>>>> dev
 }

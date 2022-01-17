@@ -130,6 +130,43 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
         return tableMap;
     }
 
+    @Override
+    public Map<String, List> findPowerQualityRealtimeByDataTimeForTable(Integer deviceId, Integer start, Integer end) {
+        List<PowerQualityRealtime> powerQualityRealtimeList = powerQualityRealtimeRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        List<Map> tableListForTHD = new ArrayList<>();
+        List<Map> tableListForPowerQuality = new ArrayList<>();
+        for (PowerQualityRealtime powerQualityRealtime : powerQualityRealtimeList
+        ) {
+            if (powerQualityRealtime.getDataTime() % 3600 == 0) {
+                Map PHDMap = new HashMap();
+                PHDMap.put("iaPHD", powerQualityRealtime.getIaPhd());
+                PHDMap.put("ibPHD", powerQualityRealtime.getIbPhd());
+                PHDMap.put("icPHD", powerQualityRealtime.getIcPhd());
+                PHDMap.put("uaPHD", powerQualityRealtime.getUaPhd());
+                PHDMap.put("ubPHD", powerQualityRealtime.getUbPhd());
+                PHDMap.put("ucPHD", powerQualityRealtime.getUcPhd());
+                tableListForTHD.add(PHDMap);
+
+                Map powerQualityMap = new HashMap();
+                powerQualityMap.put("frequencyDeviation", powerQualityRealtime.getFrequencyDeviation());
+                powerQualityMap.put("uaDeviation", powerQualityRealtime.getUaDeviation());
+                powerQualityMap.put("ubDeviation", powerQualityRealtime.getUbDeviation());
+                powerQualityMap.put("ucDeviation", powerQualityRealtime.getUcDeviation());
+                powerQualityMap.put("uUabDeviation", powerQualityRealtime.getuUabDeviation());
+                powerQualityMap.put("uUbcDeviation", powerQualityRealtime.getuUbcDeviation());
+                powerQualityMap.put("uUcaDeviation", powerQualityRealtime.getuUcaDeviation());
+                powerQualityMap.put("iUnbalance", powerQualityRealtime.getiUnbalance());
+                powerQualityMap.put("uUnbalance", powerQualityRealtime.getuUnbalance());
+                tableListForPowerQuality.add(powerQualityMap);
+
+            }
+
+        }
+        Map<String, List> newMap = new HashMap();
+        newMap.put("PHD", tableListForTHD);
+        newMap.put("PowerQuality", tableListForPowerQuality);
+        return newMap;
+    }
 
 //    @Override
 //    public List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime) {

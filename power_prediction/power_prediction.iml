@@ -18,6 +18,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="Entities" />
           <factory-entry name="entityManagerFactory" />
           <factory-entry name="noname-a.xml@0" value="6f2c721f-9312-4fbb-8332-0f9d1064a2fa" />
           <factory-entry name="power_prediction" />
@@ -137,5 +138,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.8.3" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.22" level="project" />
   </component>
 </module>

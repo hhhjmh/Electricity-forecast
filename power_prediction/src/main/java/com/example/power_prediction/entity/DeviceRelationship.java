@@ -9,8 +9,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "device_relationship", schema = "power")
-@Getter
-@Setter
 public class DeviceRelationship {
 
     @Id
@@ -22,6 +20,45 @@ public class DeviceRelationship {
     private Integer superDeviceId;
     private Integer sublayerDeviceId;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getSuperDeviceId() {
+        return superDeviceId;
+    }
+
+    public void setSuperDeviceId(Integer superDeviceId) {
+        this.superDeviceId = superDeviceId;
+    }
+
+    public Integer getSublayerDeviceId() {
+        return sublayerDeviceId;
+    }
+
+    public void setSublayerDeviceId(Integer sublayerDeviceId) {
+        this.sublayerDeviceId = sublayerDeviceId;
+    }
 
     @Override
     public boolean equals(Object o) {
