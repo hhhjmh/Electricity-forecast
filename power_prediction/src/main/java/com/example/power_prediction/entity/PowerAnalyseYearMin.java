@@ -89,7 +89,23 @@ public class PowerAnalyseYearMin {
     public void setDeviceId(int deviceId) {
         this.deviceId = deviceId;
     }
+    private Integer frequencyDeviationTime;
+    private String frequencyDeviation;
+    public Integer getFrequencyDeviationTime() {
+        return frequencyDeviationTime;
+    }
 
+    public void setFrequencyDeviationTime(Integer frequencyDeviationTime) {
+        this.frequencyDeviationTime = frequencyDeviationTime;
+    }
+
+    public String getFrequencyDeviation() {
+        return frequencyDeviation;
+    }
+
+    public void setFrequencyDeviation(String frequencyDeviation) {
+        this.frequencyDeviation = frequencyDeviation;
+    }
 
     @Id
     @Column(name = "id")

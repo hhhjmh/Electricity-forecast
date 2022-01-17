@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -155,5 +157,18 @@ public class PowerBillByDay {
                 ", j_power_price='" + j_power_price + '\'' +
                 ", device=" + deviceId +
                 '}';
+    }
+
+    public  Map<String, Object> toMap(){
+        Map<String, Object> tmp = new HashMap<>();
+        tmp.put("f_power", this.getF_power());
+        tmp.put("f_power_price", this.getF_power_price());
+        tmp.put("g_power", this.getG_power());
+        tmp.put("g_power_price", this.getG_power_price());
+        tmp.put("p_power", this.getP_power());
+        tmp.put("p_power_price", this.getP_power_price());
+        tmp.put("j_power", this.getJ_power());
+        tmp.put("j_power_price", this.getJ_power_price());
+        return tmp;
     }
 }

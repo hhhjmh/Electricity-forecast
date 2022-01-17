@@ -24,8 +24,6 @@ public class ImplPowerPriceTimeService implements PowerPriceTimeService {
     PowerPriceTimeRepository powerPriceTimeRepository;
 
 
-
-
     @Override
     public List<PowerPriceTime> findAll() {
         return powerPriceTimeRepository.findAll();
@@ -82,11 +80,11 @@ public class ImplPowerPriceTimeService implements PowerPriceTimeService {
     }
 
     @Override
-    public Map<String, Object> getDevicePowerPriceInTime(Integer typeId, Integer time) {
+    public Map<String, Object> getDevicePowerPriceInTime(Integer time) {
         Map<String, Object> map = new HashMap<>();
         try {
             //获取当天的电费计价信息
-            PowerPriceTime powerPriceTime = powerPriceTimeRepository.findFirstByDeviceTypeIdAndStartTimeLessThanEqualOrderByStartTimeDesc(typeId, time);
+            PowerPriceTime powerPriceTime = powerPriceTimeRepository.findFirstByStartTimeLessThanEqualOrderByStartTimeDesc(time);
 
             Map<String, Object> f = mappedLocalTime(powerPriceTime.getF_power_startAt(), powerPriceTime.getF_power_endAt());
             f.put("price", powerPriceTime.getF_power_price());

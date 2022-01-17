@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PowerPriceTimeRepository extends JpaRepository<PowerPriceTime, Integer> {
-    PowerPriceTime findFirstByDeviceTypeIdAndStartTimeLessThanEqualOrderByStartTimeDesc(Integer deviceType,Integer time);
+    PowerPriceTime findFirstByStartTimeLessThanEqualOrderByStartTimeDesc(Integer time);
 }

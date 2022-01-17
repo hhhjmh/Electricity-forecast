@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PowerBillByDayRepository extends JpaRepository<PowerBillByDay, Integer> {
     List<PowerBillByDay> findAllByDeviceIdAndDateTimeStartingWith(Integer deviceId, String date);
+    PowerBillByDay findByDeviceIdAndDateTime(Integer deviceId, String date);
 }

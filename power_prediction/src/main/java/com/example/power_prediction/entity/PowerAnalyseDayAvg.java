@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "power_analyse_day_avg", schema = "power", catalog = "")
 public class PowerAnalyseDayAvg {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int deviceId;
     private Integer dataTime;
@@ -46,8 +48,16 @@ public class PowerAnalyseDayAvg {
     private String iUnbalance;
     private String uUnbalance;
 
-    @Id
-    @Column(name = "id")
+    private String frequencyDeviation;
+
+    public String getFrequencyDeviation() {
+        return frequencyDeviation;
+    }
+
+    public void setFrequencyDeviation(String frequencyDeviation) {
+        this.frequencyDeviation = frequencyDeviation;
+    }
+
     public int getId() {
         return id;
     }
