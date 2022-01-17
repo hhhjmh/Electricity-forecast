@@ -3,6 +3,7 @@
     <el-container>
       <el-aside id="inaside" width="240px">
         <el-tree
+        @check-change="handleCheckChange"
           :data="data"
           show-checkbox
           node-key="id"
@@ -70,7 +71,7 @@
           >
           </el-date-picker>
 
-          <el-button type="primary" plain size="medium" @click="changeTable()"
+          <el-button type="primary" plain size="medium" @click="convert()"
             >确定</el-button
           >
           <!-- 导出功能 -->
@@ -150,194 +151,194 @@
           <!-- 峰谷平尖电量表 -->
           <el-table
             :style="areshow0"
-            :data="tableData"
+            :data="tableData0"
             border
             show-summary
             class="kuan"
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ textAlign: 'center' }"
           >
-            <el-table-column fixed prop="id" label="监测点名称" width="180">
+            <el-table-column fixed prop="deviceId" label="监测点名称" width="100">
             </el-table-column>
-            <el-table-column prop="name1" label="总电量(kW.h)">
+            <el-table-column prop="totalkWh" label="总电量(kW.h)">
             </el-table-column>
-            <el-table-column prop="name2" label="总电费(元)"> </el-table-column>
+            <el-table-column prop="totalCharge" label="总电费(元)"> </el-table-column>
             <el-table-column prop="amount1" label="峰">
-              <el-table-column prop="Quantity1" label="峰电量(kW.h)">
+              <el-table-column prop="highKWh" label="峰电量(kW.h)">
               </el-table-column>
-              <el-table-column prop="Charge1" label="峰电费(元)">
-              </el-table-column>
-            </el-table-column>
-            <el-table-column prop="amount2" label="谷">
-              <el-table-column prop="Quantity2" label="谷电量(kW.h)">
-              </el-table-column>
-              <el-table-column prop="Charge2" label="谷电费(元)">
+              <el-table-column prop="highCharge" label="峰电费(元)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount3" label="平">
-              <el-table-column prop="Quantity3" label="峰平电量(kW.h)">
+            <el-table-column prop="amount0" label="谷">
+              <el-table-column prop="lowKWh" label="谷电量(kW.h)">
               </el-table-column>
-              <el-table-column prop="Charge3" label="平电费(元)">
+              <el-table-column prop="lowCharge" label="谷电费(元)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount3" label="尖">
-              <el-table-column prop="Quantity4" label="尖电量(kW.h)">
+            <el-table-column prop="amount0" label="平">
+              <el-table-column prop="midKWh" label="平电量(kW.h)">
               </el-table-column>
-              <el-table-column prop="Charge4" label="尖电费(元)">
+              <el-table-column prop="midCharge" label="平电费(元)">
+              </el-table-column>
+            </el-table-column>
+            <el-table-column prop="amount0" label="尖">
+              <el-table-column prop="topKWh" label="尖电量(kW.h)">
+              </el-table-column>
+              <el-table-column prop="topCharge" label="尖电费(元)">
               </el-table-column>
             </el-table-column>
           </el-table>
           <!-- 日电量表 -->
           <el-table
             :style="areshow1"
-            :data="tableData"
+            :data="tableData1"
             border
             class="kuan"
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ textAlign: 'center' }"
           >
-            <el-table-column fixed prop="date" label="监测点名称" width="180">
+            <el-table-column fixed prop="deviceId" label="监测点名称" width="100">
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="0"
               label="0:00-1:00电量(kW·h)"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="1"
               label="1:00-2:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="2"
               label="2:00-3:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="3"
               label="3:00-4:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="4"
               label="4:00-5:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="5"
               label="5:00-6:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="6"
               label="6:00-7:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="7"
               label="7:00-8:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="8"
               label="8:00-9:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="9"
               label="9:00-10:00电量（kW·h）"
               width="120"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="10"
               label="10:00-11:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="11"
               label="11:00-12:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="12"
               label="12:00-13:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="13"
               label="13:00-14:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="14"
               label="14:00-15:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="15"
               label="15:00-16:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="16"
               label="16:00-17:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="17"
               label="17:00-18:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="18"
               label="18:00-19:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="19"
               label="19:00-20:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="20"
               label="20:00-21:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="21"
               label="21:00-22:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="22"
               label="22:00-23:00电量（kW·h）"
               width="130"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="23"
               label="23:00-24:00电量（kW·h）"
               width="130"
             >
@@ -346,362 +347,353 @@
           <!-- 月峰谷平尖表 -->
           <el-table
             :style="areshow2"
-            :data="tableData"
+            :data="tableData2"
             border
             show-summary
             class="kuan"
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ textAlign: 'center' }"
           >
-            <el-table-column fixed prop="id" label="监测点名称" width="180">
+            <el-table-column fixed prop="deviceId" label="监测点名称" width="100">
             </el-table-column>
             <el-table-column prop="name1" label="总电量(kW.h)">
             </el-table-column>
-            <el-table-column prop="amount1" label="1日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            </el-table-column>
+            <el-table-column prop="1hao" label="1日电量">
+              <el-table-column prop="1haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="1haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="1haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="1haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="1haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="1日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="2hao" label="2日电量">
+              <el-table-column prop="2haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="2haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="2haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="2haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="2haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="2日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="3hao" label="3日电量">
+              <el-table-column prop="3haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="3haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="3haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="3haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="3haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="3日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="4hao" label="4日电量">
+              <el-table-column prop="4haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="4haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="4haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="4haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="4haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="4日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="5hao" label="5日电量">
+              <el-table-column prop="5haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="5haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="5haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="5haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="5haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="5日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="6hao" label="6日电量">
+              <el-table-column prop="6haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="6haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="6haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="6haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="6haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="6日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="7hao" label="7日电量">
+              <el-table-column prop="7haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="7haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="7haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="7haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="7haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="7日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="8hao" label="8日电量">
+              <el-table-column prop="8haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="8haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="8haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="8haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="8haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="8日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="9hao" label="9日电量">
+              <el-table-column prop="9haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="9haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="9haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="9haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="9haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="9日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="10hao" label="10日电量">
+              <el-table-column prop="10haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="10haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="10haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="10haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="10haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="10日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="11hao" label="11日电量">
+              <el-table-column prop="11haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="11haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="11haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="11haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="11haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="11日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="12hao" label="12日电量">
+              <el-table-column prop="12haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="12haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="12haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="12haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="12haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="12日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="13hao" label="13日电量">
+              <el-table-column prop="13haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="13haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="13haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="13haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="13haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="13日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="14hao" label="14日电量">
+              <el-table-column prop="14haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="14haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="14haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="14haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="14haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="14日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="15hao" label="15日电量">
+              <el-table-column prop="15haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="15haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="15haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="15haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="15haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="15日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="16hao" label="16日电量">
+              <el-table-column prop="16haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="16haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="16haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="16haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="16haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="16日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="17hao" label="17日电量">
+              <el-table-column prop="17haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="17haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="17haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="17haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="17haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="17日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="18hao" label="18日电量">
+              <el-table-column prop="18haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="18haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="18haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="18haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="18haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="18日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="19hao" label="19日电量">
+              <el-table-column prop="19haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="19haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="19haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="19haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="19haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="19日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="20hao" label="20日电量">
+              <el-table-column prop="20haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="20haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="20haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="20haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="20haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="20日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="21hao" label="21日电量">
+              <el-table-column prop="21haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="21haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="21haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="21haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="21haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="21日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="22hao" label="22日电量">
+              <el-table-column prop="22haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="22haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="22haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="22haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="22haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="22日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="23hao" label="23日电量">
+              <el-table-column prop="23haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="23haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="23haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="23haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="23haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="23日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="24hao" label="24日电量">
+              <el-table-column prop="24haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="24haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="24haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="24haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="24haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="24日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="25hao" label="25日电量">
+              <el-table-column prop="25haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="25haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="25haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="25haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="25haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="25日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="26hao" label="26日电量">
+              <el-table-column prop="26haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="26haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="26haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="26haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="26haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="26日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="27hao" label="27日电量">
+              <el-table-column prop="27haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="27haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="27haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="27haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="27haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="27日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="28hao" label="28日电量">
+              <el-table-column prop="28haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="28haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="28haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="28haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="28haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="28日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="29hao" label="29日电量">
+              <el-table-column prop="29haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="29haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="29haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="29haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="29haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="29日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="30hao" label="30日电量">
+              <el-table-column prop="30haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="30haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="30haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="30haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="30haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
-            <el-table-column prop="amount1" label="30日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
-              </el-table-column>
-            </el-table-column>
-            <el-table-column prop="amount1" label="31日电量">
-              <el-table-column prop="f" label="峰(kW·h)"> </el-table-column>
-              <el-table-column prop="g" label="谷(kW·h)"> </el-table-column>
-              <el-table-column prop="p" label="平(kW·h)"> </el-table-column>
-              <el-table-column prop="j" label="尖(kW·h)"> </el-table-column>
-              <el-table-column prop="total" label="小计(kW·h)">
+            <el-table-column prop="31hao" label="31日电量">
+              <el-table-column prop="31haof" label="峰(kW·h)"> </el-table-column>
+              <el-table-column prop="31haog" label="谷(kW·h)"> </el-table-column>
+              <el-table-column prop="31haop" label="平(kW·h)"> </el-table-column>
+              <el-table-column prop="31haoj" label="尖(kW·h)"> </el-table-column>
+              <el-table-column prop="31haototal" label="小计(kW·h)">
               </el-table-column>
             </el-table-column>
           </el-table>
           <!-- 时刻电表 -->
           <el-table
             :style="areshow3"
-            :data="tableData"
+            :data="tableData3"
             border
             class="kuan"
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ textAlign: 'center' }"
           >
-            <el-table-column fixed prop="name" label="监测点名称" width="180">
+            <el-table-column fixed prop="deviceId" label="监测点名称" width="100">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="电量(kW·h)">
+            <el-table-column prop="Quantity3" label="电量(kW·h)">
             </el-table-column>
           </el-table>
           <!-- 月电量明细表 -->
           <el-table
             class="kuan"
             :style="areshow4"
-            :data="tableData"
+            :data="tableData4"
             border
             :cell-style="{ textAlign: 'center' }"
             :header-cell-style="{ textAlign: 'center' }"
           >
-            <el-table-column fixed prop="name" label="监测点名称" width="180">
+            <el-table-column fixed prop="deviceId" label="监测点名称" width="100">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="1日电量(kW·h)">
+            <el-table-column prop="1haoQuantity" label="1日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity2" label="2日电量(kW·h)">
+            <el-table-column prop="2haoQuantity" label="2日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="3日电量(kW·h)">
+            <el-table-column prop="3haoQuantity" label="3日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="4日电量(kW·h)">
+            <el-table-column prop="4haoQuantity" label="4日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="5日电量(kW·h)">
+            <el-table-column prop="5haoQuantity" label="5日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="6日电量(kW·h)">
+            <el-table-column prop="6haoQuantity" label="6日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="7日电量(kW·h)">
+            <el-table-column prop="7haoQuantity" label="7日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="8日电量(kW·h)">
+            <el-table-column prop="8haoQuantity" label="8日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="9日电量(kW·h)">
+            <el-table-column prop="9haoQuantity" label="9日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="10日电量(kW·h)">
+            <el-table-column prop="10haoQuantity" label="10日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="11日电量(kW·h)">
+            <el-table-column prop="11haoQuantity" label="11日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="12日电量(kW·h)">
+            <el-table-column prop="12haoQuantity" label="12日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="13日电量(kW·h)">
+            <el-table-column prop="13haoQuantity" label="13日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="14日电量(kW·h)">
+            <el-table-column prop="14haoQuantity" label="14日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="15日电量(kW·h)">
+            <el-table-column prop="15haoQuantity" label="15日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="16日电量(kW·h)">
+            <el-table-column prop="16haoQuantity" label="16日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="17日电量(kW·h)">
+            <el-table-column prop="17haoQuantity" label="17日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="18日电量(kW·h)">
+            <el-table-column prop="18haoQuantity" label="18日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="19日电量(kW·h)">
+            <el-table-column prop="19haoQuantity" label="19日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="20日电量(kW·h)">
+            <el-table-column prop="20haoQuantity" label="20日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="21日电量(kW·h)">
+            <el-table-column prop="21haoQuantity" label="21日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="22日电量(kW·h)">
+            <el-table-column prop="22haoQuantity" label="22日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="23日电量(kW·h)">
+            <el-table-column prop="23haoQuantity" label="23日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="24日电量(kW·h)">
+            <el-table-column prop="24haoQuantity" label="24日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="25日电量(kW·h)">
+            <el-table-column prop="25haoQuantity" label="25日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="26日电量(kW·h)">
+            <el-table-column prop="26haoQuantity" label="26日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="27日电量(kW·h)">
+            <el-table-column prop="27haoQuantity" label="27日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="1日电量(kW·h)">
+            <el-table-column prop="28haoQuantity" label="28日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="28日电量(kW·h)">
+            <el-table-column prop="29haoQuantity" label="29日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="29日电量(kW·h)">
+            <el-table-column prop="30haoQuantity" label="30日电量(kW·h)">
             </el-table-column>
-            <el-table-column prop="Quantity1" label="30日电量(kW·h)">
-            </el-table-column>
-            <el-table-column prop="Quantity1" label="31日电量(kW·h)">
+            <el-table-column prop="31haoQuantity" label="31日电量(kW·h)">
             </el-table-column>
           </el-table>
         </div>
@@ -811,10 +803,7 @@ export default {
       },
       content: toDaynodeData,
       //后端数据容器
-      totaldata: [], //图表
-      tableAvgData: [], //表格
-      tableMaxData: [],
-      tableMinData: [],
+      TABLEdata: [], //图表
       //曲线选择
       options: [
         {
@@ -851,18 +840,32 @@ export default {
       disabledDate(time) {
         return time.getTime() > Date.now();
       },
-      tableData: [],
+
+      tableData0: [],
+      tableData1: [],
+      tableData2: [],
+      tableData3: [],
+      tableData4: [],
     };
   },
 
   created() {
-    this.convert();
+    //  this.convert();
   },
   mounted() {
     // echarts设置选项
   },
 
   methods: {
+    //树选择
+    handleCheckChange(data, checked) {
+      console.log(data, checked);
+      if (checked == true) {
+      }
+    },
+    // handleNodeClick(data) {
+    //   console.log(data);
+    // },
     //打印PDF
     handleCommand(command) {
       if (command == "a") {
@@ -882,25 +885,52 @@ export default {
           (this.areshow2 = "display:none"),
           (this.areshow3 = "display:none"),
           (this.areshow4 = "display:none");
-        let i = 0;
-        while (i < this.totaldata.length) {
-          //时间戳变量转化成时间变量
-          var date = new Date(
-            this.totaldata[i].dataTime * 1000 + 8 * 3600 * 1000
-          );
-          var daytime = date
-            .toJSON()
-            .substr(0, 19)
-            .replace("T", " ")
-            .replace(/-/g, ".");
+        let n = 0;
+        // while (n < this.TABLEdata.length) {
+          // while (n < 16) {
+          //   this.tableData0.push({
+          //     deviceId: "",
+          //     Totalquantity0: "",
+          //     Totalcharge0: "",
+          //     TQuantity0: "",
+          //     TCharge0: "",
+          //     LQuantity0: "",
+          //     LCharge0: "",
+          //     NQuantity0: "",
+          //     NCharge0: "",
+          //     HQuantity0: "",
+          //     HCharge0: "",
+          //   });
+          //   n = n + 1;
+          // }
+        this.tableData0[0].deviceId = "主变";
+        this.tableData0[1].deviceId = "1#空调柜2";
+        this.tableData0[2].deviceId = "3#动力柜";
+        this.tableData0[3].deviceId = "水处理系统";
+        this.tableData0[4].deviceId = "风机系统2";
+        this.tableData0[5].deviceId = "冷却水塔";
+        this.tableData0[6].deviceId = "锅炉房";
+        this.tableData0[7].deviceId = "空调用水泵";
+        this.tableData0[8].deviceId = "2#冰水机";
+        this.tableData0[9].deviceId = "高压空压机";
+        this.tableData0[10].deviceId = "低压空压机";
+        this.tableData0[11].deviceId = "1#冰水机";
+        this.tableData0[12].deviceId = "传输系统";
+        this.tableData0[13].deviceId = "1#动力柜";
+        this.tableData0[14].deviceId = "1#插座电源";
+        this.tableData0[15].deviceId = "2#插座电源";
 
-          this.echartsOption.xAxis.data[i] = daytime.substring(10, 16); //给X轴赋值
-          this.echartsOption.series[0].data[i] = this.totaldata[i].aLoad; //给A相负荷赋值
-          this.echartsOption.series[1].data[i] = this.totaldata[i].bLoad; //给B相负荷赋值
-          this.echartsOption.series[2].data[i] = this.totaldata[i].cLoad; //给C相负荷赋值
-          this.echartsOption.series[3].data[i] = this.totaldata[i].totalLoad; //给总体负荷赋值
-          i = i + 1;
-        }
+        // while (i < this.TABLEdata.length) {
+        // while (i < 16) {
+        //   this.tableData0[i].frequency6 = this.TABLEdata[i].frequencyDeviation;
+        //   this.tableData0[i].A6 = this.TABLEdata[i].ia;
+        //   this.tableData0[i].B6 = this.TABLEdata[i].ib;
+        //   this.tableData0[i].C6 = this.TABLEdata[i].ic;
+        //   this.tableData0[i].Uab6 = this.TABLEdata[i].uab;
+        //   this.tableData0[i].Ubc6 = this.TABLEdata[i].ubc;
+        //   this.tableData0[i].Uca6 = this.TABLEdata[i].uca;
+        //   i = i + 1;
+        // }
       } else if (this.value2 == "日电量明细") {
         //给无功功率赋值
         //选择框赋值
@@ -909,30 +939,41 @@ export default {
         this.areshow2 = "display:none";
         this.areshow3 = "display:none";
         this.areshow4 = "display:none";
+        let n = 0;
+        // while (n < this.TABLEdata.length) {
+          // while (n < 16) {
+          //   this.tableData1.push({
+          //     deviceId: "",
+          //     Totalquantity0: "",
+          //     Totalcharge0: "",
+          //     TQuantity0: "",
+          //     TCharge0: "",
+          //     LQuantity0: "",
+          //     LCharge0: "",
+          //     NQuantity0: "",
+          //     NCharge0: "",
+          //     HQuantity0: "",
+          //     HCharge0: "",
+          //   });
+          //   n = n + 1;
+          // }
+        this.tableData1[0].deviceId = "主变";
+        this.tableData1[1].deviceId = "1#空调柜2";
+        this.tableData1[2].deviceId = "3#动力柜";
+        this.tableData1[3].deviceId = "水处理系统";
+        this.tableData1[4].deviceId = "风机系统2";
+        this.tableData1[5].deviceId = "冷却水塔";
+        this.tableData1[6].deviceId = "锅炉房";
+        this.tableData1[7].deviceId = "空调用水泵";
+        this.tableData1[8].deviceId = "2#冰水机";
+        this.tableData1[9].deviceId = "高压空压机";
+        this.tableData1[10].deviceId = "低压空压机";
+        this.tableData1[11].deviceId = "1#冰水机";
+        this.tableData1[12].deviceId = "传输系统";
+        this.tableData1[13].deviceId = "1#动力柜";
+        this.tableData1[14].deviceId = "1#插座电源";
+        this.tableData1[15].deviceId = "2#插座电源";
 
-        let i = 0;
-        while (i < this.totaldata.length) {
-          //时间戳变量转化成时间变量
-          var date = new Date(
-            this.totaldata[i].dataTime * 1000 + 8 * 3600 * 1000
-          );
-          var daytime = date
-            .toJSON()
-            .substr(0, 19)
-            .replace("T", " ")
-            .replace(/-/g, ".");
-
-          this.echartsOption.xAxis.data[i] = daytime.substring(10, 16); //给X轴赋值
-          this.echartsOption.series[0].data[i] =
-            this.totaldata[i].aReactivePower; //给A相无功功率赋值
-          this.echartsOption.series[1].data[i] =
-            this.totaldata[i].bReactivePower; //给B相无功功率赋值
-          this.echartsOption.series[2].data[i] =
-            this.totaldata[i].cReactivePower; //给C相无功功率赋值
-          this.echartsOption.series[3].data[i] =
-            this.totaldata[i].totalReactivePower; //给总体无功功率赋值
-          i = i + 1;
-        }
       } else if (this.value2 == "月峰谷平尖明细") {
         //给功率因数赋值
         //选择框赋值
@@ -942,26 +983,42 @@ export default {
           (this.areshow3 = "display:none"),
           (this.areshow4 = "display:none");
 
-        let i = 0;
-        while (i < this.totaldata.length) {
-          //时间戳变量转化成时间变量
-          var date = new Date(
-            this.totaldata[i].dataTime * 1000 + 8 * 3600 * 1000
-          );
-          var daytime = date
-            .toJSON()
-            .substr(0, 19)
-            .replace("T", " ")
-            .replace(/-/g, ".");
+            let n = 0;
+        // while (n < this.TABLEdata.length) {
+          // while (n < 16) {
+          //   this.tableData2.push({
+          //     deviceId: "",
+          //     Totalquantity0: "",
+          //     Totalcharge0: "",
+          //     TQuantity0: "",
+          //     TCharge0: "",
+          //     LQuantity0: "",
+          //     LCharge0: "",
+          //     NQuantity0: "",
+          //     NCharge0: "",
+          //     HQuantity0: "",
+          //     HCharge0: "",
+          //   });
+          //   n = n + 1;
+          // }
 
-          this.echartsOption.xAxis.data[i] = daytime.substring(10, 16); //给X轴赋值
-          this.echartsOption.series[0].data[i] = this.totaldata[i].aPowerFactor; //给A相功率因数赋值
-          this.echartsOption.series[1].data[i] = this.totaldata[i].bPowerFactor; //给B相功率因数赋值
-          this.echartsOption.series[2].data[i] = this.totaldata[i].cPowerFactor; //给C相功率因数赋值
-          this.echartsOption.series[3].data[i] =
-            this.totaldata[i].totalPowerFactor; //给总体功率因数赋值
-          i = i + 1;
-        }
+        this.tableData2[0].deviceId = "主变";
+        this.tableData2[1].deviceId = "1#空调柜2";
+        this.tableData2[2].deviceId = "3#动力柜";
+        this.tableData2[3].deviceId = "水处理系统";
+        this.tableData2[4].deviceId = "风机系统2";
+        this.tableData2[5].deviceId = "冷却水塔";
+        this.tableData2[6].deviceId = "锅炉房";
+        this.tableData2[7].deviceId = "空调用水泵";
+        this.tableData2[8].deviceId = "2#冰水机";
+        this.tableData2[9].deviceId = "高压空压机";
+        this.tableData2[10].deviceId = "低压空压机";
+        this.tableData2[11].deviceId = "1#冰水机";
+        this.tableData2[12].deviceId = "传输系统";
+        this.tableData2[13].deviceId = "1#动力柜";
+        this.tableData2[14].deviceId = "1#插座电源";
+        this.tableData2[15].deviceId = "2#插座电源";
+
       } else if (this.value2 == "时刻电量统计") {
         //给电流赋值
         //选择框赋值
@@ -970,25 +1027,42 @@ export default {
           (this.areshow2 = "display:none"),
           (this.areshow3 = ""),
           (this.areshow4 = "display:none");
-        let i = 0;
-        while (i < this.totaldata.length) {
-          //时间戳变量转化成时间变量
-          var date = new Date(
-            this.totaldata[i].dataTime * 1000 + 8 * 3600 * 1000
-          );
-          var daytime = date
-            .toJSON()
-            .substr(0, 19)
-            .replace("T", " ")
-            .replace(/-/g, ".");
+            let n = 0;
+        // while (n < this.TABLEdata.length) {
+          // while (n < 16) {
+          //   this.tableData3.push({
+          //     deviceId: "",
+          //     Totalquantity0: "",
+          //     Totalcharge0: "",
+          //     TQuantity0: "",
+          //     TCharge0: "",
+          //     LQuantity0: "",
+          //     LCharge0: "",
+          //     NQuantity0: "",
+          //     NCharge0: "",
+          //     HQuantity0: "",
+          //     HCharge0: "",
+          //   });
+          //   n = n + 1;
+          // }
 
-          this.echartsOption.xAxis.data[i] = daytime.substring(10, 16); //给X轴赋值
-          this.echartsOption.series[0].data[i] = this.totaldata[i].ia; //给A相电流赋值
-          this.echartsOption.series[1].data[i] = this.totaldata[i].ib; //给B相电流赋值
-          this.echartsOption.series[2].data[i] = this.totaldata[i].ic; //给C相电流赋值
-          this.echartsOption.series[5].data[i] = this.totaldata[i].zeroi; //给零线赋值
-          i = i + 1;
-        }
+        this.tableData3[0].deviceId = "主变";
+        this.tableData3[1].deviceId = "1#空调柜2";
+        this.tableData3[2].deviceId = "3#动力柜";
+        this.tableData3[3].deviceId = "水处理系统";
+        this.tableData3[4].deviceId = "风机系统2";
+        this.tableData3[5].deviceId = "冷却水塔";
+        this.tableData3[6].deviceId = "锅炉房";
+        this.tableData3[7].deviceId = "空调用水泵";
+        this.tableData3[8].deviceId = "2#冰水机";
+        this.tableData3[9].deviceId = "高压空压机";
+        this.tableData3[10].deviceId = "低压空压机";
+        this.tableData3[11].deviceId = "1#冰水机";
+        this.tableData3[12].deviceId = "传输系统";
+        this.tableData3[13].deviceId = "1#动力柜";
+        this.tableData3[14].deviceId = "1#插座电源";
+        this.tableData3[15].deviceId = "2#插座电源";
+
       } else if (this.value2 == "月电量明细") {
         //给电压赋值
         //选择框赋值
@@ -997,375 +1071,62 @@ export default {
           (this.areshow2 = "display:none"),
           (this.areshow3 = "display:none"),
           (this.areshow4 = "");
-        let i = 0;
-        while (i < this.totaldata.length) {
-          //时间戳变量转化成时间变量
-          var date = new Date(
-            this.totaldata[i].dataTime * 1000 + 8 * 3600 * 1000
-          );
-          var daytime = date
-            .toJSON()
-            .substr(0, 19)
-            .replace("T", " ")
-            .replace(/-/g, ".");
+            let n = 0;
+        // while (n < this.TABLEdata.length) {
+          // while (n < 16) {
+          //   this.tableData4.push({
+          //     deviceId: "",
+          //     Totalquantity0: "",
+          //     Totalcharge0: "",
+          //     TQuantity0: "",
+          //     TCharge0: "",
+          //     LQuantity0: "",
+          //     LCharge0: "",
+          //     NQuantity0: "",
+          //     NCharge0: "",
+          //     HQuantity0: "",
+          //     HCharge0: "",
+          //   });
+          //   n = n + 1;
+          // }
 
-          this.echartsOption.xAxis.data[i] = daytime.substring(10, 16); //给X轴赋值
-          this.echartsOption.series[0].data[i] = this.totaldata[i].ua; //给A相电压赋值
-          this.echartsOption.series[1].data[i] = this.totaldata[i].ub; //给B相电压赋值
-          this.echartsOption.series[2].data[i] = this.totaldata[i].uc; //给C相电压赋值
-          this.echartsOption.series[6].data[i] = this.totaldata[i].uab; //给Uab赋值
-          this.echartsOption.series[7].data[i] = this.totaldata[i].ubc; //给Ubc赋值
-          this.echartsOption.series[8].data[i] = this.totaldata[i].uca; //给Uca赋值
+        this.tableData4[0].deviceId = "主变";
+        this.tableData4[1].deviceId = "1#空调柜2";
+        this.tableData4[2].deviceId = "3#动力柜";
+        this.tableData4[3].deviceId = "水处理系统";
+        this.tableData4[4].deviceId = "风机系统2";
+        this.tableData4[5].deviceId = "冷却水塔";
+        this.tableData4[6].deviceId = "锅炉房";
+        this.tableData4[7].deviceId = "空调用水泵";
+        this.tableData4[8].deviceId = "2#冰水机";
+        this.tableData4[9].deviceId = "高压空压机";
+        this.tableData4[10].deviceId = "低压空压机";
+        this.tableData4[11].deviceId = "1#冰水机";
+        this.tableData4[12].deviceId = "传输系统";
+        this.tableData4[13].deviceId = "1#动力柜";
+        this.tableData4[14].deviceId = "1#插座电源";
+        this.tableData4[15].deviceId = "2#插座电源";
 
-          i = i + 1;
-        }
       }
     },
 
-    //将输入时间戳转化为年月日时分秒的字符串（2022.01.05 03:35:00）中间的空格为/t是两位
-    changeTime(A) {
-      var date = new Date(A * 1000 + 8 * 3600 * 1000);
-      var B = date.toJSON().substr(0, 19).replace("T", " ").replace(/-/g, ".");
-      return B;
-    },
-
-    //按钮组的显示定义
-    fhclick() {
-      this.changeBG = [1, 0, 0, 0, 0, 0, 0, 0, 0];
-      this.cleanTable();
-      this.tableData[0].message = "总负荷(kW)";
-      this.tableData[1].message = "A相负荷(kW)";
-      this.tableData[2].message = "B相负荷(kW)";
-      this.tableData[3].message = "C相负荷(kW)";
-
-      this.tableData[0].average = this.tableAvgData.totalLoad;
-      this.tableData[1].average = this.tableAvgData.aLoad;
-      this.tableData[2].average = this.tableAvgData.bLoad;
-      this.tableData[3].average = this.tableAvgData.cLoad;
-
-      this.tableData[0].maxValue = this.tableMaxData.totalLoad;
-      this.tableData[1].maxValue = this.tableMaxData.aLoad;
-      this.tableData[2].maxValue = this.tableMaxData.bLoad;
-      this.tableData[3].maxValue = this.tableMaxData.cLoad;
-
-      this.tableData[0].minValue = this.tableMinData.totalLoad;
-      this.tableData[1].minValue = this.tableMinData.aLoad;
-      this.tableData[2].minValue = this.tableMinData.bLoad;
-      this.tableData[3].minValue = this.tableMinData.cLoad;
-
-      this.tableData[0].maxTime = this.changeTime(
-        this.tableMaxData.totalLoadTime
-      );
-      this.tableData[1].maxTime = this.changeTime(this.tableMaxData.aLoadTime);
-      this.tableData[2].maxTime = this.changeTime(this.tableMaxData.bLoadTime);
-      this.tableData[3].maxTime = this.changeTime(this.tableMaxData.cLoadTime);
-
-      this.tableData[0].minTime = this.changeTime(
-        this.tableMinData.totalLoadTime
-      );
-      this.tableData[1].minTime = this.changeTime(this.tableMinData.aLoadTime);
-      this.tableData[2].minTime = this.changeTime(this.tableMinData.bLoadTime);
-      this.tableData[3].minTime = this.changeTime(this.tableMinData.cLoadTime);
-    },
-    wgglclick() {
-      this.changeBG = [0, 1, 0, 0, 0, 0, 0, 0, 0];
-      this.cleanTable();
-      this.tableData[0].message = "总无功(kVar)";
-      this.tableData[1].message = "A相无功(kVar)";
-      this.tableData[2].message = "B相无功(kVar)";
-      this.tableData[3].message = "C相无功(kVar)";
-
-      this.tableData[0].average = this.tableAvgData.totalReactivePower;
-      this.tableData[1].average = this.tableAvgData.aReactivePower;
-      this.tableData[2].average = this.tableAvgData.bReactivePower;
-      this.tableData[3].average = this.tableAvgData.cReactivePower;
-
-      this.tableData[0].maxValue = this.tableMaxData.totalReactivePower;
-      this.tableData[1].maxValue = this.tableMaxData.aReactivePower;
-      this.tableData[2].maxValue = this.tableMaxData.bReactivePower;
-      this.tableData[3].maxValue = this.tableMaxData.cReactivePower;
-
-      this.tableData[0].minValue = this.tableMinData.totalReactivePower;
-      this.tableData[1].minValue = this.tableMinData.aReactivePower;
-      this.tableData[2].minValue = this.tableMinData.bReactivePower;
-      this.tableData[3].minValue = this.tableMinData.cReactivePower;
-
-      this.tableData[0].maxTime = this.changeTime(
-        this.tableMaxData.totalReactivePowerTime
-      );
-      this.tableData[1].maxTime = this.changeTime(
-        this.tableMaxData.aReactivePowerTime
-      );
-      this.tableData[2].maxTime = this.changeTime(
-        this.tableMaxData.bReactivePowerTime
-      );
-      this.tableData[3].maxTime = this.changeTime(
-        this.tableMaxData.cReactivePowerTime
-      );
-
-      this.tableData[0].minTime = this.changeTime(
-        this.tableMinData.totalReactivePowerTime
-      );
-      this.tableData[1].minTime = this.changeTime(
-        this.tableMinData.aReactivePowerTime
-      );
-      this.tableData[2].minTime = this.changeTime(
-        this.tableMinData.bReactivePowerTime
-      );
-      this.tableData[3].minTime = this.changeTime(
-        this.tableMinData.cReactivePowerTime
-      );
-    },
-    glysclick() {
-      this.changeBG = [0, 0, 1, 0, 0, 0, 0, 0, 0];
-      this.cleanTable();
-      this.tableData[0].message = "总功率因数";
-      this.tableData[1].message = "A相功率因数";
-      this.tableData[2].message = "B相功率因数";
-      this.tableData[3].message = "C相功率因数";
-
-      this.tableData[0].average = this.tableAvgData.totalPowerFactor;
-      this.tableData[1].average = this.tableAvgData.aPowerFactor;
-      this.tableData[2].average = this.tableAvgData.bPowerFactor;
-      this.tableData[3].average = this.tableAvgData.cPowerFactor;
-
-      this.tableData[0].maxValue = this.tableMaxData.totalPowerFactor;
-      this.tableData[1].maxValue = this.tableMaxData.aPowerFactor;
-      this.tableData[2].maxValue = this.tableMaxData.bPowerFactor;
-      this.tableData[3].maxValue = this.tableMaxData.cPowerFactor;
-
-      this.tableData[0].minValue = this.tableMinData.totalPowerFactor;
-      this.tableData[1].minValue = this.tableMinData.aPowerFactor;
-      this.tableData[2].minValue = this.tableMinData.bPowerFactor;
-      this.tableData[3].minValue = this.tableMinData.cPowerFactor;
-
-      this.tableData[0].maxTime = this.changeTime(
-        this.tableMaxData.totalPowerFactorTime
-      );
-      this.tableData[1].maxTime = this.changeTime(
-        this.tableMaxData.aPowerFactorTime
-      );
-      this.tableData[2].maxTime = this.changeTime(
-        this.tableMaxData.bPowerFactorTime
-      );
-      this.tableData[3].maxTime = this.changeTime(
-        this.tableMaxData.cPowerFactorTime
-      );
-
-      this.tableData[0].minTime = this.changeTime(
-        this.tableMinData.totalPowerFactorTime
-      );
-      this.tableData[1].minTime = this.changeTime(
-        this.tableMinData.aPowerFactorTime
-      );
-      this.tableData[2].minTime = this.changeTime(
-        this.tableMinData.bPowerFactorTime
-      );
-      this.tableData[3].minTime = this.changeTime(
-        this.tableMinData.cPowerFactorTime
-      );
-    },
-    dlclick() {
-      this.changeBG = [0, 0, 0, 1, 0, 0, 0, 0, 0];
-      this.cleanTable();
-      this.tableData[0].message = "A相电流(A)";
-      this.tableData[1].message = "B相电流(A)";
-      this.tableData[2].message = "C相电流(A)";
-      this.tableData[3].message = "零线电流(A)";
-
-      this.tableData[0].average = this.tableAvgData.ia;
-      this.tableData[1].average = this.tableAvgData.ib;
-      this.tableData[2].average = this.tableAvgData.ic;
-      this.tableData[3].average = this.tableAvgData.zeroi;
-
-      this.tableData[0].maxValue = this.tableMaxData.ia;
-      this.tableData[1].maxValue = this.tableMaxData.ib;
-      this.tableData[2].maxValue = this.tableMaxData.ic;
-      this.tableData[3].maxValue = this.tableMaxData.zeroi;
-
-      this.tableData[0].minValue = this.tableMinData.ia;
-      this.tableData[1].minValue = this.tableMinData.ib;
-      this.tableData[2].minValue = this.tableMinData.ic;
-      this.tableData[3].minValue = this.tableMinData.zeroi;
-
-      this.tableData[0].maxTime = this.changeTime(this.tableMaxData.iaTime);
-      this.tableData[1].maxTime = this.changeTime(this.tableMaxData.ibTime);
-      this.tableData[2].maxTime = this.changeTime(this.tableMaxData.icTime);
-      this.tableData[3].maxTime = this.changeTime(this.tableMaxData.zeroiTime);
-
-      this.tableData[0].minTime = this.changeTime(this.tableMinData.iaTime);
-      this.tableData[1].minTime = this.changeTime(this.tableMinData.ibTime);
-      this.tableData[2].minTime = this.changeTime(this.tableMinData.icTime);
-      this.tableData[3].minTime = this.changeTime(this.tableMinData.zeroiTime);
-    },
-    dyclick() {
-      this.changeBG = [0, 0, 0, 0, 1, 0, 0, 0, 0];
-      //由于电压页面有6个所以需要重新定义表格
-      this.tableData = [
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-        {
-          message: "",
-          average: "",
-          maxValue: "",
-          maxTime: "",
-          minValue: "",
-          minTime: "",
-        },
-      ];
-
-      this.tableData[0].message = "A相电压(V)";
-      this.tableData[1].message = "B相电压(V)";
-      this.tableData[2].message = "C相电压(V)";
-      this.tableData[3].message = "Uab线电压(V)";
-      this.tableData[4].message = "Ubc线电压(V)";
-      this.tableData[5].message = "Uca线电压(V)";
-
-      this.tableData[0].average = this.tableAvgData.ua;
-      this.tableData[1].average = this.tableAvgData.ub;
-      this.tableData[2].average = this.tableAvgData.uc;
-      this.tableData[3].average = this.tableAvgData.uab;
-      this.tableData[4].average = this.tableAvgData.ubc;
-      this.tableData[5].average = this.tableAvgData.uca;
-
-      this.tableData[0].maxValue = this.tableMaxData.ua;
-      this.tableData[1].maxValue = this.tableMaxData.ub;
-      this.tableData[2].maxValue = this.tableMaxData.uc;
-      this.tableData[3].maxValue = this.tableMaxData.uab;
-      this.tableData[4].maxValue = this.tableMaxData.ubc;
-      this.tableData[5].maxValue = this.tableMaxData.uca;
-
-      this.tableData[0].minValue = this.tableMinData.ua;
-      this.tableData[1].minValue = this.tableMinData.ub;
-      this.tableData[2].minValue = this.tableMinData.uc;
-      this.tableData[3].minValue = this.tableMinData.uab;
-      this.tableData[4].minValue = this.tableMinData.ubc;
-      this.tableData[5].minValue = this.tableMinData.uca;
-
-      this.tableData[0].maxTime = this.changeTime(this.tableMaxData.uaTime);
-      this.tableData[1].maxTime = this.changeTime(this.tableMaxData.ubTime);
-      this.tableData[2].maxTime = this.changeTime(this.tableMaxData.ucTime);
-      this.tableData[3].maxTime = this.changeTime(this.tableMaxData.uabTime);
-      this.tableData[4].maxTime = this.changeTime(this.tableMaxData.ubcTime);
-      this.tableData[5].maxTime = this.changeTime(this.tableMaxData.ucaTime);
-
-      this.tableData[0].minTime = this.changeTime(this.tableMinData.uaTime);
-      this.tableData[1].minTime = this.changeTime(this.tableMinData.ubTime);
-      this.tableData[2].minTime = this.changeTime(this.tableMinData.ucTime);
-      this.tableData[3].minTime = this.changeTime(this.tableMinData.uabTime);
-      this.tableData[4].minTime = this.changeTime(this.tableMinData.ubcTime);
-      this.tableData[5].minTime = this.changeTime(this.tableMinData.ucaTime);
-    },
-    dlxbclick() {
-      this.changeBG = [0, 0, 0, 0, 0, 1, 0, 0, 0];
-    },
-    dyxbclick() {
-      this.changeBG = [0, 0, 0, 0, 0, 0, 1, 0, 0];
-    },
-    dypcclick() {
-      this.changeBG = [0, 0, 0, 0, 0, 0, 0, 1, 0];
-    },
-    sxclick() {
-      this.changeBG = [0, 0, 0, 0, 0, 0, 0, 0, 1];
-    },
-
     convert() {
-      //请求图表数据
+      //请求表格数据
       axios
         .post(
-          "http://114.213.210.219/powerRealtime/findPowerRealtimeByDataTime",
+          "http://121.43.111.195/powerRealtime/findPowerDistributionDayByDataTime",
           {
+            id: 16,
             deviceId: "1",
-            dataTime: "1640534400",
+            dataTime: "1638892801",
           }
         )
         .then((response) => {
-          this.totaldata = response.data;
-          //console.log(this.totaldata.length)
-          console.log(this.changeTime(1640679300));
-          console.log(this.totaldata);
-          this.changeLine();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          console.log(1);
 
-      //请求表格数据
-      axios
-        .post("http://114.213.211.241/PowerAnalyse/DayAvg", {
-          deviceId: "1",
-          dataTime: "1641312000",
-        })
-        .then((response) => {
-          this.tableAvgData = response.data;
-          console.log(this.tableAvgData);
-          this.fhclick();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      axios
-        .post("http://114.213.211.241/PowerAnalyse/DayMax", {
-          deviceId: "1",
-          dataTime: "1641312000",
-        })
-        .then((response) => {
-          this.tableMaxData = response.data;
-          console.log(this.tableMaxData);
-          this.fhclick();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      axios
-        .post("http://114.213.211.241/PowerAnalyse/DayMin", {
-          deviceId: "1",
-          dataTime: "1641312000",
-        })
-        .then((response) => {
-          this.tableMinData = response.data;
-          console.log(this.tableMinData);
-          this.fhclick();
+          this.tableData0 = response.data;
+          this.changeTable()
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -1381,8 +1142,8 @@ export default {
   background-color: rgb(219, 219, 219);
 }
 .el-aside {
-    height: 1030px;
-  }
+  height: 1030px;
+}
 .kuan {
   width: 100%;
 }
@@ -1397,7 +1158,7 @@ export default {
   background: #2c5dff;
   color: #fff;
 }
-#inaside{
-  background-color:rgb(241, 241, 239);
+#inaside {
+  background-color: rgb(241, 241, 239);
 }
 </style>

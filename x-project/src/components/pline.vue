@@ -19,8 +19,8 @@
   }
   .buttonBackground {
 
-    left: 27rem;
-    top: 51rem;
+    left: 48rem;
+    top: 24rem;
   }
 </style>
 

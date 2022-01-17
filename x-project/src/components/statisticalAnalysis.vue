@@ -20,7 +20,7 @@
   .buttonBackground {
 
     left: 42rem;
-    top: 51rem;
+    top: 0rem;
   }
 </style>
 
