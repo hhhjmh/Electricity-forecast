@@ -245,7 +245,6 @@ public class ImplUtilService implements UtilService {
     }
 
 
-
     @Override
     public List findAllDeviceRelationship(Integer type, String userDepartment, Integer method) {
 
@@ -266,7 +265,7 @@ public class ImplUtilService implements UtilService {
                 if (o[4] == null) { //superDeviceID为null
                     topMap.put("label", o[0]);
                     topMap.put("children", recursionTree(objects, (Integer) o[2], type));
-                    topMap.put("id", o[1]);
+                    topMap.put("id", o[2]);
                     arrayList.add(topMap);
                 }
             }
@@ -288,7 +287,7 @@ public class ImplUtilService implements UtilService {
                 Map map = new HashMap();
                 map.put("children", arrayList1);
                 map.put("label", o[0]);
-                map.put("id", o[1]);
+                map.put("id", o[2]);
 
                 if (deviceName != null && deviceName.equals((String) o[0])) {
                     break;
@@ -299,13 +298,12 @@ public class ImplUtilService implements UtilService {
             } else if (o[4] == topId) {
                 Map<String, Object> subMap = new HashMap<>();
                 subMap.put("label", o[0]);
-                subMap.put("id", o[1]);
+                subMap.put("id", o[2]);
                 arrayList.add(subMap);
             }
         }
         return arrayList;
     }
-
 
 
     @Override
@@ -318,19 +316,18 @@ public class ImplUtilService implements UtilService {
     }
 
 
-
     @Override
     public void setZoneId(String zone) {
         UtilEntity time_zone = utilEntityRepository.findByVariableAttributeNameAndState("time_zone", 1);
         if (time_zone != null) {
             time_zone.setVariableAttributeNum(zone);
         } else {
-            time_zone=new UtilEntity();
+            time_zone = new UtilEntity();
             time_zone.setVariableAttributeName("time_zone");
             time_zone.setState(1);
             time_zone.setVariableAttributeNum(zone);
         }
-        time_zone.setDataTime((int) (System.currentTimeMillis()/1000));
+        time_zone.setDataTime((int) (System.currentTimeMillis() / 1000));
         utilEntityRepository.save(time_zone);
     }
 }

@@ -42,21 +42,32 @@ public class PowerRealtimeController {
         return powerRealtimeService.findPowerRealtimeByDataTimeForTable(powerRealtime.getDeviceId(), powerRealtime.getDataTime(), powerRealtime.getDataTime() + 86400 * powerRealtime.getId() - 1);
     }
 
-    //返回每天的电能分布数据——曲线
+    //返回每天的电量数据——曲线
     @PostMapping("/findPowerDistributionHourByDataTime")
     public List<PowerDistributionHour> findPowerDistributionHourByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionHour powerDistributionHour) {
-        if (powerDistributionHour.getId() == 0) {
+        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerDistributionHourByDeviceIdAndDataTimeBetween(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId());
+        return powerRealtimeService.findPowerDistributionHourByDeviceIdAndDataTimeBetween(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
     }
 
 
-    //返回每天中24个整点的电能分布数据——表格
+    //返回每天的电量数据——曲线累加
+    @PostMapping("/findPowerDistributionHourByDataTimeForAdd")
+    public List<PowerDistributionHour> findPowerDistributionHourByDataTimeForAdd(@RequestBody PowerDistributionHour powerDistributionHour) {
+        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
+            powerDistributionHour.setId(1);
+        }
+        //使用id暂存天数
+        return powerRealtimeService.findPowerDistributionHourByDataTimeForAdd(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
+    }
+
+
+    //返回每天中24个整点的电量数据——表格
     @PostMapping("/findPowerDistributionHourByDataTimeForTable")
     public Map findPowerDistributionHourByDataTimeForTable(@RequestBody PowerDistributionHour powerDistributionHour) {
-        if (powerDistributionHour.getId() == 0) {
+        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数

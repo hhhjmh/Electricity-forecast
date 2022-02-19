@@ -33,7 +33,7 @@ public class UtilController {
     @ResponseBody
     @RequestMapping("/insertPowerDistributionHour/{batchSize}")
     public Integer insertPowerDistributionHour(@PathVariable Integer batchSize) {
-        return utilService.batchInsertingDataForPowerDistributionHour(1, 1638288000, batchSize, 20, 40);
+        return utilService.batchInsertingDataForPowerDistributionHour(1, 1638374400, batchSize, 20, 40);
     }
 
     @ResponseBody

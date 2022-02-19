@@ -14,6 +14,9 @@ public interface PowerRealtimeService {
     //    根据deviceId和时间间隔返回所有数据
     List<PowerRealtime> findPowerRealtimeByDeviceIdAndDataTimeBetween(Integer deviceId,Integer start,Integer end);
 
+    List<PowerDistributionHour> findPowerDistributionHourByDataTimeForAdd(Integer deviceId, Integer start, Integer end);
+
+
     List<PowerDistributionHour> findPowerDistributionHourByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
 
     List<PowerQualityRealtime> findPowerQualityRealtimeByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
@@ -25,6 +28,7 @@ public interface PowerRealtimeService {
     Map findPowerDistributionHourByDataTimeForTable(Integer deviceId, Integer start, Integer end);
 
     Map findPowerQualityRealtimeByDataTimeForTable(Integer deviceId, Integer dataTime, Integer end);
+
     //    List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime);
 
 }

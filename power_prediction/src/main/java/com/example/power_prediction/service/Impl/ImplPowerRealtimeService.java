@@ -30,6 +30,26 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
     }
 
     @Override
+    public List<PowerDistributionHour> findPowerDistributionHourByDataTimeForAdd(Integer deviceId, Integer start, Integer end) {
+        List<PowerDistributionHour> powerDistributionHours = powerDistributionHourRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        Double totalPower = 0.0;
+        Integer flag = 0;
+        for (PowerDistributionHour p : powerDistributionHours
+        ) {
+            {
+                if (flag == 288) {
+                    totalPower = 0.0;
+                }
+                Double oldTotalKWh = Double.parseDouble(p.getTotalKWh());
+                p.setTotalKWh(String.format("%.2f", Double.parseDouble(p.getTotalKWh()) + totalPower));
+                totalPower = oldTotalKWh + totalPower;
+                flag += 1;
+            }
+        }
+        return powerDistributionHours;
+    }
+
+    @Override
     public List<PowerDistributionHour> findPowerDistributionHourByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end) {
         return powerDistributionHourRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
     }
@@ -117,7 +137,7 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
             hourKWh += Double.valueOf(p.getTotalKWh());
             if (i % 12 == 0) {
                 tableMap.put("hourKWh" + hour, String.format("%.2f", (hourKWh)));
-                hour +=1;
+                hour += 1;
                 hourKWh = 0.0;
             }
             i++;
