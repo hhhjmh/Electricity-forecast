@@ -30,22 +30,32 @@ public class PowerBillByDayController {
     }
 */
 
-    @PostMapping("/queryMonth")
+    @RequestMapping("/queryMonth")
     public Map<String, Object> queryMonth(@RequestParam Integer deviceId, @RequestParam Integer year, @RequestParam Integer month) {
         return powerBillByDayService.queryByMonth(deviceId, year, month);
     }
 
-    @PostMapping("/queryYear")
+    @RequestMapping("/queryYear")
     public Map<String, Object> queryYear(@RequestParam Integer deviceId, @RequestParam Integer year) {
         return powerBillByDayService.queryByYear(deviceId, year);
     }
 
-    @PostMapping("/queryCustom")
+    @RequestMapping("/queryCustom")
     public Map<String, Object> queryCustom(@RequestParam String deviceIds, @RequestParam String start, @RequestParam String end, @RequestParam String unit) {
         return powerBillByDayService.queryCustom(deviceIds, start, end, unit);
     }
 
-    @PostMapping("/dailyUpdate")
+    @RequestMapping("/queryCostMonth")
+    public Map<String, Object> queryCostMonth(@RequestParam Integer year,@RequestParam Integer month,@RequestParam String department) {
+        return powerBillByDayService.queryCostMonth(year,month,department);
+    }
+
+    @RequestMapping("/queryCostYear")
+    public Map<String, Object> queryCostYear(@RequestParam Integer year,@RequestParam String department) {
+        return powerBillByDayService.queryCostYear(year,department);
+    }
+
+    @RequestMapping("/dailyUpdate")
     public Map<String, Object> dailyUpdate() {
         return powerBillByDayService.dailyUpdate();
     }

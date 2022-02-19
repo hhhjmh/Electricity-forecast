@@ -17,4 +17,9 @@ public interface PowerBillByDayService {
      * @return 第一层 时间 第二次 设备id 第三层数据
      */
     Map<String, Object> queryCustom(String deviceIds, String start, String end, String unit);
+
+    Map<String, Object> queryCostMonth(Integer year, Integer month, String department);
+
+    Map<String, Object> queryCostYear(Integer year, String department);
+
 }

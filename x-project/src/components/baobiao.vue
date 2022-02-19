@@ -2,7 +2,7 @@
 <template>
   <div>
     <!-- APP按钮 -->
-    <div class="buttonBackground"id="btn_normal">
+    <div class="buttonBackground" id="btn_normal">
       <button type="text" @click="centerDialogVisible = true"></button>
       <p>月报分析</p>
     </div>
@@ -129,7 +129,7 @@
               <div
                 class="echart"
                 id="myChart"
-                :style="{ width: '100%', height: '500%' }"
+                :style="{ width: '1500px', height: '500px' }"
               ></div>
               <h2 style="text-align: center">
                 电能管理体验馆--月电费统计({{ value2 }})
@@ -159,7 +159,7 @@
             </div>
             <h4 id="2">1.2 电费电量统计表</h4>
             <el-table
-              :data="tableData"
+              :data="tableData1"
               border
               show-summary
               style="width: 100%"
@@ -197,24 +197,24 @@
             </el-table>
             <h4 id="3">1.3 设备功率因数分析</h4>
             <el-table
-              :data="tableData"
+              :data="tableData2"
               style="width: 100%"
               :header-cell-style="{ textAlign: 'center' }"
               :cell-style="{ textAlign: 'center' }"
             >
-              <el-table-column prop="date" label="设备名称" width="300">
+              <el-table-column prop="name2" label="设备名称" width="300">
               </el-table-column>
-              <el-table-column prop="amount1" label="月平均电流（A）">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
+              <el-table-column prop="current2" label="月平均电流（A）">
+                <el-table-column prop="A2" label="A"> </el-table-column>
+                <el-table-column prop="B2" label="B"> </el-table-column>
+                <el-table-column prop="C2" label="C"> </el-table-column>
               </el-table-column>
-              <el-table-column prop="C" label="月平均功率"> </el-table-column>
+              <el-table-column prop="D2" label="月平均功率"> </el-table-column>
             </el-table>
             <h3 id="4">二、安全用电</h3>
             <h4 id="5">2.1 变压器运行情况</h4>
             <el-table
-              :data="tableData"
+              :data="tableData3"
               border
               style="width: 100%"
               :cell-style="{ textAlign: 'center' }"
@@ -240,76 +240,94 @@
             <h3 id="6">三、洁净用电</h3>
             <h4 id="7">3.1 三相不平衡</h4>
             <el-table
-              :data="tableData"
+              :data="tableData4"
               style="width: 100%"
               :cell-style="{ textAlign: 'center' }"
               :header-cell-style="{ textAlign: 'center' }"
             >
-              <el-table-column prop="date" label="设备名称" width="150">
+              <el-table-column prop="name4" label="设备名称" width="150">
               </el-table-column>
-              <el-table-column prop="amount1" label="月平均电流（A）">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
-                <el-table-column prop="D" label="D"> </el-table-column>
+              <el-table-column prop=" current4" label="月平均电流（A）">
+                <el-table-column prop="A4" label="A"> </el-table-column>
+                <el-table-column prop="B4" label="B"> </el-table-column>
+                <el-table-column prop="C4" label="C"> </el-table-column>
+                <el-table-column prop="Z4" label="Z"> </el-table-column>
               </el-table-column>
-              <el-table-column prop="amount1" label="月平均线电压（V）">
-                <el-table-column prop="A" label="Uab"> </el-table-column>
-                <el-table-column prop="B" label="Ubc"> </el-table-column>
-                <el-table-column prop="C" label="Uca"> </el-table-column>
+              <el-table-column prop=" voltage4" label="月平均线电压（V）">
+                <el-table-column prop="Uab4" label="Uab"> </el-table-column>
+                <el-table-column prop="Ubc4" label="Ubc"> </el-table-column>
+                <el-table-column prop="Uca4" label="Uca"> </el-table-column>
               </el-table-column>
-              <el-table-column prop="C" label="三相电流不平衡度(%)" width="300">
+              <el-table-column
+                prop="currentunbalance4"
+                label="三相电流不平衡度(%)"
+                width="200"
+              >
               </el-table-column>
-              <el-table-column prop="C" label="三相电压不平衡度(%)" width="300">
+              <el-table-column
+                prop="voltageunbalance4"
+                label="三相电压不平衡度(%)"
+                width="200"
+              >
               </el-table-column>
             </el-table>
             <h4 id="8">3.2 谐波畸变率</h4>
             <el-table
-              :data="tableData"
+              :data="tableData5"
               style="width: 100%"
               :cell-style="{ textAlign: 'center' }"
               :header-cell-style="{ textAlign: 'center' }"
             >
-              <el-table-column prop="name" label="设备名称" width="150">
+              <el-table-column prop="name5" label="设备名称" width="150">
               </el-table-column>
-              <el-table-column prop="date" label="月平均负荷（kW）" width="150">
+              <el-table-column
+                prop="average5"
+                label="月平均负荷（kW）"
+                width="150"
+              >
               </el-table-column>
-              <el-table-column prop="amount1" label="月平均电流（A）">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
+              <el-table-column prop="current5" label="月平均电流（A）">
+                <el-table-column prop="A5" label="A"> </el-table-column>
+                <el-table-column prop="B5" label="B"> </el-table-column>
+                <el-table-column prop="C5" label="C"> </el-table-column>
               </el-table-column>
-              <el-table-column prop="amount1" label="谐波电流畸变率（%）">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
+              <el-table-column prop="THDcurrent" label="谐波电流畸变率（%）">
+                <el-table-column prop="THDcurrentA" label="A">
+                </el-table-column>
+                <el-table-column prop="THDcurrentB" label="B">
+                </el-table-column>
+                <el-table-column prop="THDcurrentC" label="C">
+                </el-table-column>
               </el-table-column>
-              <el-table-column prop="amount1" label="谐波电压畸变率（%）">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
+              <el-table-column prop="THDvoltage" label="谐波电压畸变率（%）">
+                <el-table-column prop="THDvoltageA" label="A">
+                </el-table-column>
+                <el-table-column prop="THDvoltageB" label="B">
+                </el-table-column>
+                <el-table-column prop="THDvoltageC" label="C">
+                </el-table-column>
               </el-table-column>
             </el-table>
             <h4 id="9">3.3 频率偏差 电压偏差</h4>
             <el-table
-              :data="tableData"
+              :data="tableData6"
               style="width: 100%"
               :cell-style="{ textAlign: 'center' }"
               :header-cell-style="{ textAlign: 'center' }"
             >
-              <el-table-column prop="name" label="设备名称" width="150">
+              <el-table-column prop="name6" label="设备名称" width="150">
               </el-table-column>
-              <el-table-column prop="date" label="频率偏差" width="150">
+              <el-table-column prop="frequency6" label="频率偏差" width="150">
               </el-table-column>
               <el-table-column prop="amount1" label="相电压偏差">
-                <el-table-column prop="A" label="A"> </el-table-column>
-                <el-table-column prop="B" label="B"> </el-table-column>
-                <el-table-column prop="C" label="C"> </el-table-column>
+                <el-table-column prop="A6" label="A"> </el-table-column>
+                <el-table-column prop="B6" label="B"> </el-table-column>
+                <el-table-column prop="C6" label="C"> </el-table-column>
               </el-table-column>
               <el-table-column prop="amount1" label="线电压偏差">
-                <el-table-column prop="A" label="Uab"> </el-table-column>
-                <el-table-column prop="B" label="Ubc"> </el-table-column>
-                <el-table-column prop="C" label="Uca"> </el-table-column>
+                <el-table-column prop="Uab6" label="Uab"> </el-table-column>
+                <el-table-column prop="Ubc6" label="Ubc"> </el-table-column>
+                <el-table-column prop="Uca6" label="Uca"> </el-table-column>
               </el-table-column>
             </el-table>
           </el-dialog></div
@@ -318,8 +336,6 @@
   </div>
 </template>
 <style src="../assets/css/button.css">
-
-
 </style>
 <style lang="scss">
 .tabBox {
@@ -368,23 +384,28 @@ a:hover {
 }
 
 /* 弹窗按钮 */
- .buttonBackground button {
-   
-     background-image: url(../assets/icon/monthReport.png);
-  }
-  .buttonBackground {
-    left: 15rem;
-    top: 8rem;
-  }
-
+.buttonBackground button {
+  background-image: url(../assets/icon/monthReport.png);
+}
+.buttonBackground {
+  left: 15rem;
+  top: 8rem;
+}
 </style>
 <script >
 import axios from "axios";
 export default {
   data() {
     return {
+      tableData1: [],
+      tableData2: [],
+      tableData3: [],
+      tableData4: [],
+      tableData5: [],
+      tableData6: [],
       //后端数据容器
       totaldata: [],
+      TABLEdata: [],
       //电量图
 
       option1: {
@@ -640,36 +661,221 @@ export default {
       },
 
       htmlTitle: "月电量统计表",
-      tableData: [
-        {
-          data: "",
-          name: "",
-          address: "",
-        },
-      ],
       value2: "",
       value1: "",
       centerDialogVisible: false,
       activeName: "first",
       dialogTableVisible: false,
       dialogFormVisible: false,
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
-      },
       formLabelWidth: "120px",
     };
   },
   created() {
     this.convert();
   },
+  mounted() {},
   methods: {
+    //1.3
+    gonglv() {
+      let n = 0;
+      // while (n < this.TABLEdata.length) {
+      while (n < 16) {
+        this.tableData2.push({
+          name2: "",
+          A2: "",
+          B2: "",
+          C2: "",
+          D2: "",
+        });
+        n = n + 1;
+      }
+      // console.log(this.tableData4[0]);
+
+      let i = 0;
+      this.tableData2[0].name2 = "主变";
+      this.tableData2[1].name2 = "1#空调柜2";
+      this.tableData2[2].name2 = "3#动力柜";
+      this.tableData2[3].name2 = "水处理系统";
+      this.tableData2[4].name2 = "风机系统2";
+      this.tableData2[5].name2 = "冷却水塔";
+      this.tableData2[6].name2 = "锅炉房";
+      this.tableData2[7].name2 = "空调用水泵";
+      this.tableData2[8].name2 = "2#冰水机";
+      this.tableData2[9].name2 = "高压空压机";
+      this.tableData2[10].name2 = "低压空压机";
+      this.tableData2[11].name2 = "1#冰水机";
+      this.tableData2[12].name2 = "传输系统";
+      this.tableData2[13].name2 = "1#动力柜";
+      this.tableData2[14].name2 = "1#插座电源";
+      this.tableData2[15].name2 = "2#插座电源";
+
+      // while (i < this.TABLEdata.length) {
+      while (i < 16) {
+        this.tableData2[i].A2 = this.TABLEdata[i].ia;
+        this.tableData2[i].B2 = this.TABLEdata[i].ib;
+        this.tableData2[i].C2 = this.TABLEdata[i].ic;
+        this.tableData2[i].D2 = this.TABLEdata[i].uab;
+
+        i = i + 1;
+      }
+    },
+    //3.1
+    sanxiang() {
+      let n = 0;
+      // while (n < this.TABLEdata.length) {
+      while (n < 16) {
+        this.tableData4.push({
+          name4: "",
+          A4: "",
+          B4: "",
+          C4: "",
+          Z4: "",
+          Uab4: "",
+          Ubc4: "",
+          Uca4: "",
+          currentunbalance4: "",
+          voltageunbalance4: "",
+        });
+        n = n + 1;
+      }
+      // console.log(this.tableData4[0]);
+
+      let i = 0;
+      this.tableData4[0].name4 = "主变";
+      this.tableData4[1].name4 = "1#空调柜2";
+      this.tableData4[2].name4 = "3#动力柜";
+      this.tableData4[3].name4 = "水处理系统";
+      this.tableData4[4].name4 = "风机系统2";
+      this.tableData4[5].name4 = "冷却水塔";
+      this.tableData4[6].name4 = "锅炉房";
+      this.tableData4[7].name4 = "空调用水泵";
+      this.tableData4[8].name4 = "2#冰水机";
+      this.tableData4[9].name4 = "高压空压机";
+      this.tableData4[10].name4 = "低压空压机";
+      this.tableData4[11].name4 = "1#冰水机";
+      this.tableData4[12].name4 = "传输系统";
+      this.tableData4[13].name4 = "1#动力柜";
+      this.tableData4[14].name4 = "1#插座电源";
+      this.tableData4[15].name4 = "2#插座电源";
+
+      // while (i < this.TABLEdata.length) {
+      while (i < 16) {
+        this.tableData4[i].A4 = this.TABLEdata[i].ia;
+        this.tableData4[i].B4 = this.TABLEdata[i].ib;
+        this.tableData4[i].C4 = this.TABLEdata[i].ic;
+        this.tableData4[i].Z4 = this.TABLEdata[i].zeroi;
+        this.tableData4[i].Uab4 = this.TABLEdata[i].uab;
+        this.tableData4[i].Ubc4 = this.TABLEdata[i].ubc;
+        this.tableData4[i].Uca4 = this.TABLEdata[i].uca;
+        // this.tableData4[i].currentunbalance4 =
+        // this.tableData4[i].voltageunbalance4 =
+        // console.log(this.TABLEdata[0].ia)
+        i = i + 1;
+      }
+    },
+    //3.2
+    xiebo() {
+      let n = 0;
+      // while (n < this.TABLEdata.length) {
+      while (n < 16) {
+        this.tableData5.push({
+          name5: "",
+          A5: "",
+          B5: "",
+          C5: "",
+          average5: "",
+          THDcurrentA: "",
+          THDcurrentB: "",
+          THDcurrentC: "",
+          THDvoltageA: "",
+          THDvoltageB: "",
+          THDvoltageC: "",
+        });
+        n = n + 1;
+      }
+      // console.log(this.tableData4[0]);
+
+      let i = 0;
+      this.tableData5[0].name5 = "主变";
+      this.tableData5[1].name5 = "1#空调柜2";
+      this.tableData5[2].name5 = "3#动力柜";
+      this.tableData5[3].name5 = "水处理系统";
+      this.tableData5[4].name5 = "风机系统2";
+      this.tableData5[5].name5 = "冷却水塔";
+      this.tableData5[6].name5 = "锅炉房";
+      this.tableData5[7].name5 = "空调用水泵";
+      this.tableData5[8].name5 = "2#冰水机";
+      this.tableData5[9].name5 = "高压空压机";
+      this.tableData5[10].name5 = "低压空压机";
+      this.tableData5[11].name5 = "1#冰水机";
+      this.tableData5[12].name5 = "传输系统";
+      this.tableData5[13].name5 = "1#动力柜";
+      this.tableData5[14].name5 = "1#插座电源";
+      this.tableData5[15].name5 = "2#插座电源";
+
+      // while (i < this.TABLEdata.length) {
+      while (i < 16) {
+        this.tableData5[i].A5 = this.TABLEdata[i].ia;
+        this.tableData5[i].B5 = this.TABLEdata[i].ib;
+        this.tableData5[i].C5 = this.TABLEdata[i].ic;
+        this.tableData5[i].average5 = this.TABLEdata[i].totalLoad;
+        // this.tableData4[i].Ubc4 = this.TABLEdata[i].ib;
+        // this.tableData4[i].Uca4 = this.TABLEdata[i].ib;
+        // this.tableData4[i].currentunbalance4 =
+        // this.tableData4[i].voltageunbalance4 =
+        // console.log(this.TABLEdata[0].ia)
+        i = i + 1;
+      }
+    },
+    //3.3
+    piancha() {
+      let n = 0;
+      // while (n < this.TABLEdata.length) {
+      while (n < 16) {
+        this.tableData6.push({
+          frequency6: "",
+          name6: "",
+          A6: "",
+          B6: "",
+          C6: "",
+          Uab6: "",
+          Ubc6: "",
+          Uca6: "",
+        });
+        n = n + 1;
+      }
+      // console.log(this.tableData4[0]);
+
+      let i = 0;
+      this.tableData6[0].name6 = "主变";
+      this.tableData6[1].name6 = "1#空调柜2";
+      this.tableData6[2].name6 = "3#动力柜";
+      this.tableData6[3].name6 = "水处理系统";
+      this.tableData6[4].name6 = "风机系统2";
+      this.tableData6[5].name6 = "冷却水塔";
+      this.tableData6[6].name6 = "锅炉房";
+      this.tableData6[7].name6 = "空调用水泵";
+      this.tableData6[8].name6 = "2#冰水机";
+      this.tableData6[9].name6 = "高压空压机";
+      this.tableData6[10].name6 = "低压空压机";
+      this.tableData6[11].name6 = "1#冰水机";
+      this.tableData6[12].name6 = "传输系统";
+      this.tableData6[13].name6 = "1#动力柜";
+      this.tableData6[14].name6 = "1#插座电源";
+      this.tableData6[15].name6 = "2#插座电源";
+
+      // while (i < this.TABLEdata.length) {
+      while (i < 16) {
+        this.tableData6[i].frequency6 = this.TABLEdata[i].frequencyDeviation;
+        this.tableData6[i].A6 = this.TABLEdata[i].ia;
+        this.tableData6[i].B6 = this.TABLEdata[i].ib;
+        this.tableData6[i].C6 = this.TABLEdata[i].ic;
+        this.tableData6[i].Uab6 = this.TABLEdata[i].uab;
+        this.tableData6[i].Ubc6 = this.TABLEdata[i].ubc;
+        this.tableData6[i].Uca6 = this.TABLEdata[i].uca;
+        i = i + 1;
+      }
+    },
     //echart赋值
     charge() {
       let i = 0;
@@ -685,7 +891,6 @@ export default {
           .replace(/-/g, ".");
         console.log(daytime);
         // console.log(this.totaldata.length)
-
         this.option1.xAxis.data[i] = daytime.substring(5, 10); //给X轴赋值
         this.option1.series[0].data[i] = this.totaldata[i].highKWh; //给峰电量赋值
         this.option1.series[1].data[i] = this.totaldata[i].lowKWh; //给谷电量赋值
@@ -721,6 +926,26 @@ export default {
           //console.log(this.totaldata.length)
           console.log(this.totaldata);
           this.charge();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios
+        .post(
+          "http://114.213.211.241/PowerAnalyse/findPowerAnalyseDayAvgByDataTime",
+          {
+            deviceId: "1",
+            dataTime: "1638288000",
+          }
+        )
+        .then((response) => {
+          this.TABLEdata = response.data;
+          console.log(this.TABLEdata);
+
+          this.sanxiang();
+          this.xiebo();
+          this.gonglv();
+          this.piancha();
         })
         .catch((error) => {
           console.log(error);

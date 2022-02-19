@@ -4,4 +4,5 @@ import com.example.power_prediction.entity.PowerAnalyseMonthAvg;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PowerAnalyseMonthAvgRepository extends JpaRepository<PowerAnalyseMonthAvg,Integer> {
+    PowerAnalyseMonthAvg findByDeviceIdAndDataTime(int deviceId, Integer dataTime);
 }

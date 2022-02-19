@@ -26,7 +26,7 @@ public class PowerPriceTimeController {
         return powerPriceTimeService.edit(powerPriceTime);
     }
 
-    @PostMapping("/del")
+    @RequestMapping("/del")
     public String del(@RequestParam Integer id){
         return powerPriceTimeService.del(id);
     }

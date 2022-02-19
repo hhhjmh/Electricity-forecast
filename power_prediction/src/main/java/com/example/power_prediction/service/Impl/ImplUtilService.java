@@ -1,13 +1,9 @@
 package com.example.power_prediction.service.Impl;
 
-import com.example.power_prediction.entity.PowerDistributionDay;
-import com.example.power_prediction.entity.PowerDistributionHour;
-import com.example.power_prediction.entity.PowerQualityRealtime;
-import com.example.power_prediction.entity.PowerRealtime;
+import com.example.power_prediction.entity.*;
 
 import com.example.power_prediction.repository.*;
 
-import com.example.power_prediction.entity.UtilEntity;
 import com.example.power_prediction.repository.DeviceRelationshipRepository;
 import com.example.power_prediction.repository.PowerDistributionDayRepository;
 import com.example.power_prediction.repository.PowerRealtimeRepository;
@@ -329,5 +325,17 @@ public class ImplUtilService implements UtilService {
         }
         time_zone.setDataTime((int) (System.currentTimeMillis() / 1000));
         utilEntityRepository.save(time_zone);
+    }
+
+    @Override
+    public List<Integer> getMainTransformer(List<Map<String, Object>> deviceTree) {
+        List<Integer> list = new ArrayList<>();
+        for (Map<String, Object> map : deviceTree) {
+            List<Map<String, Object>> transformers = (List<Map<String, Object>>) map.get("children");
+            for (Map<String, Object> transformer : transformers) {
+                list.add((Integer) transformer.get("id"));
+            }
+        }
+        return list;
     }
 }
