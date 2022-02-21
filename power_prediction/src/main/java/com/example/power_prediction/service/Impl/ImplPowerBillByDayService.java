@@ -1,10 +1,8 @@
 package com.example.power_prediction.service.Impl;
 
-import com.example.power_prediction.entity.Device;
-import com.example.power_prediction.entity.DeviceRelationship;
-import com.example.power_prediction.entity.PowerBillByDay;
-import com.example.power_prediction.entity.PowerRealtime;
+import com.example.power_prediction.entity.*;
 import com.example.power_prediction.repository.*;
+import com.example.power_prediction.service.PowerAnalyseMonthService;
 import com.example.power_prediction.service.PowerBillByDayService;
 import com.example.power_prediction.service.PowerPriceTimeService;
 import com.example.power_prediction.service.UtilService;
@@ -39,6 +37,9 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
 
     @Autowired
     DeviceRepository deviceRepository;
+
+    @Autowired
+    PowerAnalyseMonthService powerAnalyseMonthService;
 
 
     /**
@@ -432,6 +433,39 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
             e.printStackTrace();
         }
 
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> monthReport(Integer year, Integer month, String department) {
+        Map<String, Object> map = new HashMap<>(); //总容器
+        try {
+            //获得设备树，得到主变列表
+            List deviceTree = utilService.findAllDeviceRelationship(1, department, 0);
+            List<Integer> transformers = utilService.getMainTransformer(deviceTree);
+            List<Integer> devices = utilService.getAllDevicesId(deviceTree);
+            //去除展馆的id
+            devices.remove(0);
+            //获取月份对应的时间戳
+            Integer month_time = (int) LocalDate.of(year, month, 1).atStartOfDay(utilService.getZoneId()).toEpochSecond();
+
+            //加入电费信息
+            List<Map<String, Object>> cost = transformers.stream().map(t -> {
+                Map<String, Object> data = queryByMonth(t, year, month);
+                data.put("deviceId", t);
+                return data;
+            }).collect(toList());
+            List<PowerAnalyseMonthAvg> info = devices.stream().map(id -> powerAnalyseMonthService.getMonthAvgByID(id, month_time)).collect(toList());
+            Map<String, Object> devicesName = devices.stream().collect(toMap(String::valueOf, d -> deviceRepository.findById(Integer.valueOf(d)).get().getName()));
+
+            map.put("devicesName", devicesName);
+            map.put("cost", cost);
+            map.put("info", info);
+            map.put("state", "Success");
+        } catch (Exception e) {
+            map.put("state", "Fail");
+            e.printStackTrace();
+        }
         return map;
     }
 }

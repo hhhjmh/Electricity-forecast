@@ -22,4 +22,6 @@ public interface PowerBillByDayService {
 
     Map<String, Object> queryCostYear(Integer year, String department);
 
+    Map<String, Object> monthReport(Integer year, Integer month, String department);
+
 }

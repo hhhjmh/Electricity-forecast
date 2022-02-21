@@ -59,4 +59,9 @@ public class PowerBillByDayController {
     public Map<String, Object> dailyUpdate() {
         return powerBillByDayService.dailyUpdate();
     }
+
+    @RequestMapping("/monthReport")
+    public Map<String, Object> monthReport(@RequestParam Integer year,@RequestParam Integer month,@RequestParam String department) {
+        return powerBillByDayService.monthReport(year,month,department);
+    }
 }

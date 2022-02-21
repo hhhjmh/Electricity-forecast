@@ -5,10 +5,7 @@ package com.example.power_prediction;
 import com.example.power_prediction.entity.PowerBillByDay;
 import com.example.power_prediction.repository.DeviceRepository;
 import com.example.power_prediction.repository.PowerBillByDayRepository;
-import com.example.power_prediction.service.PowerBillByDayService;
-import com.example.power_prediction.service.PowerDistributionHourService;
-import com.example.power_prediction.service.PowerPriceTimeService;
-import com.example.power_prediction.service.UtilService;
+import com.example.power_prediction.service.*;
 import com.example.power_prediction.util.TimeOperation;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -33,6 +30,9 @@ class CspTest {
 
     @Autowired
     UtilService utilService;
+
+    @Autowired
+    PowerAnalyseMonthService powerAnalyseMonthService;
 
     @Test
     void showPowerDistributionHourQueryByDay() {
@@ -83,6 +83,17 @@ class CspTest {
     void showGetMainTransformer(){
         System.out.println(utilService.getMainTransformer(utilService.findAllDeviceRelationship(1, "电能体验馆", 0)));
     }
+
+    @Test
+    void showGetAllDevicesId(){
+        System.out.println(utilService.getAllDevicesId(utilService.findAllDeviceRelationship(1, "电能体验馆", 0)));
+    }
+
+    @Test
+    void showGetMonthAvgByID(){
+        System.out.println(powerAnalyseMonthService.getMonthAvgByID(1, 1638288000).toString());
+    }
+
 
 }
 
