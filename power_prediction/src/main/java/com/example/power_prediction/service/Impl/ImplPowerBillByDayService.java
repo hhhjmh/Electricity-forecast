@@ -104,6 +104,16 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
         }
     }
 
+    //获取一年的数据
+    private Map<String, Object> getYearData(Integer deviceId, Integer year) {
+        Map<String, Object> dataMap = queryByYear(deviceId, year);
+        if (dataMap.get("state") == "Success") {
+            return getTotal(dataMap);
+        } else {
+            throw new NullPointerException(year + "年数据错误");
+        }
+    }
+
     //不同日期同设备的数据累加
     private Map<String, Object> getTotal(Map<String, Object> dataMap) {
         //对数据进行累加
@@ -349,6 +359,11 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     endDate = YearMonth.parse(end, DateTimeFormatter.ofPattern("yyyy-MM")).atDay(1);
                     chronoUnit = ChronoUnit.MONTHS;
                     break;
+                case "year":
+                    startDate = Year.parse(start, DateTimeFormatter.ofPattern("yyyy")).atDay(1);
+                    endDate = Year.parse(end, DateTimeFormatter.ofPattern("yyyy")).atDay(1);
+                    chronoUnit = ChronoUnit.YEARS;
+                    break;
                 default:
                     throw new NullPointerException("指定参数不正确");
             }
@@ -371,6 +386,10 @@ public class ImplPowerBillByDayService implements PowerBillByDayService {
                     case "month":
                         key = i.format(DateTimeFormatter.ofPattern("yyyy-MM"));
                         deviceData = Arrays.stream(devices).collect(toMap(d -> d, d -> getMonthData(Integer.valueOf(d), finalI.getYear(), finalI.getMonthValue())));
+                        break;
+                    case "year":
+                        key = i.format(DateTimeFormatter.ofPattern("yyyy"));
+                        deviceData = Arrays.stream(devices).collect(toMap(d -> d, d -> getYearData(Integer.valueOf(d), finalI.getYear())));
                         break;
                 }
                 data.put(key, deviceData);
