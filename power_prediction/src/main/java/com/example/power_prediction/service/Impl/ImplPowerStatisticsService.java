@@ -45,13 +45,13 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
 //                mouthTotalLoad = Double.valueOf(String.valueOf(o[4])) + mouthTotalLoad;
 //                mouthTotalLoad = Double.valueOf(String.valueOf(o[4])) + mouthTotalLoad;
 
-
-                msgMap.put("totalLoad" + i, o[4]);
-                msgMap.put("totalKWh" + i, o[5]);
-                msgMap.put("highKWh" + i, o[6]);
-                msgMap.put("lowKWh" + i, o[7]);
-                msgMap.put("midKWh" + i, o[8]);
-                msgMap.put("topKWh" + i, o[9]);
+                msgMap.put("Quantity"+i+"r" , o[5]);
+                msgMap.put(i+"totalLoad"  , o[4]);
+                msgMap.put(i+"haototal" , o[5]);
+                msgMap.put(i+"haof" , o[6]);
+                msgMap.put(i+"haog" , o[7]);
+                msgMap.put(i+"haop" , o[8]);
+                msgMap.put(i+"haoj" , o[9]);
                 msgMap.put("totalCharge" + i, o[10]);
                 msgMap.put("highCharge" + i, o[11]);
                 msgMap.put("lowCharge" + i, o[12]);
@@ -59,7 +59,7 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
                 msgMap.put("topCharge" + i, o[14]);
                 i++;
             }
-            msgMap.put("mouthTotalLoad", mouthTotalLoad);
+            msgMap.put("mouthTotalLoad", String.format("%.2f", (mouthTotalLoad)));
             mapList.add(msgMap);
         }
 
