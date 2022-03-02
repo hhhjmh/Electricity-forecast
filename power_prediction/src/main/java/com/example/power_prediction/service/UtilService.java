@@ -46,4 +46,13 @@ public interface UtilService {
      */
     List<Integer> getMainTransformer(List<Map<String, Object>> deviceTree);
 
+
+    /**
+     * 获得设备树下的s所有设备id
+     *
+     * @param deviceTree findAllDeviceRelationship得到的设备树
+     * @return 设备id的List
+     */
+    List<Integer> getAllDevicesId(List<Map<String, Object>> deviceTree);
+
 }

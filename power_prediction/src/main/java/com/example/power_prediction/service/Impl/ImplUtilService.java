@@ -338,4 +338,18 @@ public class ImplUtilService implements UtilService {
         }
         return list;
     }
+
+
+    @Override
+    public List<Integer> getAllDevicesId(List<Map<String, Object>> deviceTree) {
+        List<Integer> list = new ArrayList<>();
+        for (Map<String, Object> map : deviceTree) {
+            list.add((Integer) map.get("id"));
+            if (map.containsKey("children")){
+                List<Integer> devices = getAllDevicesId((List<Map<String, Object>>) map.get("children"));
+                list.addAll(devices);
+            }
+        }
+        return list;
+    }
 }

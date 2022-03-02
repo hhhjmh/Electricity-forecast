@@ -43,15 +43,7 @@ public class TimeOperation {
         return ZonedDateTime.ofInstant(Instant.ofEpochSecond(timeStamp), zoneId);
     }
 
-    /**
-     * 将实现了Temporal接口的对象转换成时间戳
-     *
-     * @param temporal 时间对象
-     * @return 时间戳单位为秒
-     */
-    public static Integer getTimeStamp(Temporal temporal) {
-        return (int) Instant.from(temporal).toEpochMilli() / 1000;
-    }
+
 
 
     /**
