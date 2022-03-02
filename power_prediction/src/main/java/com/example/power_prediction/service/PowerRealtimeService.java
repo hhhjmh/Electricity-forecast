@@ -29,6 +29,14 @@ public interface PowerRealtimeService {
 
     Map findPowerQualityRealtimeByDataTimeForTable(Integer deviceId, Integer dataTime, Integer end);
 
+    Integer powerRealtimeUpdateOrSave(PowerRealtime powerRealtime);
+
+    Integer powerQualityRealtimeUpdateOrSave(PowerQualityRealtime powerQualityRealtime);
+
+    Integer PowerDistributionDayUpdateOrSave(PowerDistributionDay powerDistributionDay);
+
+    List<Object[]> findPowerDistributionDayByMultipleIdAndDataTime(String newIdList, Integer dataTime);
+
     //    List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime);
 
 }

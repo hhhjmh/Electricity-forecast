@@ -2,11 +2,14 @@ package com.example.power_prediction.controller;
 
 import com.example.power_prediction.entity.Device;
 import com.example.power_prediction.entity.DeviceRelationship;
+import com.example.power_prediction.service.ImportService;
 import com.example.power_prediction.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
 public class UtilController {
     @Autowired
     UtilService utilService;
+    @Autowired
+    ImportService importService;
 
     @ResponseBody
     @RequestMapping("/insertPowerRealtime/{batchSize}")
@@ -66,5 +71,30 @@ public class UtilController {
     @RequestMapping("/setTimeZone")
     public void setTimeZone(@RequestParam String timezone) {
         utilService.setZoneId(timezone);
+    }
+
+
+
+    @PostMapping(value = "/upload")
+    @ResponseBody
+    public String uploadExcel(@RequestParam("uploadFile") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
+            return "文件不能为空";
+        }
+        InputStream inputStream = file.getInputStream();
+        List<List<Object>> list = importService.getBankListByExcel(inputStream, file.getOriginalFilename());
+        inputStream.close();
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> lo = list.get(i);
+            try {
+//暂未确定上传内容
+//                Integer a= Integer.valueOf(lo.get(1).toString());
+//                System.out.println(a);
+            } catch (Exception e) {
+                System.out.print(e);
+                return "格式错误";
+            }
+        }
+        return "上传成功";
     }
 }

@@ -23,6 +23,8 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
     PowerDistributionDayRepository powerDistributionDayRepository;
     @Autowired
     DeviceRepository deviceRepository;
+    @Autowired
+    UtilEntityRepository utilEntityRepository;
 
     @Override
     public List<PowerRealtime> findPowerRealtimeByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end) {
@@ -188,9 +190,74 @@ public class ImplPowerRealtimeService implements PowerRealtimeService {
         return newMap;
     }
 
-//    @Override
-//    public List<PowerRealtime> findAllPowerRealtimeByDataTime(Integer deviceId, Integer dataTime) {
-//
-//        return
-//    }
+    @Override
+    public Integer powerRealtimeUpdateOrSave(PowerRealtime powerRealtime) {
+
+        try {
+            powerRealtimeRepository.save(powerRealtime);
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e);
+            return -1;
+        }
+    }
+
+    @Override
+    public Integer powerQualityRealtimeUpdateOrSave(PowerQualityRealtime powerQualityRealtime) {
+        try {
+            powerQualityRealtimeRepository.save(powerQualityRealtime);
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e);
+            return -1;
+        }
+    }
+
+    @Override
+    public Integer PowerDistributionDayUpdateOrSave(PowerDistributionDay powerDistributionDay) {
+        try {
+            if (powerDistributionDay.getId() != 0) {
+                PowerDistributionDay powerDistributionDayNew = powerDistributionDayRepository.getById(powerDistributionDay.getId());
+                //费用是否改变暂定
+//                Double highRate = Double.valueOf(utilEntityRepository.findByVariableAttributeNameAndState("highPowerRate", 1).getVariableAttributeNum());
+//                Double lowRate = Double.valueOf(utilEntityRepository.findByVariableAttributeNameAndState("lowPowerRate", 1).getVariableAttributeNum());
+//                Double midRate = Double.valueOf(utilEntityRepository.findByVariableAttributeNameAndState("midPowerRate", 1).getVariableAttributeNum());
+                if (powerDistributionDay.getTotalLoad() != null) {
+                    powerDistributionDayNew.setTotalLoad(powerDistributionDay.getTotalLoad());
+                }
+                if (powerDistributionDay.getTotalkWh() != null) {
+                    powerDistributionDayNew.setTotalkWh(powerDistributionDay.getTotalkWh());
+                }
+                if (powerDistributionDay.getTopKWh() != null) {
+                    powerDistributionDayNew.setTopKWh(powerDistributionDay.getTopKWh());
+                }
+                if (powerDistributionDay.getHighKWh() != null) {
+                    powerDistributionDayNew.setHighKWh(powerDistributionDay.getHighKWh());
+                }
+                if (powerDistributionDay.getMidKWh() != null) {
+                    powerDistributionDayNew.setMidKWh(powerDistributionDay.getMidKWh());
+                }
+                if(powerDistributionDay.getLowKWh()!=null){
+                    powerDistributionDayNew.setLowKWh(powerDistributionDay.getLowKWh());
+                }
+            }
+            powerDistributionDayRepository.save(powerDistributionDay);
+            return 1;
+        } catch (Exception e) {
+            System.out.println(e);
+            return -1;
+        }
+    }
+
+    @Override
+    public List<Object[]> findPowerDistributionDayByMultipleIdAndDataTime(String multipleId, Integer dataTime) {
+        String[] idList = multipleId.split(",");
+        List<Integer> newIdList = new ArrayList<>();
+        for (String a : idList
+        ) {
+            newIdList.add(Integer.valueOf(a));
+        }
+        return powerDistributionDayRepository.findPowerDistributionDayByMultipleIdAndDataTime(newIdList,dataTime);
+    }
+
 }

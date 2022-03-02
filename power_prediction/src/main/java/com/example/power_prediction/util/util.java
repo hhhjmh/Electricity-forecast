@@ -10,6 +10,16 @@ import java.util.Map;
 
 public class util {
 
+    public static String randomNumeric(int a) {
+
+        String num = "";
+        for (int i = 0; i < a; i++) {
+            num = num + String.valueOf((int) Math.floor(Math.random() * 9 + 1));
+        }
+        return num;
+
+    }
+
 
     public static Map divideData(Integer max, Integer min, Integer bias) {
 

@@ -12,6 +12,15 @@ public class User {
     private String password;
     private Integer root;
     private String department;
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getDepartment() {
         return department;

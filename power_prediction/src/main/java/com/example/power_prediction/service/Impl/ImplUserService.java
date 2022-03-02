@@ -18,12 +18,12 @@ public class ImplUserService implements UserService {
     public Map<String, Object> login(User user) {
 
         Map<String, Object> map = new HashMap<>();
-        User newUser = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+        User newUser = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (newUser != null) {
             map.put("username", newUser.getUsername());
             map.put("root", newUser.getRoot());
             map.put("state", "Success");
-            map.put("userDepartment,",newUser.getDepartment());
+            map.put("userDepartment,", newUser.getDepartment());
             System.out.println("Success");
         } else {
             map.put("state", "Fail");
@@ -31,5 +31,15 @@ public class ImplUserService implements UserService {
         }
         return map;
 
+    }
+
+    @Override
+    public Integer save(User user) {
+        try {
+            userRepository.save(user);
+            return 1;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 }

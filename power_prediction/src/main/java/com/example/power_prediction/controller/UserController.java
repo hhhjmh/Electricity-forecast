@@ -24,4 +24,12 @@ public class UserController {
     }
 
 
+    @PostMapping("/register")
+    public Integer userRegister(@RequestBody User user) {
+        user.setRoot(0);
+        return userService.save(user);
+    }
+
+
+
 }

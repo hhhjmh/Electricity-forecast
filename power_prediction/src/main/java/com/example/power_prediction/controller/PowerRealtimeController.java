@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,33 +46,33 @@ public class PowerRealtimeController {
     //返回每天的电量数据——曲线
     @PostMapping("/findPowerDistributionHourByDataTime")
     public List<PowerDistributionHour> findPowerDistributionHourByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionHour powerDistributionHour) {
-        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
+        if (powerDistributionHour.getId() == null || powerDistributionHour.getId() == 0) {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerDistributionHourByDeviceIdAndDataTimeBetween(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
+        return powerRealtimeService.findPowerDistributionHourByDeviceIdAndDataTimeBetween(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId() - 1);
     }
 
 
     //返回每天的电量数据——曲线累加
     @PostMapping("/findPowerDistributionHourByDataTimeForAdd")
     public List<PowerDistributionHour> findPowerDistributionHourByDataTimeForAdd(@RequestBody PowerDistributionHour powerDistributionHour) {
-        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
+        if (powerDistributionHour.getId() == null || powerDistributionHour.getId() == 0) {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerDistributionHourByDataTimeForAdd(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
+        return powerRealtimeService.findPowerDistributionHourByDataTimeForAdd(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId() - 1);
     }
 
 
     //返回每天中24个整点的电量数据——表格
     @PostMapping("/findPowerDistributionHourByDataTimeForTable")
     public Map findPowerDistributionHourByDataTimeForTable(@RequestBody PowerDistributionHour powerDistributionHour) {
-        if (powerDistributionHour.getId() == null||powerDistributionHour.getId() == 0) {
+        if (powerDistributionHour.getId() == null || powerDistributionHour.getId() == 0) {
             powerDistributionHour.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerDistributionHourByDataTimeForTable(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId()-1);
+        return powerRealtimeService.findPowerDistributionHourByDataTimeForTable(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400 * powerDistributionHour.getId() - 1);
     }
 
     //返回每天的电能质量数据
@@ -91,7 +92,7 @@ public class PowerRealtimeController {
             powerQualityRealtime.setId(1);
         }
         //使用id暂存天数
-        return powerRealtimeService.findPowerQualityRealtimeByDataTimeForTable(powerQualityRealtime.getDeviceId(), powerQualityRealtime.getDataTime(), powerQualityRealtime.getDataTime() + 86400 * powerQualityRealtime.getId()-1);
+        return powerRealtimeService.findPowerQualityRealtimeByDataTimeForTable(powerQualityRealtime.getDeviceId(), powerQualityRealtime.getDataTime(), powerQualityRealtime.getDataTime() + 86400 * powerQualityRealtime.getId() - 1);
     }
 
     //返回每天的电能分布数据
@@ -104,10 +105,28 @@ public class PowerRealtimeController {
         return powerRealtimeService.findPowerDistributionDayByDeviceIdAndDataTimeBetween(powerDistributionDay.getDeviceId(), powerDistributionDay.getDataTime(), powerDistributionDay.getDataTime() + 86400 * powerDistributionDay.getId());
     }
 
-//    @RequestMapping("/findPowerRealtimeByDataTime")
-//    public List<PowerRealtime> findPowerRealtimeByDataTime(@RequestBody PowerRealtime powerRealtime) {
-//        return powerRealtimeService.findAllPowerRealtimeByDataTime(powerRealtime.getDeviceId(), powerRealtime.getDataTime());
-//    }
+    @PostMapping("/findPowerDistributionDayByMultipleIdAndDataTime")
+    public List<Object[]> findPowerDistributionDayByMultipleIdAndDataTime(@RequestParam("multipleId") String multipleId, @RequestParam("dataTime") Integer dataTime) {
+
+        //使用id暂存天数
+        return powerRealtimeService.findPowerDistributionDayByMultipleIdAndDataTime(multipleId, dataTime);
+    }
+
+    @PostMapping("/powerRealtimeUpdateOrSave")
+    public Integer powerRealtimeUpdateOrSave(@RequestBody PowerRealtime powerRealtime) {
+        return powerRealtimeService.powerRealtimeUpdateOrSave(powerRealtime);
+    }
+
+
+    @PostMapping("/PowerQualityRealtimeUpdateOrSave")
+    public Integer PowerQualityRealtimeUpdateOrSave(@RequestBody PowerQualityRealtime powerQualityRealtime) {
+        return powerRealtimeService.powerQualityRealtimeUpdateOrSave(powerQualityRealtime);
+    }
+
+    @PostMapping("/PowerDistributionDayUpdateOrSave")
+    public Integer PowerDistributionDayUpdateOrSave(@RequestBody PowerDistributionDay powerDistributionDay) {
+        return powerRealtimeService.PowerDistributionDayUpdateOrSave(powerDistributionDay);
+    }
 
 
 }
