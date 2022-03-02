@@ -25,4 +25,6 @@ public interface PowerAnalyseDayService {
 
     List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(Integer deviceId, Integer start, Integer end);
 
+    List<String> getDistributionHour(Integer deviceId, Integer start, Integer end);
+
 }

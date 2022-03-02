@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +28,27 @@ public class ImpIPowerAnalyseDayService implements PowerAnalyseDayService {
 
     @Autowired
     PowerQualityRealtimeRepository powerQualityRealtimeRepository;
+
+    @Autowired
+    PowerDistributionHourRepository powerDistributionHourRepository;
+
+    @Override
+    public List<String> getDistributionHour(Integer deviceId, Integer start, Integer end) {
+        List<PowerDistributionHour> powerDistributionHours = powerDistributionHourRepository.findAllByDeviceIdAndDataTimeBetween(deviceId, start, end);
+        List<String> hourData = new ArrayList<>();
+        double tempData = 0;
+        for(int i=0; i<powerDistributionHours.size(); i++) {
+            if((i+1)%12==0) {
+                hourData.add(String.format("%.2f", tempData));
+                tempData = 0;
+            }
+            tempData += Double.valueOf(powerDistributionHours.get(i).getTotalKWh());
+        }
+//        for(int i=0; i<hourData.size(); i++) {
+//            System.out.print(hourData.get(i) + " ");
+//        }
+        return hourData;
+    }
 
     @Override
     public PowerAnalyseDayAvg getDayAvgByID(int deviceId, Integer dataTime) {

@@ -1,9 +1,6 @@
 package com.example.power_prediction.controller;
 
-import com.example.power_prediction.entity.PowerAnalyseDayAvg;
-import com.example.power_prediction.entity.PowerAnalyseDayMax;
-import com.example.power_prediction.entity.PowerAnalyseDayMin;
-import com.example.power_prediction.entity.PowerRealtime;
+import com.example.power_prediction.entity.*;
 import com.example.power_prediction.service.PowerAnalyseDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -92,5 +89,11 @@ public class PowerAnalyseDayController {
     public List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(@RequestBody PowerAnalyseDayAvg powerAnalyseDayAvg) {
         //使用id暂存天数
         return powerAnalyseDayAvgService.findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(powerAnalyseDayAvg.getDeviceId(), powerAnalyseDayAvg.getDataTime(), powerAnalyseDayAvg.getDataTime() + 86400 * 30);
+    }
+
+    @PostMapping("/findDistributionHour")
+    public List<String> findDistributionHourByDeviceIdAndDataTimeBetween(@RequestBody PowerDistributionHour powerDistributionHour) {
+        //使用id暂存天数
+        return powerAnalyseDayAvgService.getDistributionHour(powerDistributionHour.getDeviceId(), powerDistributionHour.getDataTime(), powerDistributionHour.getDataTime() + 86400);
     }
 }
