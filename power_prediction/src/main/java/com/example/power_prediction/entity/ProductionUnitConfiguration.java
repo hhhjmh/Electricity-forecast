@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "production_unit_configuration", schema = "power", catalog = "")
-public class ProductionUnitConfigurationEntity {
+public class ProductionUnitConfiguration {
     private int id;
     private String workshopUnit;
     private String className;
@@ -55,7 +55,7 @@ public class ProductionUnitConfigurationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductionUnitConfigurationEntity that = (ProductionUnitConfigurationEntity) o;
+        ProductionUnitConfiguration that = (ProductionUnitConfiguration) o;
         return id == that.id &&
                 Objects.equals(workshopUnit, that.workshopUnit) &&
                 Objects.equals(className, that.className) &&
