@@ -7,4 +7,6 @@ public interface PowerStatisticsService {
 
 
     List<Map> findMultipleDevicePowerMsg(String multipleId, Integer dataTime, Integer dayNum, Integer type);
+
+    List<Map> findMultipleDevicePowerMsgForDay(String multipleId, Integer start, Integer end);
 }
