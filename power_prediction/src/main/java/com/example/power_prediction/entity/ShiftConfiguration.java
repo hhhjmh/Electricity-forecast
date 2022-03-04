@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "shift_configuration", schema = "power", catalog = "")
-public class ShiftConfigurationEntity {
+public class ShiftConfiguration {
     private int id;
     private String companyName;
     private String className;
@@ -88,7 +88,7 @@ public class ShiftConfigurationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShiftConfigurationEntity that = (ShiftConfigurationEntity) o;
+        ShiftConfiguration that = (ShiftConfiguration) o;
         return id == that.id &&
                 Objects.equals(companyName, that.companyName) &&
                 Objects.equals(className, that.className) &&

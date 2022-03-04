@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "shift_system_electricity_assessment", schema = "power", catalog = "")
-public class ShiftSystemElectricityAssessmentEntity {
+public class ShiftSystemElectricityAssessment {
     private int id;
     private String companyName;
     private String magnification;
@@ -99,7 +99,7 @@ public class ShiftSystemElectricityAssessmentEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShiftSystemElectricityAssessmentEntity that = (ShiftSystemElectricityAssessmentEntity) o;
+        ShiftSystemElectricityAssessment that = (ShiftSystemElectricityAssessment) o;
         return id == that.id &&
                 Objects.equals(companyName, that.companyName) &&
                 Objects.equals(magnification, that.magnification) &&

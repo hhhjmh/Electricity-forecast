@@ -4,35 +4,34 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "power_electrical_safety", schema = "power", catalog = "")
-public class PowerElectricalSafetyEntity {
+@Table(name = "power_indicator_cap", schema = "power", catalog = "")
+public class PowerIndicatorCap {
     private int id;
     private int deviceId;
-    private Integer dataTime;
-    private Integer totalLoad;
-    private Integer aLoad;
-    private Integer bLoad;
-    private Integer cLoad;
-    private Integer ia;
-    private Integer ib;
-    private Integer ic;
-    private Integer zeroi;
-    private Integer ua;
-    private Integer ub;
-    private Integer uc;
-    private Integer uab;
-    private Integer ubc;
-    private Integer uca;
-    private Integer temperature;
-    private Integer uUcaDeviation;
-    private Integer iUnbalance;
-    private Integer frequencyDeviation;
-    private Integer iaPhd;
-    private Integer ibPhd;
-    private Integer icPhd;
-    private Integer uaPhd;
-    private Integer ubPhd;
-    private Integer ucPhd;
+    private String totalLoad;
+    private String aLoad;
+    private String bLoad;
+    private String cLoad;
+    private String ia;
+    private String ib;
+    private String ic;
+    private String zeroi;
+    private String ua;
+    private String ub;
+    private String uc;
+    private String uab;
+    private String ubc;
+    private String uca;
+    private String temperature;
+    private String uUcaDeviation;
+    private String iUnbalance;
+    private String frequencyDeviation;
+    private String iaPhd;
+    private String ibPhd;
+    private String icPhd;
+    private String uaPhd;
+    private String ubPhd;
+    private String ucPhd;
 
     @Id
     @Column(name = "id")
@@ -55,252 +54,242 @@ public class PowerElectricalSafetyEntity {
     }
 
     @Basic
-    @Column(name = "dataTime")
-    public Integer getDataTime() {
-        return dataTime;
-    }
-
-    public void setDataTime(Integer dataTime) {
-        this.dataTime = dataTime;
-    }
-
-    @Basic
     @Column(name = "totalLoad")
-    public Integer getTotalLoad() {
+    public String getTotalLoad() {
         return totalLoad;
     }
 
-    public void setTotalLoad(Integer totalLoad) {
+    public void setTotalLoad(String totalLoad) {
         this.totalLoad = totalLoad;
     }
 
     @Basic
     @Column(name = "aLoad")
-    public Integer getaLoad() {
+    public String getaLoad() {
         return aLoad;
     }
 
-    public void setaLoad(Integer aLoad) {
+    public void setaLoad(String aLoad) {
         this.aLoad = aLoad;
     }
 
     @Basic
     @Column(name = "bLoad")
-    public Integer getbLoad() {
+    public String getbLoad() {
         return bLoad;
     }
 
-    public void setbLoad(Integer bLoad) {
+    public void setbLoad(String bLoad) {
         this.bLoad = bLoad;
     }
 
     @Basic
     @Column(name = "cLoad")
-    public Integer getcLoad() {
+    public String getcLoad() {
         return cLoad;
     }
 
-    public void setcLoad(Integer cLoad) {
+    public void setcLoad(String cLoad) {
         this.cLoad = cLoad;
     }
 
     @Basic
     @Column(name = "ia")
-    public Integer getIa() {
+    public String getIa() {
         return ia;
     }
 
-    public void setIa(Integer ia) {
+    public void setIa(String ia) {
         this.ia = ia;
     }
 
     @Basic
     @Column(name = "ib")
-    public Integer getIb() {
+    public String getIb() {
         return ib;
     }
 
-    public void setIb(Integer ib) {
+    public void setIb(String ib) {
         this.ib = ib;
     }
 
     @Basic
     @Column(name = "ic")
-    public Integer getIc() {
+    public String getIc() {
         return ic;
     }
 
-    public void setIc(Integer ic) {
+    public void setIc(String ic) {
         this.ic = ic;
     }
 
     @Basic
     @Column(name = "zeroi")
-    public Integer getZeroi() {
+    public String getZeroi() {
         return zeroi;
     }
 
-    public void setZeroi(Integer zeroi) {
+    public void setZeroi(String zeroi) {
         this.zeroi = zeroi;
     }
 
     @Basic
     @Column(name = "ua")
-    public Integer getUa() {
+    public String getUa() {
         return ua;
     }
 
-    public void setUa(Integer ua) {
+    public void setUa(String ua) {
         this.ua = ua;
     }
 
     @Basic
     @Column(name = "ub")
-    public Integer getUb() {
+    public String getUb() {
         return ub;
     }
 
-    public void setUb(Integer ub) {
+    public void setUb(String ub) {
         this.ub = ub;
     }
 
     @Basic
     @Column(name = "uc")
-    public Integer getUc() {
+    public String getUc() {
         return uc;
     }
 
-    public void setUc(Integer uc) {
+    public void setUc(String uc) {
         this.uc = uc;
     }
 
     @Basic
     @Column(name = "uab")
-    public Integer getUab() {
+    public String getUab() {
         return uab;
     }
 
-    public void setUab(Integer uab) {
+    public void setUab(String uab) {
         this.uab = uab;
     }
 
     @Basic
     @Column(name = "ubc")
-    public Integer getUbc() {
+    public String getUbc() {
         return ubc;
     }
 
-    public void setUbc(Integer ubc) {
+    public void setUbc(String ubc) {
         this.ubc = ubc;
     }
 
     @Basic
     @Column(name = "uca")
-    public Integer getUca() {
+    public String getUca() {
         return uca;
     }
 
-    public void setUca(Integer uca) {
+    public void setUca(String uca) {
         this.uca = uca;
     }
 
     @Basic
     @Column(name = "temperature")
-    public Integer getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(Integer temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
     @Basic
     @Column(name = "uUcaDeviation")
-    public Integer getuUcaDeviation() {
+    public String getuUcaDeviation() {
         return uUcaDeviation;
     }
 
-    public void setuUcaDeviation(Integer uUcaDeviation) {
+    public void setuUcaDeviation(String uUcaDeviation) {
         this.uUcaDeviation = uUcaDeviation;
     }
 
     @Basic
     @Column(name = "iUnbalance")
-    public Integer getiUnbalance() {
+    public String getiUnbalance() {
         return iUnbalance;
     }
 
-    public void setiUnbalance(Integer iUnbalance) {
+    public void setiUnbalance(String iUnbalance) {
         this.iUnbalance = iUnbalance;
     }
 
     @Basic
     @Column(name = "frequencyDeviation")
-    public Integer getFrequencyDeviation() {
+    public String getFrequencyDeviation() {
         return frequencyDeviation;
     }
 
-    public void setFrequencyDeviation(Integer frequencyDeviation) {
+    public void setFrequencyDeviation(String frequencyDeviation) {
         this.frequencyDeviation = frequencyDeviation;
     }
 
     @Basic
     @Column(name = "iaPHD")
-    public Integer getIaPhd() {
+    public String getIaPhd() {
         return iaPhd;
     }
 
-    public void setIaPhd(Integer iaPhd) {
+    public void setIaPhd(String iaPhd) {
         this.iaPhd = iaPhd;
     }
 
     @Basic
     @Column(name = "ibPHD")
-    public Integer getIbPhd() {
+    public String getIbPhd() {
         return ibPhd;
     }
 
-    public void setIbPhd(Integer ibPhd) {
+    public void setIbPhd(String ibPhd) {
         this.ibPhd = ibPhd;
     }
 
     @Basic
     @Column(name = "icPHD")
-    public Integer getIcPhd() {
+    public String getIcPhd() {
         return icPhd;
     }
 
-    public void setIcPhd(Integer icPhd) {
+    public void setIcPhd(String icPhd) {
         this.icPhd = icPhd;
     }
 
     @Basic
     @Column(name = "uaPHD")
-    public Integer getUaPhd() {
+    public String getUaPhd() {
         return uaPhd;
     }
 
-    public void setUaPhd(Integer uaPhd) {
+    public void setUaPhd(String uaPhd) {
         this.uaPhd = uaPhd;
     }
 
     @Basic
     @Column(name = "ubPHD")
-    public Integer getUbPhd() {
+    public String getUbPhd() {
         return ubPhd;
     }
 
-    public void setUbPhd(Integer ubPhd) {
+    public void setUbPhd(String ubPhd) {
         this.ubPhd = ubPhd;
     }
 
     @Basic
     @Column(name = "ucPHD")
-    public Integer getUcPhd() {
+    public String getUcPhd() {
         return ucPhd;
     }
 
-    public void setUcPhd(Integer ucPhd) {
+    public void setUcPhd(String ucPhd) {
         this.ucPhd = ucPhd;
     }
 
@@ -308,10 +297,9 @@ public class PowerElectricalSafetyEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PowerElectricalSafetyEntity that = (PowerElectricalSafetyEntity) o;
+        PowerIndicatorCap that = (PowerIndicatorCap) o;
         return id == that.id &&
                 deviceId == that.deviceId &&
-                Objects.equals(dataTime, that.dataTime) &&
                 Objects.equals(totalLoad, that.totalLoad) &&
                 Objects.equals(aLoad, that.aLoad) &&
                 Objects.equals(bLoad, that.bLoad) &&
@@ -340,6 +328,6 @@ public class PowerElectricalSafetyEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, deviceId, dataTime, totalLoad, aLoad, bLoad, cLoad, ia, ib, ic, zeroi, ua, ub, uc, uab, ubc, uca, temperature, uUcaDeviation, iUnbalance, frequencyDeviation, iaPhd, ibPhd, icPhd, uaPhd, ubPhd, ucPhd);
+        return Objects.hash(id, deviceId, totalLoad, aLoad, bLoad, cLoad, ia, ib, ic, zeroi, ua, ub, uc, uab, ubc, uca, temperature, uUcaDeviation, iUnbalance, frequencyDeviation, iaPhd, ibPhd, icPhd, uaPhd, ubPhd, ucPhd);
     }
 }
