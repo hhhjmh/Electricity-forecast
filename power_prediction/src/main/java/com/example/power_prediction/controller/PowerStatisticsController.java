@@ -20,7 +20,6 @@ public class PowerStatisticsController {
     public List<Map> findMultipleDevicePowerMsg(@RequestParam("multipleId") String multipleId
             , @RequestParam("dataTime") Integer dataTime, @RequestParam("dayNum") Integer dayNum, @RequestParam("type") Integer type) {
 
-        //使用id暂存天数
         return  powerStatisticsService.findMultipleDevicePowerMsg(multipleId,dataTime,dayNum,type);
     }
 }
