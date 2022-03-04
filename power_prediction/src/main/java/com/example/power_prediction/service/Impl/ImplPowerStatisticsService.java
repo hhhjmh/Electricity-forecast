@@ -194,7 +194,7 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
             Map hourMap = new HashMap();
             if (powerDistributionHours.get(0)[0] != null)
                 hourMap.put("deviceName", powerDistributionHours.get(0)[0]);
-            else break;
+            else continue;
             if (powerDistributionHours.get(0)[1] == null) {
                 hourMap.put("totalKWh", 0);
             } else {
