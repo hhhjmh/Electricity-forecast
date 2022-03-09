@@ -108,7 +108,6 @@ public class PowerRealtimeController {
     @PostMapping("/findPowerDistributionDayByMultipleIdAndDataTime")
     public List<Object[]> findPowerDistributionDayByMultipleIdAndDataTime(@RequestParam("multipleId") String multipleId, @RequestParam("dataTime") Integer dataTime) {
 
-        //使用id暂存天数
         return powerRealtimeService.findPowerDistributionDayByMultipleIdAndDataTime(multipleId, dataTime);
     }
 

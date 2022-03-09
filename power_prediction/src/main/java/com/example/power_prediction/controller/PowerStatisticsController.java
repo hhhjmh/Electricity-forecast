@@ -20,7 +20,7 @@ public class PowerStatisticsController {
     /**
      *
      *
-     * @param type   1月峰谷平尖   2年电量分析   3电量电费分析
+     * @param type  0获取总数据  1月峰谷平尖   2年电量分析   3电量电费分析
      */
 
     @PostMapping("/findMultipleDevicePowerMsgForMouth")
