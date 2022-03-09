@@ -86,9 +86,9 @@ public class PowerAnalyseDayController {
     }
 
     @PostMapping("/findPowerAnalyseDayMaxByDataTime")
-    public List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(@RequestBody PowerAnalyseDayAvg powerAnalyseDayAvg) {
+    public List<PowerAnalyseDayMax> findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(@RequestBody PowerAnalyseDayMax powerAnalyseDayMax) {
         //使用id暂存天数
-        return powerAnalyseDayAvgService.findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(powerAnalyseDayAvg.getDeviceId(), powerAnalyseDayAvg.getDataTime(), powerAnalyseDayAvg.getDataTime() + 86400 * 30);
+        return powerAnalyseDayAvgService.findPowerAnalyseDayMaxByDeviceIdAndDataTimeBetween(powerAnalyseDayMax.getDeviceId(), powerAnalyseDayMax.getDataTime(), powerAnalyseDayMax.getDataTime() + 86400 * 30);
     }
 
     @PostMapping("/findDistributionHour")
