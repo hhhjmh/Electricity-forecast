@@ -24,10 +24,18 @@ public class DeviceManageController {
         return deviceManageService.findAllDeviceMsgByState(device.getState());
     }
 
+
     @PostMapping("findAllByIsOrNotDistributionAndState")
     public List<Device> findAllByIsOrNotDistribution(@RequestBody Device device) {
         return deviceManageService.findAllByIsOrNotDistribution(device);
     }
+
+
+    @PostMapping("findAllByIsOrNotDistributionAndStateAndType")
+    public List<Device> findAllByIsOrNotDistributionAndStateAndType(@RequestBody DeviceRelationship deviceRelationship) {
+        return deviceManageService.findAllByIsOrNotDistributionAndStateAndType(deviceRelationship);
+    }
+
 
     @PostMapping("findOneByDeviceId")
     public Device findOneByDeviceId(@RequestBody Device device) {
@@ -68,6 +76,19 @@ public class DeviceManageController {
     @PostMapping("addDeviceRelationship")
     public Integer addDeviceRelationship(@RequestBody DeviceRelationship deviceRelationship) {
         return deviceManageService.addDeviceRelationship(deviceRelationship);
+    }
+
+    @PostMapping("addMultipleDeviceRelationship")
+    public Integer addMultipleDeviceRelationship(@RequestParam("multipleId") String multipleId
+            , @RequestParam("superDeviceId") Integer superDeviceId, @RequestParam("type") Integer type) {
+
+        return deviceManageService.addMultipleDeviceRelationship(multipleId,superDeviceId,type);
+    }
+
+
+    @PostMapping("deleteDeviceRelationship")
+    public Integer deleteDeviceRelationship(@RequestBody DeviceRelationship deviceRelationship) {
+        return deviceManageService.deleteDeviceRelationship(deviceRelationship);
     }
 
 

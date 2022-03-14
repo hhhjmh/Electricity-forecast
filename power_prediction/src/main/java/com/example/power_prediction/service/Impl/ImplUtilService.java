@@ -255,10 +255,12 @@ public class ImplUtilService implements UtilService {
             System.out.println("error");
             return null;
         } else {
+            String deviceName = null;
             for (Object[] o : objects
             ) {
                 Map<String, Object> topMap = new HashMap<>();
                 if (o[4] == null) { //superDeviceID为null
+
                     topMap.put("label", o[0]);
                     topMap.put("children", recursionTree(objects, (Integer) o[2], type));
                     topMap.put("id", o[2]);
@@ -270,11 +272,14 @@ public class ImplUtilService implements UtilService {
     }
 
     public ArrayList recursionTree(List<Object[]> objects, Integer topId, Integer type) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Map> arrayList = new ArrayList();
         String deviceName = null;
         for (Object[] o : objects) {
 
             if (o[5] != null && o[4] == topId) {
+                if (deviceName != null && deviceName.equals((String) o[0])) {
+                    continue;
+                }
                 List<Object[]> newObjects = deviceRelationshipRepository.findDeviceRelationshipBySuperDeviceId(type, (Integer) o[2]);
                 if (newObjects == null)
                     break;
@@ -284,18 +289,26 @@ public class ImplUtilService implements UtilService {
                 map.put("children", arrayList1);
                 map.put("label", o[0]);
                 map.put("id", o[2]);
-
-                if (deviceName != null && deviceName.equals((String) o[0])) {
-                    break;
-                }
-
                 deviceName = (String) o[0];
                 arrayList.add(map);
             } else if (o[4] == topId) {
+                if (deviceName != null && deviceName.equals((String) o[0])) {
+                    continue;
+                }
+                Integer flag = 0;
                 Map<String, Object> subMap = new HashMap<>();
                 subMap.put("label", o[0]);
                 subMap.put("id", o[2]);
-                arrayList.add(subMap);
+                for (Map<String, Object> map : arrayList
+                ) {
+                    if (map.get("id") == subMap.get("id")) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0)
+                    arrayList.add(subMap);
+//                deviceName = (String) o[0];
             }
         }
         return arrayList;
@@ -345,7 +358,7 @@ public class ImplUtilService implements UtilService {
         List<Integer> list = new ArrayList<>();
         for (Map<String, Object> map : deviceTree) {
             list.add((Integer) map.get("id"));
-            if (map.containsKey("children")){
+            if (map.containsKey("children")) {
                 List<Integer> devices = getAllDevicesId((List<Map<String, Object>>) map.get("children"));
                 list.addAll(devices);
             }

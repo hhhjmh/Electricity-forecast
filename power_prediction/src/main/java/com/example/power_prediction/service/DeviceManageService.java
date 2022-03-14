@@ -21,4 +21,10 @@ public interface DeviceManageService {
     Device findOneByDeviceId(Integer id);
 
     List<Device> findAllByIsOrNotDistribution(Device device);
+
+    List<Device> findAllByIsOrNotDistributionAndStateAndType(DeviceRelationship deviceRelationship);
+
+    Integer deleteDeviceRelationship(DeviceRelationship deviceRelationship);
+
+    Integer addMultipleDeviceRelationship(String multipleId, Integer superDeviceId, Integer type);
 }

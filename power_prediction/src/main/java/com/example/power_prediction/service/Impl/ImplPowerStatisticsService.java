@@ -43,20 +43,6 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
             Double mouthMidCharge = 0.0;
             Double mouthTopCharge = 0.0;
 
-            Double mouthTotalKWh1 = 0.0;
-
-            Double mouthTotalKWh2 = 0.0;
-            Double mouthTotalKWh3 = 0.0;
-            Double mouthTotalKWh4 = 0.0;
-            Double mouthTotalKWh5 = 0.0;
-            Double mouthTotalKWh6 = 0.0;
-            Double mouthTotalKWh7 = 0.0;
-            Double mouthTotalKWh8 = 0.0;
-            Double mouthTotalKWh9 = 0.0;
-            Double mouthTotalKWh10 = 0.0;
-            Double mouthTotalKWh11 = 0.0;
-            Double mouthTotalKWh12 = 0.0;
-
             for (Object[] o : powerDistributionDays) {
                 mouthTotalKWh = Double.valueOf(String.valueOf(o[5])) + mouthTotalKWh;
                 mouthHighKWh = Double.valueOf(String.valueOf(o[6])) + mouthHighKWh;
@@ -88,6 +74,18 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
 
                 if (type == 2)//type选择为2表示适用于年电量分析
                 {
+                    Double mouthTotalKWh1 = 0.0;Double mouthTotalCharge1 = 0.0;
+                    Double mouthTotalKWh2 = 0.0;Double mouthTotalCharge2 = 0.0;
+                    Double mouthTotalKWh3 = 0.0;Double mouthTotalCharge3 = 0.0;
+                    Double mouthTotalKWh4 = 0.0;Double mouthTotalCharge4 = 0.0;
+                    Double mouthTotalKWh5 = 0.0;Double mouthTotalCharge5 = 0.0;
+                    Double mouthTotalKWh6 = 0.0;Double mouthTotalCharge6 = 0.0;
+                    Double mouthTotalKWh7 = 0.0;Double mouthTotalCharge7 = 0.0;
+                    Double mouthTotalKWh8 = 0.0;Double mouthTotalCharge8 = 0.0;
+                    Double mouthTotalKWh9 = 0.0;Double mouthTotalCharge9 = 0.0;
+                    Double mouthTotalKWh10 = 0.0;Double mouthTotalCharge10 = 0.0;
+                    Double mouthTotalKWh11 = 0.0;Double mouthTotalCharge11 = 0.0;
+                    Double mouthTotalKWh12 = 0.0;Double mouthTotalCharge12 = 0.0;
                     Long timestamp = Long.valueOf(Integer.valueOf(String.valueOf(o[3])));
 //                    Long timeStamp = Long.valueOf(timestamp * 1000);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -98,41 +96,78 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
                     switch (mouth) {
                         case 1:
                             mouthTotalKWh1 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge1 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 2:
                             mouthTotalKWh2 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge2 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 3:
                             mouthTotalKWh3 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge3 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 4:
                             mouthTotalKWh4 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge4 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 5:
                             mouthTotalKWh5 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge5 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 6:
                             mouthTotalKWh6 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge6 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 7:
                             mouthTotalKWh7 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge7 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 8:
                             mouthTotalKWh8 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge8 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 9:
                             mouthTotalKWh9 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge9 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 10:
                             mouthTotalKWh10 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge10 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 11:
                             mouthTotalKWh11 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge11 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                         case 12:
                             mouthTotalKWh12 += Double.valueOf(String.valueOf(o[5]));
+                            mouthTotalCharge12 +=Double.valueOf(String.valueOf(o[10]));
                             break;
                     }
+                    msgMap.put("mouthTotalKWh1", String.format("%.2f", (mouthTotalKWh1)));
+                    msgMap.put("mouthTotalKWh2", String.format("%.2f", (mouthTotalKWh2)));
+                    msgMap.put("mouthTotalKWh3", String.format("%.2f", (mouthTotalKWh3)));
+                    msgMap.put("mouthTotalKWh4", String.format("%.2f", (mouthTotalKWh4)));
+                    msgMap.put("mouthTotalKWh5", String.format("%.2f", (mouthTotalKWh5)));
+                    msgMap.put("mouthTotalKWh6", String.format("%.2f", (mouthTotalKWh6)));
+                    msgMap.put("mouthTotalKWh7", String.format("%.2f", (mouthTotalKWh7)));
+                    msgMap.put("mouthTotalKWh8", String.format("%.2f", (mouthTotalKWh8)));
+                    msgMap.put("mouthTotalKWh9", String.format("%.2f", (mouthTotalKWh9)));
+                    msgMap.put("mouthTotalKWh10", String.format("%.2f", (mouthTotalKWh10)));
+                    msgMap.put("mouthTotalKWh11", String.format("%.2f", (mouthTotalKWh11)));
+                    msgMap.put("mouthTotalKWh12", String.format("%.2f", (mouthTotalKWh12)));
+
+                    msgMap.put("mouthTotalCharge1", String.format("%.2f", (mouthTotalCharge1)));
+                    msgMap.put("mouthTotalCharge2", String.format("%.2f", (mouthTotalCharge2)));
+                    msgMap.put("mouthTotalCharge3", String.format("%.2f", (mouthTotalCharge3)));
+                    msgMap.put("mouthTotalCharge4", String.format("%.2f", (mouthTotalCharge4)));
+                    msgMap.put("mouthTotalCharge5", String.format("%.2f", (mouthTotalCharge5)));
+                    msgMap.put("mouthTotalCharge6", String.format("%.2f", (mouthTotalCharge6)));
+                    msgMap.put("mouthTotalCharge7", String.format("%.2f", (mouthTotalCharge7)));
+                    msgMap.put("mouthTotalCharge8", String.format("%.2f", (mouthTotalCharge8)));
+                    msgMap.put("mouthTotalCharge9", String.format("%.2f", (mouthTotalCharge9)));
+                    msgMap.put("mouthTotalCharge10", String.format("%.2f", (mouthTotalCharge10)));
+                    msgMap.put("mouthTotalCharge11", String.format("%.2f", (mouthTotalCharge11)));
+                    msgMap.put("mouthTotalCharge12", String.format("%.2f", (mouthTotalCharge12)));
                 }
 
             }
@@ -146,21 +181,6 @@ public class ImplPowerStatisticsService implements PowerStatisticsService {
             msgMap.put("mouthLowCharge", String.format("%.2f", (mouthLowCharge)));
             msgMap.put("mouthMidCharge", String.format("%.2f", (mouthMidCharge)));
             msgMap.put("mouthTopCharge", String.format("%.2f", (mouthTopCharge)));
-
-            if (type == 2) {
-                msgMap.put("mouthTotalKWh1", String.format("%.2f", (mouthTotalKWh1)));
-                msgMap.put("mouthTotalKWh2", String.format("%.2f", (mouthTotalKWh2)));
-                msgMap.put("mouthTotalKWh3", String.format("%.2f", (mouthTotalKWh3)));
-                msgMap.put("mouthTotalKWh4", String.format("%.2f", (mouthTotalKWh4)));
-                msgMap.put("mouthTotalKWh5", String.format("%.2f", (mouthTotalKWh5)));
-                msgMap.put("mouthTotalKWh6", String.format("%.2f", (mouthTotalKWh6)));
-                msgMap.put("mouthTotalKWh7", String.format("%.2f", (mouthTotalKWh7)));
-                msgMap.put("mouthTotalKWh8", String.format("%.2f", (mouthTotalKWh8)));
-                msgMap.put("mouthTotalKWh9", String.format("%.2f", (mouthTotalKWh9)));
-                msgMap.put("mouthTotalKWh10", String.format("%.2f", (mouthTotalKWh10)));
-                msgMap.put("mouthTotalKWh11", String.format("%.2f", (mouthTotalKWh11)));
-                msgMap.put("mouthTotalKWh12", String.format("%.2f", (mouthTotalKWh12)));
-            }
             if (type == 3) { //type选择为3表示适用于电量电费分析
                 if (mouthTotalKWh != 0) {
                     msgMap.put("mouthHighKWhPercentage", String.format("%.2f", (mouthHighKWh / mouthTotalKWh)));

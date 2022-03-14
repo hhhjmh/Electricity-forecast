@@ -305,42 +305,5 @@ public class PowerElectricalSafety {
         this.ucPhd = ucPhd;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PowerElectricalSafety that = (PowerElectricalSafety) o;
-        return id == that.id &&
-                deviceId == that.deviceId &&
-                Objects.equals(dataTime, that.dataTime) &&
-                Objects.equals(totalLoad, that.totalLoad) &&
-                Objects.equals(aLoad, that.aLoad) &&
-                Objects.equals(bLoad, that.bLoad) &&
-                Objects.equals(cLoad, that.cLoad) &&
-                Objects.equals(ia, that.ia) &&
-                Objects.equals(ib, that.ib) &&
-                Objects.equals(ic, that.ic) &&
-                Objects.equals(zeroi, that.zeroi) &&
-                Objects.equals(ua, that.ua) &&
-                Objects.equals(ub, that.ub) &&
-                Objects.equals(uc, that.uc) &&
-                Objects.equals(uab, that.uab) &&
-                Objects.equals(ubc, that.ubc) &&
-                Objects.equals(uca, that.uca) &&
-                Objects.equals(temperature, that.temperature) &&
-                Objects.equals(uUcaDeviation, that.uUcaDeviation) &&
-                Objects.equals(iUnbalance, that.iUnbalance) &&
-                Objects.equals(frequencyDeviation, that.frequencyDeviation) &&
-                Objects.equals(iaPhd, that.iaPhd) &&
-                Objects.equals(ibPhd, that.ibPhd) &&
-                Objects.equals(icPhd, that.icPhd) &&
-                Objects.equals(uaPhd, that.uaPhd) &&
-                Objects.equals(ubPhd, that.ubPhd) &&
-                Objects.equals(ucPhd, that.ucPhd);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, deviceId, dataTime, totalLoad, aLoad, bLoad, cLoad, ia, ib, ic, zeroi, ua, ub, uc, uab, ubc, uca, temperature, uUcaDeviation, iUnbalance, frequencyDeviation, iaPhd, ibPhd, icPhd, uaPhd, ubPhd, ucPhd);
-    }
 }

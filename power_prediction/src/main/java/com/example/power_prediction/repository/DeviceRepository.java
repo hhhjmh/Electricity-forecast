@@ -25,4 +25,6 @@ public interface DeviceRepository extends JpaRepository<Device,Integer> {
     List<Device> findAllByDistributionState(String distributionState);
 
     List<Device> findAllByDistributionStateAndState(String distributionState, Integer state);
+
+    List<Device> findAllByIdIsNotInAndState(List<Integer> idList,Integer state);
 }

@@ -52,6 +52,8 @@ public class UtilController {
     @PostMapping("/deviceRelationshipTree")
     public List findDeviceRelationship(@RequestBody Device device) {
         Integer method = 0;
+
+        //id暂存type
         return utilService.findAllDeviceRelationship(device.getId(), device.getUserDepartment(), method);
     }
 
