@@ -9,9 +9,9 @@ public class PowerIndicatorCap {
     private int id;
     private int deviceId;
     private String types;
-    private String maxValue;
-    private String ratedValue;
-    private String minValue;
+    private String max_value;
+    private String rated_value;
+    private String min_value;
     private String unit;
     private String remark;
 
@@ -44,28 +44,28 @@ public class PowerIndicatorCap {
         this.types = types;
     }
 
-    public String getMaxValue() {
-        return maxValue;
+    public String getMax_value() {
+        return max_value;
     }
 
-    public void setMaxValue(String maxValue) {
-        this.maxValue = maxValue;
+    public void setMax_value(String max_value) {
+        this.max_value = max_value;
     }
 
-    public String getRatedValue() {
-        return ratedValue;
+    public String getRated_value() {
+        return rated_value;
     }
 
-    public void setRatedValue(String ratedValue) {
-        this.ratedValue = ratedValue;
+    public void setRated_value(String rated_value) {
+        this.rated_value = rated_value;
     }
 
-    public String getMinValue() {
-        return minValue;
+    public String getMin_value() {
+        return min_value;
     }
 
-    public void setMinValue(String minValue) {
-        this.minValue = minValue;
+    public void setMin_value(String min_value) {
+        this.min_value = min_value;
     }
 
     public String getUnit() {
