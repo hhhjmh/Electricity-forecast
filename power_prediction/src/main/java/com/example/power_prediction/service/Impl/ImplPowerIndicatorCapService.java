@@ -15,27 +15,35 @@ public class ImplPowerIndicatorCapService implements PowerIndicatorCapService {
     PowerIndicatorCapRepository powerIndicatorCapRepository;
 
     @Override
-    public void AddPowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
+    public int AddPowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
         PowerIndicatorCap tempPowerIndicatorCap = powerIndicatorCapRepository.findByDeviceIdAndTypes(powerIndicatorCap.getDeviceId(), powerIndicatorCap.getTypes());
         System.out.println(powerIndicatorCap.getDeviceId()+" " + powerIndicatorCap.getTypes());
-        if(tempPowerIndicatorCap==null)
+        if(tempPowerIndicatorCap==null) {
             powerIndicatorCapRepository.save(powerIndicatorCap);
+            return 1;
+        }
+        return 0;
     }
 
     @Override
-    public void DeletePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
+    public int DeletePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
         PowerIndicatorCap tempPowerIndicatorCap = powerIndicatorCapRepository.findByDeviceIdAndTypes(powerIndicatorCap.getDeviceId(), powerIndicatorCap.getTypes());
-        if(tempPowerIndicatorCap!=null)
+        if(tempPowerIndicatorCap!=null) {
             powerIndicatorCapRepository.delete(tempPowerIndicatorCap);
+            return 1;
+        }
+        return 0;
     }
 
     @Override
-    public void UpdatePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
+    public int UpdatePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
         PowerIndicatorCap temp = powerIndicatorCapRepository.findByDeviceIdAndTypes(powerIndicatorCap.getDeviceId(), powerIndicatorCap.getTypes());
         if(temp!=null) {
             powerIndicatorCap.setId(temp.getId());
             powerIndicatorCapRepository.save(powerIndicatorCap);
+            return 1;
         }
+        return 0;
     }
 
     @Override

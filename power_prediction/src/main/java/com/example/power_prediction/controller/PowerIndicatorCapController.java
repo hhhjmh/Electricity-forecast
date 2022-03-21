@@ -16,18 +16,21 @@ public class PowerIndicatorCapController {
     PowerIndicatorCapService powerIndicatorCapService;
 
     @PostMapping("/add")
-    public void AddPowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
-        powerIndicatorCapService.AddPowerIndicatorCap(powerIndicatorCap);
+    public int AddPowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
+        int ret = powerIndicatorCapService.AddPowerIndicatorCap(powerIndicatorCap);
+        return ret;
     }
 
     @PostMapping("/delete")
-    public void DeletePowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
-        powerIndicatorCapService.DeletePowerIndicatorCap(powerIndicatorCap);
+    public int DeletePowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
+        int ret = powerIndicatorCapService.DeletePowerIndicatorCap(powerIndicatorCap);
+        return ret;
     }
 
     @PostMapping("/update")
-    public void UpdatePowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
-        powerIndicatorCapService.UpdatePowerIndicatorCap(powerIndicatorCap);
+    public int UpdatePowerIndicatorCap(@RequestBody PowerIndicatorCap powerIndicatorCap) {
+        int ret = powerIndicatorCapService.UpdatePowerIndicatorCap(powerIndicatorCap);
+        return ret;
     }
 
 

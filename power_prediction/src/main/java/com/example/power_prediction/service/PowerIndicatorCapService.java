@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface PowerIndicatorCapService {
 
-    void AddPowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
+    int AddPowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
 
-    void DeletePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
+    int DeletePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
 
-    void UpdatePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
+    int UpdatePowerIndicatorCap(PowerIndicatorCap powerIndicatorCap);
 
     List<PowerIndicatorCap> findAllByDeviceId(int deviceId);
 
