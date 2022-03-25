@@ -17,7 +17,6 @@ public class ImplPowerIndicatorCapService implements PowerIndicatorCapService {
     @Override
     public int AddPowerIndicatorCap(PowerIndicatorCap powerIndicatorCap) {
         PowerIndicatorCap tempPowerIndicatorCap = powerIndicatorCapRepository.findByDeviceIdAndTypes(powerIndicatorCap.getDeviceId(), powerIndicatorCap.getTypes());
-        System.out.println(powerIndicatorCap.getDeviceId()+" " + powerIndicatorCap.getTypes());
         if(tempPowerIndicatorCap==null) {
             powerIndicatorCapRepository.save(powerIndicatorCap);
             return 1;

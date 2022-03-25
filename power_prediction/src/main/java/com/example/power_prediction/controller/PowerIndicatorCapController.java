@@ -38,6 +38,7 @@ public class PowerIndicatorCapController {
     @PostMapping("/findAllByDeviceId")
     public List<PowerIndicatorCap> findAllByClassName(@RequestBody PowerIndicatorCap powerIndicatorCap) {
         return powerIndicatorCapService.findAllByDeviceId(powerIndicatorCap.getDeviceId());
+
     }
 
 
