@@ -23,9 +23,8 @@ public class ImplProductionUnitConfigurationService implements ProductionUnitCon
 
     @Override
     public void DeleteProductionUnitConfiguration(ProductionUnitConfiguration productionUnitConfiguration) {
-        ProductionUnitConfiguration temp = productionUnitConfigurationRepository.findByWorkshopUnit(productionUnitConfiguration.getWorkshopUnit());
-        if(temp!=null)
-            productionUnitConfigurationRepository.delete(temp);
+        if(productionUnitConfigurationRepository.findById(productionUnitConfiguration.getId())!=null)
+            productionUnitConfigurationRepository.delete(productionUnitConfiguration);
     }
 
     @Override

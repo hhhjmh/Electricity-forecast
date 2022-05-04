@@ -23,9 +23,8 @@ public class ImplShiftConfigurationService implements ShiftConfigurationService 
 
     @Override
     public void DeleteShiftConfiguration(ShiftConfiguration shiftConfiguration) {
-        ShiftConfiguration tempShiftConfiguration = shiftConfigurationRepository.findByClassNameAndTeamName(shiftConfiguration.getClassName(), shiftConfiguration.getTeamName());
-        if(tempShiftConfiguration!=null)
-            shiftConfigurationRepository.delete(tempShiftConfiguration);
+        if(shiftConfigurationRepository.findById(shiftConfiguration.getId())!=null)
+            shiftConfigurationRepository.delete(shiftConfiguration);
     }
 
     @Override
